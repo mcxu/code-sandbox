@@ -1,4 +1,4 @@
-package com;
+package algorithms;
 
 import java.util.Enumeration;
 import java.util.Hashtable;

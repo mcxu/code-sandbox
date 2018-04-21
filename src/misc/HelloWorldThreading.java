@@ -3,7 +3,7 @@
  * http://stackoverflow.com/questions/16963405/printing-hello-and-world-multiple-times-using-two-threads-in-java
  */
 
-package com;
+package misc;
 
 class HelloWorldRunner extends Thread
 {

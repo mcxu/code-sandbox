@@ -1,4 +1,4 @@
-package com;
+package misc;
 
 public class TestMain {
 

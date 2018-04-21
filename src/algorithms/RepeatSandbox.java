@@ -1,4 +1,4 @@
-package com;
+package algorithms;
 
 import java.util.Hashtable;
 import java.lang.Character;
