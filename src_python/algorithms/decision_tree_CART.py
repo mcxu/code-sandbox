@@ -8,7 +8,7 @@ Decision tree classifier written from scratch using CART
 tutorial: https://www.youtube.com/watch?v=LDRbO9a6XPU
 github: https://github.com/random-forests/tutorials/blob/master/decision_tree.ipynb
 '''
-from distutils.log import info
+from distutils.log import INFO
 
 # Note in this example, left node/leaf is true, right node/leaf is false.
 # dataset
