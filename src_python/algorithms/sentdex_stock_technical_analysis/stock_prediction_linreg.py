@@ -10,12 +10,18 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import matplotlib.dates as mdates
+from matplotlib import style
 import quandl
 import math
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing, cross_validation, svm
 from sklearn.linear_model import LinearRegression
+import datetime
+import pickle
+import _pickle
+
+style.use("ggplot")
 
 def graph_raw_fx():
     date, bid, ask = np.loadtxt("GBPUSD1d.txt", unpack=True, delimiter=",",
@@ -26,8 +32,8 @@ def graph_raw_fx():
     ax1 = plt.subplot2grid(shape=(40,40), loc=(0,0), rowspan=40, colspan=40)
     
     # plot data
-    ax1.plot(date, bid)
-    ax1.plot(date, ask)
+    #ax1.plot(date, bid)
+    #ax1.plot(date, ask)
     
     # format x-axis so that it is in date format.
     ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d %H:%M:%S"))
@@ -69,17 +75,18 @@ def find_pattern():
     print("forecast_out: ", forecast_out)
     
     df['label'] = df[forecast_col].shift(-forecast_out)
-    print("find_pattern: df head:\n", df.head())
+    print("after shift df head:\n", df.head())
     
     # features: drop label column
     X = np.array(df.drop(['label'], 1))
-    print("X: ", X)
-    X = X[:-forecast_out]
-    print("X after bracket: ", X)
-    X_lately = X[-forecast_out:]
-    print("X_lately: ", X_lately)
-    # normalize the new values alongside all your other values. adds to processing time, unfortunately.
+    print("X before preprocessing:\n", X)
     X = preprocessing.scale(X)
+    print("X after preprocessing:\n", X)
+    X_lately = X[-forecast_out:] # counting from end of list, inclusive
+    print("X_lately:\n", X_lately)
+    X = X[:-forecast_out] # counting from end of list, exclusive
+    print("X[:-forecast_out]:\n", X)
+    # normalize the new values alongside all your other values. adds to processing time, unfortunately.
     
     df.dropna(inplace=True)
     # labels
@@ -91,14 +98,42 @@ def find_pattern():
     # run linear regression train and test
     clf = LinearRegression(n_jobs=-1)
     #clf = svm.SVR()
-    clf.fit(X_train, y_train)
+    clf.fit(X_train, y_train) # need to pickle after fit b/c dont want to retrain every run.
     accuracy = clf.score(X_test, y_test)
     print("accuracy: ", accuracy)
     
+    # do pickling: serializing the classifier object (clf)
+#     with open('linearregression.pickle', 'wb') as f:
+#         pickle.dump(clf, f)
     
+    # use pickle file
+    pickle_in = open('linearregression.pickle', 'rb')
+    clf = pickle.load(pickle_in)
+    
+    # predict on list X_lately
+    forecast_set = clf.predict(X_lately)
+    print("predict forecast_set (scaled):\n", forecast_set, accuracy, forecast_out)
+    
+    df['forecast'] = np.nan
+    last_date = df.iloc[-1].name
+    last_unix = last_date.timestamp()
+    one_day = 86400 #seconds
+    next_unix = last_unix + one_day
+    
+    for i in forecast_set:
+        next_date = datetime.datetime.fromtimestamp(next_unix)
+        next_unix += one_day
+        df.loc[next_date] = [np.nan for _ in range(len(df.columns)-1)] + [i]
+        
+    df[adj['close']].plot()
+    df['forecast'].plot()
+    plt.legend(loc=4)
+    plt.xlabel('Date')
+    plt.ylabel('Price')
+    plt.show()
 
 def main():
-    graph_raw_fx()
+    #graph_raw_fx()
     find_pattern()
     #print(req_cols.AdjOpen)
 
