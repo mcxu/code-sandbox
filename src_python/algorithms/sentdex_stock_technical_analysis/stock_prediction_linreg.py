@@ -66,6 +66,8 @@ def find_pattern():
     df = df[field_list]
     df['HL_PCT'] = (df[adj['hi']] - df[adj['close']]) / df[adj['close']] * 100.0
     df['PCT_change'] = (df[adj['close']] - df[adj['open']]) / df[adj['open']] * 100.0
+    
+    # adjusted close is the only feature that affects price.
     df = df[ [adj['close'], 'HL_PCT', 'PCT_change', adj['vol']] ]
     
     forecast_col = adj['close']
@@ -82,7 +84,7 @@ def find_pattern():
     print("X before preprocessing:\n", X)
     X = preprocessing.scale(X)
     print("X after preprocessing:\n", X)
-    X_lately = X[-forecast_out:] # counting from end of list, inclusive
+    X_lately = X[-forecast_out] # counting from end of list, inclusive
     print("X_lately:\n", X_lately)
     X = X[:-forecast_out] # counting from end of list, exclusive
     print("X[:-forecast_out]:\n", X)

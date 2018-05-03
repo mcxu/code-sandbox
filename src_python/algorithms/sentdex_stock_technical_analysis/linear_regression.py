@@ -24,7 +24,7 @@ def create_dataset(num_datapoints, variance, step=2, correlation=False):
         if correlation and correlation=='pos':
             first_y_val += step
         elif correlation and correlation=='neg':
-            first_y_val == step
+            first_y_val -= step
     
     return np.array(xs, dtype=np.float64), np.array(ys, dtype=np.float64)
 
@@ -87,8 +87,21 @@ def r_squared_theory():
     print("r_squared: " , r_squared)
 
 def test_create_dataset():
-    xs, ys = create_dataset(40, 40, 2, correlation='pos')
+    xs, ys = create_dataset(40, 30, 2, correlation='neg')
+    m = best_fit_slope(xs, ys)
+    b = y_intercept(xs, ys, m)
+    
+    regression_line = [(m*x)+b for x in xs]
+    r_squared = coefficient_of_determination(ys, regression_line)
+    print("test_create_dataset:r_squared: ", r_squared)
+    
+    # make a prediction
+    predict_x = 8
+    predict_y = (m*predict_x)+b
+    
     plt.scatter(xs,ys)
+    plt.plot(xs, regression_line, color="black", linewidth=1)
+    plt.scatter(predict_x, predict_y, color="magenta")
 
 def main(): 
     #r_squared_theory()
