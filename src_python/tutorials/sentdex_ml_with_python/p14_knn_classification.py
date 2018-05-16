@@ -25,7 +25,7 @@ y = np.array(df['class'])
 
 X_train, X_test, y_train, y_test = cross_validation.train_test_split(X,y,test_size=0.2)
 
-clf = neighbors.KNeighborsClassifier()
+clf = neighbors.KNeighborsClassifier(n_jobs=2)
 clf.fit(X_train, y_train)
 
 accuracy = clf.score(X_test, y_test)
