@@ -1,7 +1,9 @@
 package ctci5th.DataStructures;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
 
 import ctci5th.AlgUtils;
 
@@ -37,7 +39,7 @@ public class Ch1ArraysAndStrings
 		return true;
 	}
 	
-	public void testCh1p1()
+	public void testQ1p1()
 	{
 		boolean ch1p1Test = strContainsAllUniqueChar("adhesivesssss");
 		System.out.println("ch1p1Test: " + ch1p1Test);
@@ -59,7 +61,7 @@ public class Ch1ArraysAndStrings
 		return out;
 	}
 	
-	public void testCh1p2()
+	public void testQ1p2()
 	{
 		String reversed = reverseString("qwertyuiop");
 		System.out.println("reversed: " + reversed);
@@ -76,16 +78,130 @@ public class Ch1ArraysAndStrings
 		HashMap<Character, Integer> str2Freq = AlgUtils.getCharFreqInStr(str2);
 		
 		// compare keysets
-		str1Freq.keySet();
+		Set<Character> keyset1 = str1Freq.keySet();
+		Set<Character> keyset2 = str2Freq.keySet();
+		System.out.println("keysets to compare: " + keyset1 + "\t" + keyset2);
 		
-		return false;
+		// condition to check if sets match
+		if(keyset1.containsAll(keyset2) && keyset2.containsAll(keyset1))
+		{
+			Character[] ks1Array = keyset1.toArray(new Character[0]);
+			for(Character ks1Ch: ks1Array)
+			{
+				if(str1Freq.get(ks1Ch) != str2Freq.get(ks1Ch))
+				{
+					return false;
+				}
+			}
+			//return true here b/c items in set have been iterated.
+			return true;
+		}
+		else
+		{
+			System.out.println("keyset1 and 2 are not the same.");
+			return false;
+		}
 	}
 	
+	public void testQ1p3()
+	{
+		boolean test1 = stringsArePermutations("qwertyuiop", "qowpeiruty");
+		System.out.println("test1: " + test1);
+		
+		boolean test2 = stringsArePermutations("asdfg", "asdfgs");
+		System.out.println("test2: " + test2);
+	}
+	
+	/**
+	 * Question 1.4: Write a method to replace all spaces in a string with'%20'. You may assume that 
+	 * the string has sufficient space at the end of the string to hold the additional
+	 * characters, and that you are given the "true" length of the string.
+	 * @param str
+	 * @return
+	 */
+	public String replaceSpaceWithInsert(String str, String insert)
+	{
+		char[] strChars = str.toCharArray();
+		boolean nbr = false; //non blank reached
+		int wlc = 0; //word length counter
+		
+		for(int i=strChars.length-1; i >= 0; i--)
+		{
+			System.out.print("i=" + i);
+			char ch = strChars[i];
+			System.out.print("	ch: " + ch);
+			if(ch != ' ')
+			{
+				System.out.print("	A");
+				nbr = true;
+			}
+			else
+			{
+				System.out.print("	B");
+				nbr = false;
+				
+				System.out.print("	wlc=" + wlc);
+				
+				//perform shift; repeat for every char in string to insert
+				for(int S=0; S < insert.length()-1; S++) 
+				{
+					System.out.print("\tS=" + S);
+					//shift from end of char array to current index.
+					for(int j=strChars.length-2; j > i ; j--)
+					{
+						System.out.print("\tj=" + j);
+						strChars[j+1] = strChars[j];
+						strChars[j] = ' ';
+					}
+				}
+				//reset wlc
+				wlc = 0;
+			}
+			
+			if(nbr == true)
+			{
+				wlc++;
+				System.out.print("	wlc=" + wlc);
+			}
+			System.out.print("\n");
+		}
+		
+		//for blanks insert the required string
+		int k=0;
+		for(int q=0; q <strChars.length; q++)
+		{
+			if(k==3) {k=0; }
+			if(strChars[q] == ' ')
+			{
+				strChars[q] = insert.charAt(k);
+				k++;
+			}
+		}
+		System.out.println("after insert: " + Arrays.toString(strChars));
+		
+		//reconstruct char array back into string
+		String result = "";
+		for(char ch: strChars)
+		{
+			result = result + ch;
+		}
+		return result;
+	}
+	
+	public void testQ1p4()
+	{
+		String str = "Mr John Smith    ";
+		//String str = "Mr John  Smith      ";
+		String result = replaceSpaceWithInsert(str, "%20");
+		System.out.println("result: " + result);
+	}
 	
 	public static void main(String[] args) {
 		Ch1ArraysAndStrings ch1 = new Ch1ArraysAndStrings();
-		//ch1.testCh1p1();
-		ch1.testCh1p2();
+		//ch1.testQ1p1();
+		//ch1.testQ1p2();
+		//ch1.testQ1p3();
+		ch1.testQ1p4();
 	}
 
 }
