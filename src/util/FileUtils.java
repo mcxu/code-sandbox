@@ -2,21 +2,17 @@ package util;
 
 import java.io.File;
 
-public class FileUtils 
-{
-	public void printFileSystem()
-	{
-		File file = new File(".");
-		for(String fileNames: file.list())
-		{
-			System.out.println(fileNames);
-		}
-	}
-	
-	public static void main(String[] args) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
+public class FileUtils {
+    public void printFileSystem() {
+        File file = new File(".");
+        for (String fileNames : file.list()) {
+            System.out.println(fileNames);
+        }
+    }
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+    }
 
 }
