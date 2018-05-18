@@ -122,26 +122,17 @@ public class Ch1ArraysAndStrings
 	public String replaceSpaceWithInsert(String str, String insert)
 	{
 		char[] strChars = str.toCharArray();
-		boolean nbr = false; //non blank reached
-		int wlc = 0; //word length counter
 		
 		for(int i=strChars.length-1; i >= 0; i--)
 		{
 			System.out.print("i=" + i);
 			char ch = strChars[i];
 			System.out.print("	ch: " + ch);
-			if(ch != ' ')
+			
+			//only need to shift when there is a blank
+			if(ch == ' ')
 			{
-				System.out.print("	A");
-				nbr = true;
-			}
-			else
-			{
-				System.out.print("	B");
-				nbr = false;
-				
-				System.out.print("	wlc=" + wlc);
-				
+				System.out.print("	Blank");
 				//perform shift; repeat for every char in string to insert
 				for(int S=0; S < insert.length()-1; S++) 
 				{
@@ -154,14 +145,6 @@ public class Ch1ArraysAndStrings
 						strChars[j] = ' ';
 					}
 				}
-				//reset wlc
-				wlc = 0;
-			}
-			
-			if(nbr == true)
-			{
-				wlc++;
-				System.out.print("	wlc=" + wlc);
 			}
 			System.out.print("\n");
 		}
@@ -170,7 +153,7 @@ public class Ch1ArraysAndStrings
 		int k=0;
 		for(int q=0; q <strChars.length; q++)
 		{
-			if(k==3) {k=0; }
+			if(k==3) {k=0;}
 			if(strChars[q] == ' ')
 			{
 				strChars[q] = insert.charAt(k);
@@ -192,6 +175,7 @@ public class Ch1ArraysAndStrings
 	{
 		String str = "Mr John Smith    ";
 		//String str = "Mr John  Smith      ";
+		//String str = "Mr Smith  ";
 		String result = replaceSpaceWithInsert(str, "%20");
 		System.out.println("result: " + result);
 	}
