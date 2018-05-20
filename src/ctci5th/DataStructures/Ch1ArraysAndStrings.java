@@ -181,14 +181,211 @@ public class Ch1ArraysAndStrings
         String result = replaceSpaceWithInsert(str, "%20");
         System.out.println("result: " + result);
     }
+    
+    /**
+     * Question 1.5: Method to perform basic string compression using the counts 
+     * of repeated characters. If the "compressed" string would not become smaller than the original
+     * string, return the original string.
+     * @return
+     */
+    public String compressString(String inputStr)
+    {
+        //do compression
+        int ct = 1; //count num of chars in substring of same chars
+        String compressedStr = "";
+        for(int i=1; i<inputStr.length(); i++)
+        {
+            System.out.print("i= " + i);
+            char prevChar = inputStr.charAt(i-1);
+            System.out.print("  prev: " + prevChar);
+            char currChar = inputStr.charAt(i);
+            System.out.print("  curr: " + currChar);
+            
+            if(prevChar == currChar)
+            {
+                ct++;
+                System.out.print("  ct=" + ct);
+            }
+            else
+            {
+                //need to generate compressed string
+                compressedStr = compressedStr + prevChar + ct;
+
+                ct = 1; //reset the counter
+            }
+            System.out.print("\n");
+            
+            //handle last section of string
+            if(i == inputStr.length()-1)
+            {
+                compressedStr = compressedStr + prevChar + ct;
+            }
+        }
+        
+        //compare lengths
+        if(compressedStr.length() < inputStr.length())
+        {
+            return compressedStr;
+        }
+        return inputStr;
+    }
+    
+    public void testQ1p5()
+    {
+        String test1 = compressString("aasssddfffff");
+        System.out.println("compressString test1: " + test1);
+        
+        String test2 = compressString("qqwweerrttyytywwwuuuuuu");
+        System.out.println("compressString test2: " + test2);
+    }
+    
+    /**
+     * Rotate NxN matrix 90 degrees in place.
+     * @param matrix 
+     * @param dir false=rotate left, true=rotate right
+     * @return
+     */
+    public String[][] rotateSquarematrix90Deg(String[][] matrix, boolean dir)
+    {
+        final int maxInd = matrix.length-1;
+        
+        String[] coArray = new String[4]; 
+        /* stores the carry over before shift
+            0: carry over from left col
+            1: carry over from bottom row 
+            2: carry over from right col
+            3: carry over from top row
+        */
+
+        boolean cor = false; //carry over read, has stored the item that will be carried over
+
+        //left col shift down
+        for(int i=maxInd-1; i >= 0; i--)
+        {
+            if(cor == false)
+            {
+                coArray[0] = matrix[i+1][0];
+                cor = true;
+            }
+            matrix[i+1][0] = matrix[i][0];
+        }
+        System.out.println("coArray[0]: " + coArray[0]);
+        //add carry over from right col shift up
+        if(coArray[3] != null)
+        {
+            matrix[0][2] = coArray[3];
+        }
+        cor = false;
+        
+        System.out.print("after left col shift down:\n");
+        printNbyNmatrix(matrix);
+        
+        //bottom row shift right
+        for(int i=maxInd-1; i >= 0; i--)
+        {
+            if(cor == false)
+            {
+                coArray[1] = matrix[maxInd][i+1];
+                cor = true;
+            }
+            matrix[maxInd][i+1] = matrix[maxInd][i];
+        }
+        System.out.println("coArray[1]: " + coArray[1]);
+        //add carry over from before rotation
+        matrix[maxInd][1] = coArray[0];
+        cor = false;
+        
+        System.out.print("after bottom row shift right:\n");
+        printNbyNmatrix(matrix);
+        
+        //right col shift up
+        for(int i=0; i <= maxInd-1; i++)
+        {
+            if(cor == false)
+            {
+                coArray[2] = matrix[0][maxInd];
+                cor = true;
+            }
+            matrix[i][maxInd] = matrix[i+1][maxInd];
+        }
+        System.out.println("coArray[2]: " + coArray[2]);
+        //add carry over from left col shift down
+        matrix[2][maxInd] = coArray[1];
+        cor = false;
+        
+        System.out.print("after right col shift up:\n");
+        printNbyNmatrix(matrix);
+        
+        //top row shift left
+        for(int i=0; i <= maxInd-1; i++)
+        {
+            if(cor == false)
+            {
+                coArray[3] = matrix[0][0];
+                cor = true;
+            }
+            matrix[0][i] = matrix[0][i+1];
+        }
+        System.out.println("coArray[3]: " + coArray[3]);
+        //add carry over from bottom row shift right
+        matrix[0][2] = coArray[2];
+        
+        System.out.print("after top row shift left:\n");
+        printNbyNmatrix(matrix);
+        
+        System.out.print("end result:\n");
+        printNbyNmatrix(matrix);
+        return null;
+    }
+    
+    public void printNbyNmatrix(String[][] matrix)
+    {
+        for(int row=0; row < matrix.length; row++)
+        {
+            for(int col=0; col < matrix.length; col++)
+            {
+                System.out.print(matrix[row][col] + " ");
+            }
+            System.out.print("\n");
+        }
+    }
+    
+    public void testQ1p6()
+    {
+        String[][] matrix1 = new String[][] {
+            {"a","b","c","d"},
+            {"e","f","g","h"},
+            {"i","j","k","l"},
+            {"m","n","o","p"},
+        };
+        
+        String[][] matrix2 = new String[][] {
+            {"^"," "," "," "," ","Y"," "," "," ","$"},
+            {" "," "," "," ","@","@"," "," "," "," "},
+            {" "," "," ","@"," "," ","@"," "," "," "},
+            {" "," ","@"," "," "," "," ","@"," "," "},
+            {"A","@","@","@"," "," ","@","@","@","L"},
+            {" "," "," ","@"," "," ","@"," "," "," "},
+            {" "," "," ","@"," "," ","@"," "," "," "},
+            {" "," "," ","@"," "," ","@"," "," "," "},
+            {" "," "," ","@","@","@","@"," "," "," "},
+            {"!"," "," "," ","V"," "," "," "," ","#"}
+        };
+        
+        System.out.println("before rotate:");
+        printNbyNmatrix(matrix1);
+        String[][] out1 = rotateSquarematrix90Deg(matrix1, false);
+    }
 
     public static void main(String[] args) 
     {
         Ch1ArraysAndStrings ch1 = new Ch1ArraysAndStrings();
-        // ch1.testQ1p1();
-        // ch1.testQ1p2();
-        // ch1.testQ1p3();
-        ch1.testQ1p4();
+        //ch1.testQ1p1();
+        //ch1.testQ1p2();
+        //ch1.testQ1p3();
+        //ch1.testQ1p4();
+        //ch1.testQ1p5();
+        ch1.testQ1p6();
     }
 
 }
