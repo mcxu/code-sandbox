@@ -8,15 +8,14 @@ import java.util.Set;
 import ctci5th.AlgUtils;
 
 /**
- * Chapter 1 Arrays and Strings Book pg. 71, PDF pg. 80
- * 
+ * Chapter 1 Arrays and Strings
+ * Book pg. 71, PDF pg. 80
  * @author MichaelXu
  */
 public class Ch1ArraysAndStrings 
 {
     /**
      * Question 1.1: Algorithm to determine if a string has all unique characters.
-     * 
      * @param testStr
      */
     public boolean strContainsAllUniqueChar(String testStr) 
@@ -48,7 +47,6 @@ public class Ch1ArraysAndStrings
     /**
      * Question 1.2: Function to reverse string. (In Java strings are not null
      * terminated, as in C/C++)
-     * 
      * @param testStr
      */
     public String reverseString(String testStr) 
@@ -70,7 +68,6 @@ public class Ch1ArraysAndStrings
 
     /**
      * Question 1.3: Method to decide if 1 string is permutation of another.
-     * 
      * @param args
      */
     public boolean stringsArePermutations(String str1, String str2) 
@@ -118,7 +115,6 @@ public class Ch1ArraysAndStrings
      * may assume that the string has sufficient space at the end of the string to
      * hold the additional characters, and that you are given the "true" length of
      * the string.
-     * 
      * @param str
      * @return
      */
@@ -279,7 +275,7 @@ public class Ch1ArraysAndStrings
                 }
                 cor = false;
                 System.out.print("after left col shift down:\n");
-                printNbyNmatrix(matrix);
+                printMatrix(matrix);
                 System.out.println("coArray[0]: " + coArray[0]);
                 
                 //bottom row shift right
@@ -295,7 +291,7 @@ public class Ch1ArraysAndStrings
                 matrix[maxInd-lyr][lyr+1] = coArray[0]; //add carry over from left col
                 cor = false;
                 System.out.print("after bottom row shift right:\n");
-                printNbyNmatrix(matrix);
+                printMatrix(matrix);
                 System.out.println("coArray[1]: " + coArray[1]);
                 
                 //right col shift up
@@ -311,7 +307,7 @@ public class Ch1ArraysAndStrings
                 matrix[maxInd-lyr-1][maxInd-lyr] = coArray[1]; //add carry over from bottom row
                 cor = false;
                 System.out.print("after right col shift up:\n");
-                printNbyNmatrix(matrix);
+                printMatrix(matrix);
                 System.out.println("coArray[2]: " + coArray[2]);
                 
                 //top row shift left
@@ -321,18 +317,18 @@ public class Ch1ArraysAndStrings
                 }
                 matrix[lyr][maxInd-lyr-1] = coArray[2]; //add carry over from right col
                 System.out.print("after top row shift left:\n");
-                printNbyNmatrix(matrix);
+                printMatrix(matrix);
             }
         }
         
         return matrix;
     }
     
-    public void printNbyNmatrix(String[][] matrix)
+    public void printMatrix(Object[][] matrix)
     {
         for(int row=0; row < matrix.length; row++)
         {
-            for(int col=0; col < matrix.length; col++)
+            for(int col=0; col < matrix[0].length; col++)
             {
                 System.out.print(matrix[row][col] + " ");
             }
@@ -363,14 +359,81 @@ public class Ch1ArraysAndStrings
         };
         
         System.out.println("before rotate:");
-        printNbyNmatrix(matrix2);
+        printMatrix(matrix2);
         String[][] out1 = rotateSqMatrix90DegCCW(matrix2); //point left
         out1 = rotateSqMatrix90DegCCW(out1); //point down
         out1 = rotateSqMatrix90DegCCW(out1); //point right
         System.out.print("end result:\n");
-        printNbyNmatrix(out1);
+        printMatrix(out1);
+    }
+    
+    /**
+     * Question 1.7: Algorithm such that if an element in an MxN matrix is 0, 
+     * its entire row and column are set to 0.
+     * @param matrix
+     * @return
+     */
+    public Integer[][] setRowAndColTo0(Integer[][] matrix)
+    {
+        ArrayList<int[]> initialZerosList = new ArrayList<>();
+        
+        // Identify all initial zeros
+        System.out.print("entered setRowAndColTo0\n");
+        for(int row=0; row < matrix.length; row++)
+        {
+            for(int col=0; col < matrix[0].length; col++)
+            {
+                int currInt = matrix[row][col];
+                if(currInt == 0)
+                {
+                    initialZerosList.add(new int[] {row, col});
+                }
+            }
+        }
+        System.out.println("initialZerosList after identifying:\n" + initialZerosList);
+        
+        for(int[] coord: initialZerosList)
+        {
+            System.out.println("coord: " + Arrays.toString(coord));
+            //change a column to 0
+            for(int m=0; m < matrix.length; m++)
+            {
+                matrix[m][coord[1]] = 0;
+            }
+            
+            //change a row to 0
+            for(int n=0; n < matrix[0].length; n++)
+            {
+                matrix[coord[0]][n] = 0;
+            }
+        }
+
+        return matrix;
     }
 
+    public void testQ1p7()
+    {
+        Integer[][] test1 = new Integer[][] {
+            {1,1,1,1,1,1,1,1,1,1,1,9,1,1,1},
+            {1,1,5,1,1,1,1,1,1,1,1,9,1,1,1},
+            {1,1,1,1,1,1,1,1,1,1,1,9,1,1,1},
+            {1,0,1,1,1,8,1,1,7,1,1,9,1,1,1},
+            {9,9,9,9,9,9,9,9,9,9,9,9,9,9,9},
+            {1,1,1,1,1,1,1,1,1,1,1,9,1,1,1},
+            {1,1,1,1,1,1,1,1,3,1,1,9,0,1,1},
+            {1,1,9,1,0,1,1,1,1,1,1,9,1,1,1},
+            {1,1,1,1,1,1,1,1,1,1,1,9,1,5,1},
+            {1,1,1,8,1,1,1,1,1,1,1,9,1,1,1},
+            {1,1,4,1,1,1,0,1,1,1,1,9,1,1,1}
+        };
+        
+        System.out.println("before setRowAndColTo0:");
+        printMatrix(test1);
+        Integer[][] result = setRowAndColTo0(test1);
+        System.out.println("after setRowAndColTo0:");
+        printMatrix(result);
+    }
+    
     public static void main(String[] args) 
     {
         Ch1ArraysAndStrings ch1 = new Ch1ArraysAndStrings();
@@ -379,7 +442,8 @@ public class Ch1ArraysAndStrings
         //ch1.testQ1p3();
         //ch1.testQ1p4();
         //ch1.testQ1p5();
-        ch1.testQ1p6();
+        //ch1.testQ1p6();
+        ch1.testQ1p7();
     }
 
 }
