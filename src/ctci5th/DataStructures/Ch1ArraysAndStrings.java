@@ -258,80 +258,83 @@ public class Ch1ArraysAndStrings
         */
 
         boolean cor = false; //carry over read, has stored the item that will be carried over
-
-        //left col shift down
-        for(int i=maxInd-1; i >= 0; i--)
+        
+        //for each layer of the matrix; like an onion; lyr means coords (0,0), (1,1), (2,2)...
+        for(int lyr=0; lyr<(matrix.length/2); lyr++)
         {
-            if(cor == false)
+            //number of times to shift for a given layer
+            for(int shiftCt=lyr; shiftCt <= maxInd-1-lyr; shiftCt++)
             {
-                coArray[0] = matrix[i+1][0];
-                cor = true;
+                //perform a 1-item shift for each side
+                System.out.println("##### lyr=" + lyr + "   shiftCt=" + shiftCt + " #####");
+                
+                //left col shift down
+                for(int i=maxInd-1-lyr; i >= lyr; i--)
+                {
+                    if(cor == false)
+                    {
+                        coArray[0] = matrix[i+1][lyr];
+                        cor = true;
+                    }
+                    matrix[i+1][lyr] = matrix[i][lyr];
+                }
+                cor = false;
+                System.out.print("after left col shift down:\n");
+                printNbyNmatrix(matrix);
+                System.out.println("coArray[0]: " + coArray[0]);
+                
+                
+                //bottom row shift right
+                for(int i=maxInd-1-lyr; i >= lyr; i--)
+                {
+                    if(cor == false)
+                    {
+                        coArray[1] = matrix[maxInd-lyr][i+1];
+                        cor = true;
+                    }
+                    matrix[maxInd-lyr][i+1] = matrix[maxInd-lyr][i];
+                }
+                matrix[maxInd-lyr][1] = coArray[0]; //add carry over from left col
+                cor = false;
+                System.out.print("after bottom row shift right:\n");
+                printNbyNmatrix(matrix);
+                System.out.println("coArray[1]: " + coArray[1]);
+                
+                
+                //right col shift up
+                for(int i=lyr; i <= maxInd-1-lyr; i++)
+                {
+                    if(cor == false)
+                    {
+                        coArray[2] = matrix[lyr][maxInd-lyr];
+                        cor = true;
+                    }
+                    matrix[i][maxInd-lyr] = matrix[i+1][maxInd-lyr];
+                }
+                matrix[maxInd-1-lyr][maxInd-lyr] = coArray[1]; //add carry over from bottom row
+                cor = false;
+                System.out.print("after right col shift up:\n");
+                printNbyNmatrix(matrix);
+                System.out.println("coArray[2]: " + coArray[2]);
+                
+                
+                //top row shift left
+                for(int i=lyr; i <= maxInd-1-lyr; i++)
+                {
+                    if(cor == false)
+                    {
+                        coArray[3] = matrix[lyr][lyr];
+                        cor = true;
+                    }
+                    matrix[0][i] = matrix[0][i+1];
+                }
+                matrix[lyr][maxInd-1-lyr] = coArray[2]; //add carry over from right col
+                cor = false;
+                System.out.print("after top row shift left:\n");
+                printNbyNmatrix(matrix);
+                System.out.println("coArray[3]: " + coArray[3]);
             }
-            matrix[i+1][0] = matrix[i][0];
         }
-        System.out.println("coArray[0]: " + coArray[0]);
-        //add carry over from right col shift up
-        if(coArray[3] != null)
-        {
-            matrix[0][2] = coArray[3];
-        }
-        cor = false;
-        
-        System.out.print("after left col shift down:\n");
-        printNbyNmatrix(matrix);
-        
-        //bottom row shift right
-        for(int i=maxInd-1; i >= 0; i--)
-        {
-            if(cor == false)
-            {
-                coArray[1] = matrix[maxInd][i+1];
-                cor = true;
-            }
-            matrix[maxInd][i+1] = matrix[maxInd][i];
-        }
-        System.out.println("coArray[1]: " + coArray[1]);
-        //add carry over from before rotation
-        matrix[maxInd][1] = coArray[0];
-        cor = false;
-        
-        System.out.print("after bottom row shift right:\n");
-        printNbyNmatrix(matrix);
-        
-        //right col shift up
-        for(int i=0; i <= maxInd-1; i++)
-        {
-            if(cor == false)
-            {
-                coArray[2] = matrix[0][maxInd];
-                cor = true;
-            }
-            matrix[i][maxInd] = matrix[i+1][maxInd];
-        }
-        System.out.println("coArray[2]: " + coArray[2]);
-        //add carry over from left col shift down
-        matrix[2][maxInd] = coArray[1];
-        cor = false;
-        
-        System.out.print("after right col shift up:\n");
-        printNbyNmatrix(matrix);
-        
-        //top row shift left
-        for(int i=0; i <= maxInd-1; i++)
-        {
-            if(cor == false)
-            {
-                coArray[3] = matrix[0][0];
-                cor = true;
-            }
-            matrix[0][i] = matrix[0][i+1];
-        }
-        System.out.println("coArray[3]: " + coArray[3]);
-        //add carry over from bottom row shift right
-        matrix[0][2] = coArray[2];
-        
-        System.out.print("after top row shift left:\n");
-        printNbyNmatrix(matrix);
         
         System.out.print("end result:\n");
         printNbyNmatrix(matrix);
