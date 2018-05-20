@@ -27,6 +27,18 @@ public class AlgUtils
     {
         System.out.println(getCharFreqInStr("asdff")); // {a=1, s=1, d=1, f=2}
     }
+    
+    public static void printMatrix(Object[][] matrix)
+    {
+        for(int row=0; row < matrix.length; row++)
+        {
+            for(int col=0; col < matrix[0].length; col++)
+            {
+                System.out.print(matrix[row][col] + " ");
+            }
+            System.out.print("\n");
+        }
+    }
 
     public static void main(String[] args) 
     {

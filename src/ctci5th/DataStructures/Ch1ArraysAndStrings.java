@@ -275,7 +275,7 @@ public class Ch1ArraysAndStrings
                 }
                 cor = false;
                 System.out.print("after left col shift down:\n");
-                printMatrix(matrix);
+                AlgUtils.printMatrix(matrix);
                 System.out.println("coArray[0]: " + coArray[0]);
                 
                 //bottom row shift right
@@ -291,7 +291,7 @@ public class Ch1ArraysAndStrings
                 matrix[maxInd-lyr][lyr+1] = coArray[0]; //add carry over from left col
                 cor = false;
                 System.out.print("after bottom row shift right:\n");
-                printMatrix(matrix);
+                AlgUtils.printMatrix(matrix);
                 System.out.println("coArray[1]: " + coArray[1]);
                 
                 //right col shift up
@@ -307,7 +307,7 @@ public class Ch1ArraysAndStrings
                 matrix[maxInd-lyr-1][maxInd-lyr] = coArray[1]; //add carry over from bottom row
                 cor = false;
                 System.out.print("after right col shift up:\n");
-                printMatrix(matrix);
+                AlgUtils.printMatrix(matrix);
                 System.out.println("coArray[2]: " + coArray[2]);
                 
                 //top row shift left
@@ -317,23 +317,11 @@ public class Ch1ArraysAndStrings
                 }
                 matrix[lyr][maxInd-lyr-1] = coArray[2]; //add carry over from right col
                 System.out.print("after top row shift left:\n");
-                printMatrix(matrix);
+                AlgUtils.printMatrix(matrix);
             }
         }
         
         return matrix;
-    }
-    
-    public void printMatrix(Object[][] matrix)
-    {
-        for(int row=0; row < matrix.length; row++)
-        {
-            for(int col=0; col < matrix[0].length; col++)
-            {
-                System.out.print(matrix[row][col] + " ");
-            }
-            System.out.print("\n");
-        }
     }
     
     public void testQ1p6()
@@ -359,12 +347,12 @@ public class Ch1ArraysAndStrings
         };
         
         System.out.println("before rotate:");
-        printMatrix(matrix2);
+        AlgUtils.printMatrix(matrix2);
         String[][] out1 = rotateSqMatrix90DegCCW(matrix2); //point left
         out1 = rotateSqMatrix90DegCCW(out1); //point down
         out1 = rotateSqMatrix90DegCCW(out1); //point right
         System.out.print("end result:\n");
-        printMatrix(out1);
+        AlgUtils.printMatrix(out1);
     }
     
     /**
@@ -392,8 +380,10 @@ public class Ch1ArraysAndStrings
         }
         System.out.println("initialZerosList after identifying:\n" + initialZerosList);
         
-        for(int[] coord: initialZerosList)
+        for(int k=0; k < initialZerosList.size(); k++)
         {
+            int[] coord = initialZerosList.remove(k);
+            
             System.out.println("coord: " + Arrays.toString(coord));
             //change a column to 0
             for(int m=0; m < matrix.length; m++)
@@ -428,10 +418,10 @@ public class Ch1ArraysAndStrings
         };
         
         System.out.println("before setRowAndColTo0:");
-        printMatrix(test1);
+        AlgUtils.printMatrix(test1);
         Integer[][] result = setRowAndColTo0(test1);
         System.out.println("after setRowAndColTo0:");
-        printMatrix(result);
+        AlgUtils.printMatrix(result);
     }
     
     public static void main(String[] args) 
