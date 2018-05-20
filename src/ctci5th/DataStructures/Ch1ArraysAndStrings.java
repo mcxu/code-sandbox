@@ -262,6 +262,7 @@ public class Ch1ArraysAndStrings
         //for each layer of the matrix; like an onion; lyr means coords (0,0), (1,1), (2,2)...
         for(int lyr=0; lyr<(matrix.length/2); lyr++)
         {
+            //int lyr = 0; // test
             //number of times to shift for a given layer
             for(int shiftCt=lyr; shiftCt <= maxInd-1-lyr; shiftCt++)
             {
@@ -294,7 +295,7 @@ public class Ch1ArraysAndStrings
                     }
                     matrix[maxInd-lyr][i+1] = matrix[maxInd-lyr][i];
                 }
-                matrix[maxInd-lyr][1] = coArray[0]; //add carry over from left col
+                matrix[maxInd-lyr][lyr+1] = coArray[0]; //add carry over from left col
                 cor = false;
                 System.out.print("after bottom row shift right:\n");
                 printNbyNmatrix(matrix);
@@ -326,7 +327,7 @@ public class Ch1ArraysAndStrings
                         coArray[3] = matrix[lyr][lyr];
                         cor = true;
                     }
-                    matrix[0][i] = matrix[0][i+1];
+                    matrix[lyr][i] = matrix[lyr][i+1];
                 }
                 matrix[lyr][maxInd-1-lyr] = coArray[2]; //add carry over from right col
                 cor = false;
