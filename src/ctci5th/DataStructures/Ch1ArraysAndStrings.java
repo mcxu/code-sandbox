@@ -240,21 +240,19 @@ public class Ch1ArraysAndStrings
     }
     
     /**
-     * Rotate NxN matrix 90 degrees in place.
+     * Rotate NxN matrix 90 degrees in place in CCW direction
      * @param matrix 
-     * @param dir false=rotate left, true=rotate right
      * @return
      */
-    public String[][] rotateSquarematrix90Deg(String[][] matrix, boolean dir)
+    public String[][] rotateSqMatrix90DegCCW(String[][] matrix)
     {
         final int maxInd = matrix.length-1;
         
-        String[] coArray = new String[4]; 
+        String[] coArray = new String[3]; 
         /* stores the carry over before shift
             0: carry over from left col
             1: carry over from bottom row 
             2: carry over from right col
-            3: carry over from top row
         */
 
         boolean cor = false; //carry over read, has stored the item that will be carried over
@@ -264,13 +262,13 @@ public class Ch1ArraysAndStrings
         {
             //int lyr = 0; // test
             //number of times to shift for a given layer
-            for(int shiftCt=lyr; shiftCt <= maxInd-1-lyr; shiftCt++)
+            for(int shiftCt=lyr; shiftCt < maxInd-lyr; shiftCt++)
             {
                 //perform a 1-item shift for each side
                 System.out.println("##### lyr=" + lyr + "   shiftCt=" + shiftCt + " #####");
                 
                 //left col shift down
-                for(int i=maxInd-1-lyr; i >= lyr; i--)
+                for(int i=maxInd-lyr-1; i >= lyr; i--)
                 {
                     if(cor == false)
                     {
@@ -284,9 +282,8 @@ public class Ch1ArraysAndStrings
                 printNbyNmatrix(matrix);
                 System.out.println("coArray[0]: " + coArray[0]);
                 
-                
                 //bottom row shift right
-                for(int i=maxInd-1-lyr; i >= lyr; i--)
+                for(int i=maxInd-lyr-1; i >= lyr; i--)
                 {
                     if(cor == false)
                     {
@@ -301,9 +298,8 @@ public class Ch1ArraysAndStrings
                 printNbyNmatrix(matrix);
                 System.out.println("coArray[1]: " + coArray[1]);
                 
-                
                 //right col shift up
-                for(int i=lyr; i <= maxInd-1-lyr; i++)
+                for(int i=lyr; i <= maxInd-lyr-1; i++)
                 {
                     if(cor == false)
                     {
@@ -312,34 +308,24 @@ public class Ch1ArraysAndStrings
                     }
                     matrix[i][maxInd-lyr] = matrix[i+1][maxInd-lyr];
                 }
-                matrix[maxInd-1-lyr][maxInd-lyr] = coArray[1]; //add carry over from bottom row
+                matrix[maxInd-lyr-1][maxInd-lyr] = coArray[1]; //add carry over from bottom row
                 cor = false;
                 System.out.print("after right col shift up:\n");
                 printNbyNmatrix(matrix);
                 System.out.println("coArray[2]: " + coArray[2]);
                 
-                
                 //top row shift left
-                for(int i=lyr; i <= maxInd-1-lyr; i++)
+                for(int i=lyr; i <= maxInd-lyr-1; i++)
                 {
-                    if(cor == false)
-                    {
-                        coArray[3] = matrix[lyr][lyr];
-                        cor = true;
-                    }
                     matrix[lyr][i] = matrix[lyr][i+1];
                 }
-                matrix[lyr][maxInd-1-lyr] = coArray[2]; //add carry over from right col
-                cor = false;
+                matrix[lyr][maxInd-lyr-1] = coArray[2]; //add carry over from right col
                 System.out.print("after top row shift left:\n");
                 printNbyNmatrix(matrix);
-                System.out.println("coArray[3]: " + coArray[3]);
             }
         }
         
-        System.out.print("end result:\n");
-        printNbyNmatrix(matrix);
-        return null;
+        return matrix;
     }
     
     public void printNbyNmatrix(String[][] matrix)
@@ -377,8 +363,12 @@ public class Ch1ArraysAndStrings
         };
         
         System.out.println("before rotate:");
-        printNbyNmatrix(matrix1);
-        String[][] out1 = rotateSquarematrix90Deg(matrix1, false);
+        printNbyNmatrix(matrix2);
+        String[][] out1 = rotateSqMatrix90DegCCW(matrix2); //point left
+        out1 = rotateSqMatrix90DegCCW(out1); //point down
+        out1 = rotateSqMatrix90DegCCW(out1); //point right
+        System.out.print("end result:\n");
+        printNbyNmatrix(out1);
     }
 
     public static void main(String[] args) 
