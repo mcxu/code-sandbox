@@ -29,7 +29,6 @@ public class Ch2LinkedLists
                 System.out.println("  n.data= " + n.data);
                 if(n.next.data == k.data)
                 {
-                    System.out.println("    duplicate: " + n.next.data);
                     n.next = n.next.next; //remove the duplicate
                 } 
                 else

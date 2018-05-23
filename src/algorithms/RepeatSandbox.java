@@ -1,6 +1,9 @@
 package algorithms;
 
 import java.util.Hashtable;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.Character;
 import java.lang.Integer;
 
@@ -56,12 +59,50 @@ public class RepeatSandbox {
         // return null if the check falls through
         return null;
     }
+    
+    public void test_findFirstNonRepeatedChar()
+    {
+        Character chr = findFirstNonRepeatedChar("aweoiuakfjheoawidsafkljdsasaashjsd");
+        System.out.println("first nonrepeating char= " + chr);
+    }
+    
+    public void countCharInstances()
+    {
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        
+        String input = null;
+        System.out.print("Input a string: ");
+        try {
+            input = br.readLine();
+            System.out.println("You inputted: " + input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        char search;
+        System.out.print("Enter a letter to search: ");
+        try {
+            search = (char) br.read();
+            
+            int count = 0;
+            for (int i = 0; i < input.length(); i++) {
+                if (input.charAt(i) == search)
+                    count++;
+            }
+            
+            System.out.println("There are " + count + " instances of the char: " + search);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
-    public static void main(String[] args) {
-        RepeatSandbox nr = new RepeatSandbox();
-        Character chr = nr.findFirstNonRepeatedChar("aweoiuakfjheoawidsafkljdsasaashjsd");
-        System.out.println("main: nonrepeating char= " + chr);
-
+    public static void main(String[] args) 
+    {
+        RepeatSandbox rs = new RepeatSandbox();
+        //rs.test_findFirstNonRepeatedChar();
+        rs.countCharInstances();
     }
 
 }

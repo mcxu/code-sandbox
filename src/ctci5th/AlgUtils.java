@@ -39,10 +39,17 @@ public class AlgUtils
             System.out.print("\n");
         }
     }
+    
+    public static void test_parseInt()
+    {
+        System.out.println((int) 'a');
+        System.out.println((int) 'b');
+    }
 
     public static void main(String[] args) 
     {
-        test_getCharFreqInStr();
+        //test_getCharFreqInStr();
+        test_parseInt();
     }
 
 }
