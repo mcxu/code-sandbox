@@ -75,7 +75,12 @@ public class Ch2LinkedLists
         printLinkedList(result);
     }
     
-    
+    /**
+     * Question 2.2: find kth to last element of singly linked list.
+     * @param head
+     * @param k
+     * @return
+     */
     public int getKthToLastElement(Node head, int k)
     {
         int j = getLinkedListLength(head) - k;
@@ -108,7 +113,43 @@ public class Ch2LinkedLists
         System.out.println("kthToLast: " + kthToLast);
     }
     
+    /**
+     * Question 2.3: Delete node in middle of singly linked list.
+     * @param head
+     * @param d
+     */
+    public void deleteNodeInMiddle(Node head, int d)
+    {
+        Node n = head;
+        while(n.next != null)
+        {
+            if(n.next.data == d)
+            {
+                n.next = n.next.next;
+            }
+            else
+            {
+                n = n.next;
+            }
+        }
+    }
     
+    public void testQ2p3()
+    {
+        Node head = new Node(1);
+        head.appendToTail(2);
+        head.appendToTail(3);
+        head.appendToTail(4);
+        head.appendToTail(5);
+        head.appendToTail(6);
+        
+        System.out.println("before delete");
+        printLinkedList(head);
+        
+        deleteNodeInMiddle(head, 3);
+        System.out.println("after delete");
+        printLinkedList(head);
+    }
     
     ////////////// helpers ///////////////
     
@@ -140,33 +181,34 @@ public class Ch2LinkedLists
         System.out.println(llStr);
     }
     
-    Node deleteNode(Node head, int d) 
-    {
-        Node n = head;
-        
-        if(n.data == d) 
-        {
-            return head.next;
-        }
-        
-        while(n.next != null)
-        {
-            if(n.next.data == d)
-            {
-                n.next = n.next.next;
-                return head;
-            }
-            n = n.next;
-        }
-        
-        return head;
-    }
+//    Node deleteNode(Node head, int d) 
+//    {
+//        Node n = head;
+//        
+//        if(n.data == d) 
+//        {
+//            return head.next;
+//        }
+//        
+//        while(n.next != null)
+//        {
+//            if(n.next.data == d)
+//            {
+//                n.next = n.next.next;
+//                return head;
+//            }
+//            n = n.next;
+//        }
+//        
+//        return head;
+//    }
     
     public static void main(String[] args) 
     {
         Ch2LinkedLists ch2 = new Ch2LinkedLists();
         //ch2.testQ2p1();
-        ch2.testQ2p2();
+        //ch2.testQ2p2();
+        ch2.testQ2p3();
     }
 
 }
