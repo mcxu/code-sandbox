@@ -1,7 +1,9 @@
 package ctci5th.DataStructures;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ctci5th.Node;
 
@@ -164,61 +166,73 @@ public class Ch2LinkedLists
      */
     public Node partitionLinkedList(Node head, int d)
     {   
-        Node GEdList = null; //holds values >= d
+        Node head2 = null; //holds values >= d
         
         Node n = head; //first node (right pointer)
-        while(n != null) 
+        while(n.next != null) 
         {
-            System.out.println("curr n.data: " + n.data);
+            System.out.println("n.data: " + n.data);
             
-            if(n.data >= d)
+            if(head.data >= d)
             {
-                if(GEdList == null)
+                head = head.next;
+                n = head;
+            }
+            
+            if(n.next.data >= d)
+            {
+                System.out.println("found: " + n.next.data);
+                if(head2 == null)
                 {
-                    GEdList = new Node(n.data);
+                    head2 = new Node(n.next.data);
                 }
                 else
                 {
-                    GEdList.appendToTail(n.data);
+                    head2.appendToTail(n.next.data);
                 }
+                
                 //remove the element from the head list
-                deleteNodeInMiddle(head, n.data);
+                n.next = n.next.next;
             }
+            System.out.print("curr list: "); printLinkedList(head);
+
             n = n.next;
         }
         
         //add d to end of head
-        head.appendToTail(d);
+        //head.appendToTail(d);
         
-        //add all elements but d from GEdList to end of head
-        n = GEdList;
-        while(n != null)
-        {
-            if(n.data != d)
-            {
-                head.appendToTail(n.data);
-            }
-            n = n.next;
-        }
+        //add all elements but d from head2 to end of head
+//        n = head2;
+//        while(n != null)
+//        {
+//            if(n.data != d)
+//            {
+//                head.appendToTail(n.data);
+//            }
+//            n = n.next;
+//        }
         
         System.out.print("head: ");printLinkedList(head);
-        System.out.print("GEdList: ");printLinkedList(GEdList);
-        GEdList = null; //delete GEdList
-        System.out.print("GEdList after null: ");printLinkedList(GEdList);
+        System.out.print("head2: ");printLinkedList(head2);
+        head2 = null; //delete secondary list
+        System.out.print("head2 after null: ");printLinkedList(head2);
         return head;
     }
     
     public void testQ2p4()
     {
-        Node head = new Node(1);
+        Node head = new Node(12);
         head.appendToTail(8);
         head.appendToTail(3);
         head.appendToTail(5);
         head.appendToTail(4);
         head.appendToTail(6);
+        head.appendToTail(4);
+        head.appendToTail(100);
         head.appendToTail(2);
         
-        head = partitionLinkedList(head, 2);
+        head = partitionLinkedList(head, 4);
         System.out.println("testQ2p4:");
         printLinkedList(head);
     }
@@ -297,6 +311,60 @@ public class Ch2LinkedLists
         printLinkedList(sumValuesList);
     }
     
+    public Node getFirstLoopNodeInCircularLinkedList(Node head)
+    {
+        Map<Integer, Node> nodeMap = new HashMap<>(); 
+        
+        Node n = head;
+        
+        while(n != null)
+        {
+            System.out.println("n.data=" + n.data + "  addr: " + n);
+            
+            if(nodeMap.containsKey(n.data))
+            {
+                Node k = nodeMap.get(n.data);
+                if(k == n)
+                {
+                    nodeMap = null;
+                    return n;
+                }
+            }
+            else
+            {
+                nodeMap.put(n.data, n);
+            }
+            
+            n = n.next;
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        nodeMap = null;
+        return n;
+    }
+    
+    public void testQ2p6()
+    {
+        Node a = new Node(1);
+        Node b = new Node(2);
+        a.next = b;
+        Node c = new Node(3);
+        b.next = c;
+        Node d = new Node(4);
+        c.next = d;
+        Node e = new Node(5);
+        d.next = e;
+        e.next = c;
+        
+        //printLinkedList(a);
+        Node fln = getFirstLoopNodeInCircularLinkedList(a);
+        System.out.println("fln: " + fln);
+        System.out.println("fln data: " + fln.data);
+    }
+    
     ////////////// helpers ///////////////
     
     public int getDataFromLinkedList(Node head, int index)
@@ -348,17 +416,13 @@ public class Ch2LinkedLists
     void printLinkedList(Node head)
     {
         Node n = head;
-        String llStr = "";
         while(n != null) 
         {
-            llStr = llStr + n.data + ", ";
+            String element = n.data + ", ";
+            System.out.print(element);
             n = n.next;
         }
-        if(llStr.endsWith(", "))
-        {
-            llStr = llStr.substring(0, llStr.length()-2);
-        }
-        System.out.println(llStr);
+        System.out.print("\n");
     }
     
 //    Node deleteNode(Node head, int d) 
@@ -391,8 +455,9 @@ public class Ch2LinkedLists
         //ch2.testQ2p2();
         //ch2.testQ2p3();
         //ch2.test_getDataFromLinkedList();
-        //ch2.testQ2p4();
-        ch2.testQ2p5();
+        ch2.testQ2p4();
+        //ch2.testQ2p5();
+        //ch2.testQ2p6();
     }
 
 }

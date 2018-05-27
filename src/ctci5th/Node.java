@@ -1,7 +1,8 @@
 package ctci5th;
 
 //Node class for linked list
-public class Node {
+public class Node 
+{
   public Node next = null;
   public int data;
   
