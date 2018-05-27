@@ -155,7 +155,13 @@ public class Ch2LinkedLists
         printLinkedList(head);
     }
     
-    
+    /**
+     * Question 2.4: partition linked list such that all nodes less than
+     * x come before all nodes greater than or equal to x.
+     * @param head
+     * @param d
+     * @return
+     */
     public Node partitionLinkedList(Node head, int d)
     {   
         Node GEdList = null; //holds values >= d
@@ -215,6 +221,80 @@ public class Ch2LinkedLists
         head = partitionLinkedList(head, 2);
         System.out.println("testQ2p4:");
         printLinkedList(head);
+    }
+    
+    /**
+     * Write a function that adds the two numbers and returns the sum 
+     * as a linked list.
+     * @param head1
+     * @param head2
+     * @param direction "f" if linked list values in forward order, "r" in reverse.
+     * @return
+     */
+    public Node addLinkedListNums(Node head1, Node head2, String direction)
+    {
+        String str1 = "";
+        Node n1 = head1;
+        while(n1 != null)
+        {
+            if(direction.equals("r"))
+                str1 = n1.data + str1;
+            else if(direction.equals("f"))
+                str1 = str1 + n1.data;
+            n1 = n1.next;
+        }
+        System.out.println("str1: " + str1);
+        
+        String str2 = "";
+        Node n2 = head2;
+        while(n2 != null)
+        {
+            if(direction.equals("r"))
+                str2 = n2.data + str2;
+            else if(direction.equals("f"))
+                str2 = str2 + n2.data;
+            n2 = n2.next;
+        }
+        System.out.println("str2: " + str2);
+        
+        //sum
+        int sum = Integer.parseInt(str1) + Integer.parseInt(str2);
+        System.out.println("sum= " + sum);
+        
+        //create linked list for sum
+        Node sumValuesList = null;
+        String sumStr = Integer.toString(sum);
+        for(int i=0; i < sumStr.length(); i++)
+        {
+            String chStr = Character.toString(sumStr.charAt(i));
+            int val = Integer.parseInt(chStr);
+            
+            if(sumValuesList == null)
+            {
+               sumValuesList = new Node(val);
+            }
+            else
+            {
+                sumValuesList.appendToTail(val);
+            }
+        }
+        
+        return sumValuesList;
+    }
+    
+    public void testQ2p5()
+    {
+        Node head1 = new Node(1);
+        head1.appendToTail(8);
+        head1.appendToTail(3);
+        
+        Node head2 = new Node(0);
+        head2.appendToTail(0);
+        head2.appendToTail(1);
+        
+        Node sumValuesList = addLinkedListNums(head1, head2, "r");
+        System.out.println("sumValuesList: ");
+        printLinkedList(sumValuesList);
     }
     
     ////////////// helpers ///////////////
@@ -311,7 +391,8 @@ public class Ch2LinkedLists
         //ch2.testQ2p2();
         //ch2.testQ2p3();
         //ch2.test_getDataFromLinkedList();
-        ch2.testQ2p4();
+        //ch2.testQ2p4();
+        ch2.testQ2p5();
     }
 
 }
