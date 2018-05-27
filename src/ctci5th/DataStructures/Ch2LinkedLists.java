@@ -1,5 +1,10 @@
 package ctci5th.DataStructures;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ctci5th.Node;
+
 /**
  * Linked Lists
  * Book pg. 75. PDF pg. 84
@@ -150,7 +155,103 @@ public class Ch2LinkedLists
         printLinkedList(head);
     }
     
+    
+    public Node partitionLinkedList(Node head, int d)
+    {   
+        Node GEdList = null; //holds values >= d
+        
+        Node n = head; //first node (right pointer)
+        while(n != null) 
+        {
+            System.out.println("curr n.data: " + n.data);
+            
+            if(n.data >= d)
+            {
+                if(GEdList == null)
+                {
+                    GEdList = new Node(n.data);
+                }
+                else
+                {
+                    GEdList.appendToTail(n.data);
+                }
+                //remove the element from the head list
+                deleteNodeInMiddle(head, n.data);
+            }
+            n = n.next;
+        }
+        
+        //add d to end of head
+        head.appendToTail(d);
+        
+        //add all elements but d from GEdList to end of head
+        n = GEdList;
+        while(n != null)
+        {
+            if(n.data != d)
+            {
+                head.appendToTail(n.data);
+            }
+            n = n.next;
+        }
+        
+        System.out.print("head: ");printLinkedList(head);
+        System.out.print("GEdList: ");printLinkedList(GEdList);
+        GEdList = null; //delete GEdList
+        System.out.print("GEdList after null: ");printLinkedList(GEdList);
+        return head;
+    }
+    
+    public void testQ2p4()
+    {
+        Node head = new Node(1);
+        head.appendToTail(8);
+        head.appendToTail(3);
+        head.appendToTail(5);
+        head.appendToTail(4);
+        head.appendToTail(6);
+        head.appendToTail(2);
+        
+        head = partitionLinkedList(head, 2);
+        System.out.println("testQ2p4:");
+        printLinkedList(head);
+    }
+    
     ////////////// helpers ///////////////
+    
+    public int getDataFromLinkedList(Node head, int index)
+    {
+        Node n = head;
+        int j = 0;
+        try
+        {
+            while(n.next != null && j<index)
+            {
+                j++;
+                n = n.next;
+            }
+        }
+        catch(NullPointerException ex)
+        {
+            System.out.println("n pointer is null.");
+            ex.printStackTrace();
+        }
+        return n.data;
+    }
+    
+    public void test_getDataFromLinkedList()
+    {
+        Node head = new Node(1);
+        head.appendToTail(8);
+        head.appendToTail(3);
+        head.appendToTail(5);
+        head.appendToTail(4);
+        head.appendToTail(6);
+        head.appendToTail(2);
+        
+        int data = getDataFromLinkedList(head, 3);
+        System.out.println("data: " + data);
+    }
     
     public int getLinkedListLength(Node head)
     {
@@ -202,34 +303,15 @@ public class Ch2LinkedLists
 //        return head;
 //    }
     
+    
     public static void main(String[] args) 
     {
         Ch2LinkedLists ch2 = new Ch2LinkedLists();
         //ch2.testQ2p1();
         //ch2.testQ2p2();
-        ch2.testQ2p3();
+        //ch2.testQ2p3();
+        //ch2.test_getDataFromLinkedList();
+        ch2.testQ2p4();
     }
 
-}
-
-//Node class for linked list
-class Node {
-    Node next = null;
-    int data;
-    
-    public Node(int d)
-    {
-        data = d;   
-    }
-    
-    void appendToTail(int d)
-    {
-        Node end = new Node(d);
-        Node n = this;
-        while(n.next != null)
-        {
-            n = n.next;
-        }
-        n.next = end;
-    }
 }
