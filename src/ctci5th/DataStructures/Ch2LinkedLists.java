@@ -221,13 +221,13 @@ public class Ch2LinkedLists
         //move head data to end of head list if needed
         if(headDataGTd == true)
         {
-            Node k = head;
-            while(k.next != null)
+            n = head;
+            while(n.next != null)
             {
-                int temp = k.next.data;
-                k.next.data = k.data;
-                k.data = temp;
-                k = k.next;
+                int temp = n.next.data;
+                n.next.data = n.data;
+                n.data = temp;
+                n = n.next;
             }
         }
         
