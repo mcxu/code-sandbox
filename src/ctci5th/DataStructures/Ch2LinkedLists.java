@@ -166,52 +166,81 @@ public class Ch2LinkedLists
      */
     public Node partitionLinkedList(Node head, int d)
     {   
-        Node head2 = null; //holds values >= d
+        boolean headDataGTd = false; //head data greater than d
+        if(head.data >= d)
+        {
+            headDataGTd = true;
+        }
         
+        Node head2 = null; //holds values >= d
         Node n = head; //first node (right pointer)
+        int dCount = 0;
         while(n.next != null) 
         {
-            System.out.println("n.data: " + n.data);
-            
-            if(head.data >= d)
-            {
-                head = head.next;
-                n = head;
-            }
-            
+            System.out.println("=== n.data: " + n.data + " === n.next.data: " + n.next.data);
+            System.out.print("curr list: "); printLinkedList(head);
             if(n.next.data >= d)
             {
                 System.out.println("found: " + n.next.data);
-                if(head2 == null)
+                
+                if(n.next.data == d)
                 {
-                    head2 = new Node(n.next.data);
+                    dCount++;
                 }
                 else
                 {
-                    head2.appendToTail(n.next.data);
+                    if(head2 == null)
+                    {
+                        head2 = new Node(n.next.data);
+                    }
+                    else
+                    {
+                        head2.appendToTail(n.next.data);
+                    }
                 }
                 
-                //remove the element from the head list
+                //remove element
                 n.next = n.next.next;
             }
-            System.out.print("curr list: "); printLinkedList(head);
-
-            n = n.next;
+            else 
+            {
+                n = n.next;
+            }
+            System.out.print("after list: "); printLinkedList(head);
         }
         
-        //add d to end of head
-        //head.appendToTail(d);
+        System.out.println("dCount: " + dCount);
+        
+        //add d to end of head for number of times d exists
+        for(int i=0; i<dCount; i++)
+        {
+            head.appendToTail(d);
+        }
+        System.out.print("after append d: "); printLinkedList(head);
+        
+        //move head data to end of head list if needed
+        if(headDataGTd == true)
+        {
+            Node k = head;
+            while(k.next != null)
+            {
+                int temp = k.next.data;
+                k.next.data = k.data;
+                k.data = temp;
+                k = k.next;
+            }
+        }
         
         //add all elements but d from head2 to end of head
-//        n = head2;
-//        while(n != null)
-//        {
-//            if(n.data != d)
-//            {
-//                head.appendToTail(n.data);
-//            }
-//            n = n.next;
-//        }
+        n = head2;
+        while(n != null)
+        {
+            if(n.data != d)
+            {
+                head.appendToTail(n.data);
+            }
+            n = n.next;
+        }
         
         System.out.print("head: ");printLinkedList(head);
         System.out.print("head2: ");printLinkedList(head2);
@@ -223,17 +252,25 @@ public class Ch2LinkedLists
     public void testQ2p4()
     {
         Node head = new Node(12);
+        head.appendToTail(5);
+        head.appendToTail(1);
         head.appendToTail(8);
+        head.appendToTail(-50);
         head.appendToTail(3);
         head.appendToTail(5);
         head.appendToTail(4);
+        head.appendToTail(1);
         head.appendToTail(6);
         head.appendToTail(4);
         head.appendToTail(100);
+        head.appendToTail(6);
         head.appendToTail(2);
+        head.appendToTail(1);
+        System.out.println("testQ2p4 before: ");
+        printLinkedList(head);
         
         head = partitionLinkedList(head, 4);
-        System.out.println("testQ2p4:");
+        System.out.println("testQ2p4 after:");
         printLinkedList(head);
     }
     
