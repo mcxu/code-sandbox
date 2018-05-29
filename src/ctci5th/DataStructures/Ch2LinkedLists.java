@@ -252,6 +252,7 @@ public class Ch2LinkedLists
     public void testQ2p4()
     {
         Node head = new Node(12);
+        head.appendToTail(12);
         head.appendToTail(5);
         head.appendToTail(1);
         head.appendToTail(8);
@@ -402,6 +403,91 @@ public class Ch2LinkedLists
         System.out.println("fln data: " + fln.data);
     }
     
+    
+    public boolean isPalindrome(Node head)
+    {
+        int llLen = getLinkedListLength(head);
+        
+        //check if odd length
+        int countFrom = 0;
+        if(llLen % 2 == 0)
+        {
+            countFrom = llLen/2; //even
+        }
+        else
+        {
+            countFrom = llLen/2 + 1; //odd
+        }
+        
+        String former = "";
+        String latter = "";
+        
+        int i = 0;
+        
+        Node n = head;
+        while(n != null)
+        {
+            //System.out.print("i=" + i);
+            
+            if(i < llLen/2)
+            {
+                //System.out.println(" in if: " + n.data);
+                former = former + n.data + ",";
+            }
+            else
+            {
+                //System.out.println(" in else: " + n.data);
+                if(i >= countFrom)
+                {
+                    System.out.println("i>=CF: " + i);
+                    latter = n.data + "," + latter ;
+                }
+            }
+            
+            i++;
+            n = n.next;
+        }
+        
+        System.out.println("former: " + former);
+        System.out.println("latter: " + latter);
+        
+        if(former.equals(latter))
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public void testQ2p7()
+    {
+        Node head = new Node(0);
+        head.appendToTail(1);
+        head.appendToTail(2);
+        head.appendToTail(3);
+        head.appendToTail(4);
+        head.appendToTail(3);
+        head.appendToTail(2);
+        head.appendToTail(1);
+        head.appendToTail(0);
+        
+        boolean isPal = isPalindrome(head);
+        System.out.println("isPal: " + isPal);
+        
+        Node head2 = new Node(0);
+        head2.appendToTail(1);
+        head2.appendToTail(2);
+        head2.appendToTail(3);
+        head2.appendToTail(0);
+        head2.appendToTail(2);
+        head2.appendToTail(2);
+        head2.appendToTail(1);
+        head2.appendToTail(0);
+        
+        isPal = isPalindrome(head2);
+        System.out.println("isPal: " + isPal);
+    }
+    
     ////////////// helpers ///////////////
     
     public int getDataFromLinkedList(Node head, int index)
@@ -492,9 +578,10 @@ public class Ch2LinkedLists
         //ch2.testQ2p2();
         //ch2.testQ2p3();
         //ch2.test_getDataFromLinkedList();
-        ch2.testQ2p4();
+        //ch2.testQ2p4();
         //ch2.testQ2p5();
         //ch2.testQ2p6();
+        ch2.testQ2p7();
     }
 
 }
