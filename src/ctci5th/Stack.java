@@ -10,7 +10,7 @@ public class Stack
     {
         if(top != null)
         {
-            Object item = top.data;
+            Object item = top.dataObj;
             top = top.next;
             return item;
         }
