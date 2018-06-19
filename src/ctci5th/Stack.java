@@ -10,14 +10,14 @@ public class Stack
     {
         if(top != null)
         {
-            Object item = top.dataObj;
+            Object item = top.data;
             top = top.next;
             return item;
         }
         return null;
     }
     
-    void push(Object item)
+    void push(int item)
     {
         Node t = new Node(item);
         t.next = top;
@@ -26,6 +26,6 @@ public class Stack
     
     Object peek()
     {
-        return top.dataObj;
+        return top.data;
     }
 }

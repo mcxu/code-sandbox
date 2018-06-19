@@ -1,7 +1,7 @@
 package ctci5th;
 
 /**
- * Question 3.2: Stack which also returns min element.
+ * Question 3.2: Stack which also returns min element in O(1) time.
  * @author MichaelXu
  *
  */

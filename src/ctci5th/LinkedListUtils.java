@@ -6,7 +6,7 @@ public class LinkedListUtils
 {
     public Node quickSortLinkedList(Node head)
     {
-        //todo
+        //TODO
         
         return head;
     }

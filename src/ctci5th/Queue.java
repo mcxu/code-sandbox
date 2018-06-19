@@ -4,7 +4,7 @@ public class Queue
 {
     public Node first, last;
     
-    public void enqueue(Object item)
+    public void enqueue(int item)
     {
         if(first == null)
         {
@@ -18,15 +18,15 @@ public class Queue
         }
     }
     
-    public Object dequeue()
+    public int dequeue()
     {
         if(first != null)
         {
-            Object item = first.dataObj;
+            int item = first.data;
             first = first.next;
             return item;
         }
-        return null;
+        return -1000000;
     }
 
 }
