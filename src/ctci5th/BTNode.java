@@ -34,6 +34,7 @@ public class BTNode
         
         System.out.println("root: " + root.data);
         System.out.println("root->left: " + root.left.data);
+        System.out.println("root->right: " + root.right.data);
         
         System.out.println("n4: " + n4.data);
     } 
