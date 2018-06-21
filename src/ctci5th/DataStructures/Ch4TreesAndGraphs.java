@@ -4,23 +4,42 @@ import ctci5th.BTNode;
 
 public class Ch4TreesAndGraphs 
 {   
-    //in-order traversal
-    void traverseTreeInOrder(BTNode root)
+    //in-order, post-order, and pre-order traversals
+    public static enum TraversalType {INORDER, POSTORDER, PREORDER};
+    void traverseBinaryTree(BTNode root, TraversalType traversalType)
     {
         if(root == null)
         {
             return;
         }
-        traverseTreeInOrder(root.left);
-        System.out.println("root.data: " + root.data);
-        traverseTreeInOrder(root.right);
+        
+        if(traversalType == TraversalType.PREORDER)
+        {
+            System.out.println("root.data: " + root.data);
+        }
+        traverseBinaryTree(root.left, traversalType);
+        if(traversalType == TraversalType.INORDER)
+        {
+            System.out.println("root.data: " + root.data);
+        } 
+        traverseBinaryTree(root.right, traversalType);
+        if(traversalType == TraversalType.POSTORDER)
+        {
+            System.out.println("root.data: " + root.data);
+        } 
     }
     
-    void test_traverseTreeInOrder()
+    void test_traverseBinaryTree()
     {
         BTNode testTree = getTestTree1();
+        System.out.println("In order:");
+        traverseBinaryTree(testTree, TraversalType.INORDER);
         
-        traverseTreeInOrder(testTree);
+        System.out.println("Post order:");
+        traverseBinaryTree(testTree, TraversalType.POSTORDER);
+        
+        System.out.println("Pre order:");
+        traverseBinaryTree(testTree, TraversalType.PREORDER);
     }
     
     
@@ -69,8 +88,7 @@ public class Ch4TreesAndGraphs
     
     public static void main(String[] args) {
         Ch4TreesAndGraphs ch4 = new Ch4TreesAndGraphs();
-        ch4.test_traverseTreeInOrder();
-
+        ch4.test_traverseBinaryTree();
     }
 
 }
