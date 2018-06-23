@@ -6,26 +6,26 @@ public class Ch4TreesAndGraphs
 {   
     //in-order, post-order, and pre-order traversals
     public static enum TraversalType {INORDER, POSTORDER, PREORDER};
-    void traverseBinaryTree(BTNode root, TraversalType traversalType)
+    void traverseBinaryTree(BTNode node, TraversalType traversalType)
     {
-        if(root == null)
+        if(node == null)
         {
             return;
         }
         
         if(traversalType == TraversalType.PREORDER)
         {
-            System.out.println("root.data: " + root.data);
+            System.out.println("node.data: " + node.data);
         }
-        traverseBinaryTree(root.left, traversalType);
+        traverseBinaryTree(node.left, traversalType);
         if(traversalType == TraversalType.INORDER)
         {
-            System.out.println("root.data: " + root.data);
+            System.out.println("node.data: " + node.data);
         } 
-        traverseBinaryTree(root.right, traversalType);
+        traverseBinaryTree(node.right, traversalType);
         if(traversalType == TraversalType.POSTORDER)
         {
-            System.out.println("root.data: " + root.data);
+            System.out.println("node.data: " + node.data);
         } 
     }
     
@@ -42,26 +42,57 @@ public class Ch4TreesAndGraphs
         traverseBinaryTree(testTree, TraversalType.PREORDER);
     }
     
-    
-    public boolean isBalanced(BTNode root)
+    /**
+     * Question 4.1: Function to check if binary tree is balanced.
+     * @param root
+     * @return
+     */
+    public boolean binaryTreeIsBalanced(BTNode node)
     {
+        int balHeight = balancedHeight(node);
+        System.out.println("balHeight: " + balHeight);
         
-        
+        if (balHeight > -1) 
+            return true;
         return false;
     }
     
-//    void search(BTNode root)
-//    {
-//        if(root == null)
-//        {
-//            return;
-//        }
-//        visit(root);
-//        
-//        while(BTNode n in root.adja)
-//    }
+    void testCh4p1()
+    {
+        BTNode testTree = getTestTree1();
+        
+        //make tree unbalanced
+        BTNode five = new BTNode(5);
+        testTree.left.right.left.right = five;
+        
+        boolean isBal = binaryTreeIsBalanced(testTree);
+        System.out.println("isBal: " + isBal);
+    }
     
-    public void printBinaryTree(BTNode root)
+    ///////////////////// helpers ////////////////////
+    
+    public int balancedHeight(BTNode n) {
+        if (n == null) 
+            return 0;
+        
+        System.out.println("n.data= " + n.data);
+        int hLeft = balancedHeight(n.left);
+        System.out.println("hLeft=" + hLeft);
+        int hRight = balancedHeight(n.right);
+        System.out.println("hRight=" + hRight);
+     
+        if (hLeft == -1 || hRight == -1) 
+            return -1;
+        
+        if (Math.abs(hLeft - hRight) > 1) 
+            return -1;
+        
+        if (hLeft > hRight) 
+            return hLeft + 1;
+        return hRight + 1;
+    }
+    
+    public void printBinaryTree(BTNode node)
     {
         
     }
@@ -88,7 +119,8 @@ public class Ch4TreesAndGraphs
     
     public static void main(String[] args) {
         Ch4TreesAndGraphs ch4 = new Ch4TreesAndGraphs();
-        ch4.test_traverseBinaryTree();
+        //ch4.test_traverseBinaryTree();
+        ch4.testCh4p1();
     }
 
 }
