@@ -1,4 +1,4 @@
-package ctci5th;
+package ctci5th.util.tree;
 
 /**
  * Node class for a binary tree (Chapter 4 Trees and Graphs)

@@ -1,6 +1,4 @@
-package ctci5th;
-
-import ctci5th.Node;
+package ctci5th.util.list;
 
 public class LinkedListUtils 
 {

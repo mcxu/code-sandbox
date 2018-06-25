@@ -1,6 +1,6 @@
-package ctci5th;
+package ctci5th.util.stack;
 
-import ctci5th.Node;
+import ctci5th.util.list.Node;
 
 public class Stack 
 {

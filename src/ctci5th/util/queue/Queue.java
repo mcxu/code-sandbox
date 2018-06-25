@@ -1,10 +1,12 @@
-package ctci5th;
+package ctci5th.util.queue;
+
+import ctci5th.util.list.Node;
 
 public class Queue 
 {
     public Node first, last;
     
-    public void enqueue(int item)
+    public void enqueue(Object item)
     {
         if(first == null)
         {
@@ -18,11 +20,11 @@ public class Queue
         }
     }
     
-    public int dequeue()
+    public Object dequeue()
     {
         if(first != null)
         {
-            int item = first.data;
+            Object item = first.data;
             first = first.next;
             return item;
         }

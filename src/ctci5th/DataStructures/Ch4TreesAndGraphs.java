@@ -1,6 +1,11 @@
 package ctci5th.DataStructures;
 
-import ctci5th.BTNode;
+import ctci5th.util.graph.GraphNode;
+
+import java.util.Iterator;
+
+import ctci5th.util.graph.DGNode;
+import ctci5th.util.tree.BTNode;
 
 public class Ch4TreesAndGraphs 
 {   
@@ -42,6 +47,40 @@ public class Ch4TreesAndGraphs
         traverseBinaryTree(testTree, TraversalType.PREORDER);
     }
     
+    
+    public void searchDFS(GraphNode root)
+    {
+        if(root == null)
+        {
+            return;
+        }
+        
+        visit(root);
+        root.visited = true;
+        
+        Iterator<GraphNode> adjNodes = root.connections.iterator();
+        while(adjNodes.hasNext())
+        {
+            GraphNode adjNode = adjNodes.next();
+            if(adjNode.visited == false)
+            {
+                searchDFS(adjNode);
+            }
+        }
+    }
+    
+    public void visit(GraphNode vertex)
+    {
+        System.out.println("visited: " + vertex.data);
+    }
+    
+    public void test_searchDFS()
+    {
+        GraphNode initVertex = getGraph1();
+        searchDFS(initVertex);
+    }
+    
+    
     /**
      * Question 4.1: Function to check if binary tree is balanced.
      * @param root
@@ -56,20 +95,6 @@ public class Ch4TreesAndGraphs
             return true;
         return false;
     }
-    
-    void testCh4p1()
-    {
-        BTNode testTree = getTestTree1();
-        
-        //make tree unbalanced
-        BTNode five = new BTNode(5);
-        testTree.left.right.left.right = five;
-        
-        boolean isBal = binaryTreeIsBalanced(testTree);
-        System.out.println("isBal: " + isBal);
-    }
-    
-    ///////////////////// helpers ////////////////////
     
     public int balancedHeight(BTNode n) {
         if (n == null) 
@@ -92,9 +117,46 @@ public class Ch4TreesAndGraphs
         return hRight + 1;
     }
     
-    public void printBinaryTree(BTNode node)
+    void testCh4p1()
     {
+        BTNode testTree = getTestTree1();
         
+        //make tree unbalanced
+        BTNode five = new BTNode(5);
+        testTree.left.right.left.right = five;
+        
+        boolean isBal = binaryTreeIsBalanced(testTree);
+        System.out.println("isBal: " + isBal);
+    }
+    
+    
+    public boolean isRouteBetweenNodes(DGNode node)
+    {
+        return false; //TODO
+    }
+    
+    ///////////////////// helpers ////////////////////
+
+    public GraphNode getGraph1()
+    {
+        GraphNode a = new GraphNode("a");
+        GraphNode b = new GraphNode("b");
+        GraphNode c = new GraphNode("c");
+        GraphNode d = new GraphNode("d");
+        GraphNode e = new GraphNode("e");
+        GraphNode f = new GraphNode("f");
+        GraphNode g = new GraphNode("g");
+
+        a.addNode(b); a.addNode(c);
+        b.addNode(a); b.addNode(c);
+        c.addNode(a); c.addNode(b); c.addNode(d);
+        d.addNode(c); d.addNode(e);
+        e.addNode(c); e.addNode(d); e.addNode(f);
+        f.addNode(g);
+        System.out.println("con: " + f.connections);
+        g.printConnections();
+        
+        return g;
     }
     
     public BTNode getTestTree1()
@@ -120,7 +182,9 @@ public class Ch4TreesAndGraphs
     public static void main(String[] args) {
         Ch4TreesAndGraphs ch4 = new Ch4TreesAndGraphs();
         //ch4.test_traverseBinaryTree();
-        ch4.testCh4p1();
+        ch4.test_searchDFS();
+        //ch4.testCh4p1();
+        
     }
 
 }

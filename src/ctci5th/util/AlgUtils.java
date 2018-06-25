@@ -1,4 +1,4 @@
-package ctci5th;
+package ctci5th.util;
 
 import java.util.HashMap;
 

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 
-import ctci5th.AlgUtils;
+import ctci5th.util.AlgUtils;
 
 /**
  * Chapter 1 Arrays and Strings

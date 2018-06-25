@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ctci5th.Node;
+import ctci5th.util.list.Node;
 
 /**
  * Linked Lists
@@ -95,12 +95,12 @@ public class Ch2LinkedLists
         while(n.next != null)
         {
             if(i == j) {
-                return n.data;
+                return (int)n.data;
             }
             n = n.next;
             i++;
         }
-        return n.data;
+        return (int)n.data;
     }
     
     public void testQ2p2()
@@ -129,7 +129,7 @@ public class Ch2LinkedLists
         Node n = head;
         while(n.next != null)
         {
-            if(n.next.data == d)
+            if((int)n.next.data == d)
             {
                 n.next = n.next.next;
             }
@@ -167,7 +167,7 @@ public class Ch2LinkedLists
     public Node partitionLinkedList(Node head, int d)
     {   
         boolean headDataGTd = false; //head data greater than d
-        if(head.data >= d)
+        if((int)head.data >= d)
         {
             headDataGTd = true;
         }
@@ -179,11 +179,11 @@ public class Ch2LinkedLists
         {
             System.out.println("=== n.data: " + n.data + " === n.next.data: " + n.next.data);
             System.out.print("curr list: "); printLinkedList(head);
-            if(n.next.data >= d)
+            if((int)n.next.data >= d)
             {
                 System.out.println("found: " + n.next.data);
                 
-                if(n.next.data == d)
+                if((int)n.next.data == d)
                 {
                     dCount++;
                 }
@@ -224,7 +224,7 @@ public class Ch2LinkedLists
             n = head;
             while(n.next != null)
             {
-                int temp = n.next.data;
+                int temp = (int)n.next.data;
                 n.next.data = n.data;
                 n.data = temp;
                 n = n.next;
@@ -235,7 +235,7 @@ public class Ch2LinkedLists
         n = head2;
         while(n != null)
         {
-            if(n.data != d)
+            if((int)n.data != d)
             {
                 head.appendToTail(n.data);
             }
@@ -370,7 +370,7 @@ public class Ch2LinkedLists
             }
             else
             {
-                nodeMap.put(n.data, n);
+                nodeMap.put((int)n.data, n);
             }
             
             n = n.next;
@@ -507,7 +507,7 @@ public class Ch2LinkedLists
             System.out.println("n pointer is null.");
             ex.printStackTrace();
         }
-        return n.data;
+        return (int)n.data;
     }
     
     public void test_getDataFromLinkedList()
