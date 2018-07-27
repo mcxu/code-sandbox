@@ -1,10 +1,10 @@
 package ctci5th.util.stack;
 
-import ctci5th.util.list.Node;
+import ctci5th.util.list.LLNode;
 
 public class Stack 
 {
-    public Node top;
+    public LLNode top;
     
     Object pop()
     {
@@ -19,7 +19,7 @@ public class Stack
     
     void push(int item)
     {
-        Node t = new Node(item);
+        LLNode t = new LLNode(item);
         t.next = top;
         top = t;
     }

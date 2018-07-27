@@ -1,10 +1,8 @@
 package ctci5th.DataStructures;
 
-import ctci5th.util.graph.GraphNode;
-
 import java.util.Iterator;
 
-import ctci5th.util.graph.DGNode;
+import ctci5th.util.graph.GraphVertex;
 import ctci5th.util.tree.BTNode;
 
 public class Ch4TreesAndGraphs 
@@ -48,36 +46,27 @@ public class Ch4TreesAndGraphs
     }
     
     
-    public void searchDFS(GraphNode root)
-    {
-        if(root == null)
-        {
-            return;
-        }
-        
-        visit(root);
-        root.visited = true;
-        
-        Iterator<GraphNode> adjNodes = root.connections.iterator();
-        while(adjNodes.hasNext())
-        {
-            GraphNode adjNode = adjNodes.next();
-            if(adjNode.visited == false)
-            {
-                searchDFS(adjNode);
-            }
-        }
-    }
+//    public void searchDFS(Graph graph, GraphVertex root)
+//    {
+//        if(root == null)
+//        {
+//            return;
+//        }
+//        
+//        visit(root);
+//        root.visited = true;
+//        
+//    }
     
-    public void visit(GraphNode vertex)
+    public void visit(GraphVertex vertex)
     {
         System.out.println("visited: " + vertex.data);
     }
     
     public void test_searchDFS()
     {
-        GraphNode initVertex = getGraph1();
-        searchDFS(initVertex);
+        //Graph initVertex = getGraph1();
+        //searchDFS(initVertex);
     }
     
     
@@ -130,34 +119,12 @@ public class Ch4TreesAndGraphs
     }
     
     
-    public boolean isRouteBetweenNodes(DGNode node)
+    public boolean isRouteBetweenNodes(GraphVertex node)
     {
         return false; //TODO
     }
     
     ///////////////////// helpers ////////////////////
-
-    public GraphNode getGraph1()
-    {
-        GraphNode a = new GraphNode("a");
-        GraphNode b = new GraphNode("b");
-        GraphNode c = new GraphNode("c");
-        GraphNode d = new GraphNode("d");
-        GraphNode e = new GraphNode("e");
-        GraphNode f = new GraphNode("f");
-        GraphNode g = new GraphNode("g");
-
-        a.addNode(b); a.addNode(c);
-        b.addNode(a); b.addNode(c);
-        c.addNode(a); c.addNode(b); c.addNode(d);
-        d.addNode(c); d.addNode(e);
-        e.addNode(c); e.addNode(d); e.addNode(f);
-        f.addNode(g);
-        System.out.println("con: " + f.connections);
-        g.printConnections();
-        
-        return g;
-    }
     
     public BTNode getTestTree1()
     {

@@ -2,7 +2,7 @@ package ctci5th.util.list;
 
 public class LinkedListUtils 
 {
-    public Node quickSortLinkedList(Node head)
+    public LLNode quickSortLinkedList(LLNode head)
     {
         //TODO
         
@@ -11,7 +11,7 @@ public class LinkedListUtils
     
     public void test_sortLinkedList()
     {
-        Node head = new Node(1);
+        LLNode head = new LLNode(1);
         head.appendToTail(2);
         head.appendToTail(3);
         head.appendToTail(4);

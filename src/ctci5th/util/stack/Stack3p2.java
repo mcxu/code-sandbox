@@ -1,6 +1,6 @@
 package ctci5th.util.stack;
 
-import ctci5th.util.list.Node;
+import ctci5th.util.list.LLNode;
 
 /**
  * Question 3.2: Stack which also returns min element in O(1) time.
@@ -9,8 +9,8 @@ import ctci5th.util.list.Node;
  */
 public class Stack3p2
 {
-    public Node top;
-    private Node minNode;
+    public LLNode top;
+    private LLNode minNode;
     
     Object pop()
     {
@@ -19,7 +19,7 @@ public class Stack3p2
             if(top == minNode)
             {
                 System.out.println("match found: top=" + top + "   minNode=" + minNode);
-                Node n = top.next;
+                LLNode n = top.next;
                 minNode = n;
                 while(n != null)
                 {
@@ -44,7 +44,7 @@ public class Stack3p2
     
     void push(int item)
     {
-        Node t = new Node(item);
+        LLNode t = new LLNode(item);
         System.out.println("curr top: " + top);
         System.out.println("t data: " + t.data);
         if((top == null) || ((int)t.data < (int)minNode.data))
@@ -58,14 +58,14 @@ public class Stack3p2
         System.out.println("minNode: " + minNode.data);
     }
     
-    Node min()
+    LLNode min()
     {
         return minNode;
     }
     
     void printStack()
     {
-        Node n = top;
+        LLNode n = top;
         while(n != null)
         {
             System.out.print(n.data + ", ");

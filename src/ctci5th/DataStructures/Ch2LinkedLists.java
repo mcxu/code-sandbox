@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ctci5th.util.list.Node;
+import ctci5th.util.list.LLNode;
 
 /**
  * Linked Lists
@@ -19,12 +19,12 @@ public class Ch2LinkedLists
      * @param head head of the linked list
      * @return
      */
-    public Node removeDuplicates(Node head)
+    public LLNode removeDuplicates(LLNode head)
     {
         System.out.print("entered removeDuplicates. ");
         
-        Node k = head; //for every element, go through n
-        Node n = k; //single iteration through whole list
+        LLNode k = head; //for every element, go through n
+        LLNode n = k; //single iteration through whole list
         
         System.out.println("head.data: " + head.data);
         while(k.next != null)
@@ -58,7 +58,7 @@ public class Ch2LinkedLists
     public void testQ2p1()
     {
         //create linked list
-        Node head = new Node(1);
+        LLNode head = new LLNode(1);
         head.appendToTail(2);
         head.appendToTail(3);
         head.appendToTail(6);
@@ -76,7 +76,7 @@ public class Ch2LinkedLists
         
         printLinkedList(head);
         
-        Node result = removeDuplicates(head);
+        LLNode result = removeDuplicates(head);
         System.out.println("linked list with duplicates removed:");
         printLinkedList(result);
     }
@@ -87,11 +87,11 @@ public class Ch2LinkedLists
      * @param k
      * @return
      */
-    public int getKthToLastElement(Node head, int k)
+    public int getKthToLastElement(LLNode head, int k)
     {
         int j = getLinkedListLength(head) - k;
         int i= 0;
-        Node n = head;
+        LLNode n = head;
         while(n.next != null)
         {
             if(i == j) {
@@ -105,7 +105,7 @@ public class Ch2LinkedLists
     
     public void testQ2p2()
     {
-        Node head = new Node(1);
+        LLNode head = new LLNode(1);
         head.appendToTail(2);
         head.appendToTail(3);
         head.appendToTail(4);
@@ -124,9 +124,9 @@ public class Ch2LinkedLists
      * @param head
      * @param d
      */
-    public void deleteNodeInMiddle(Node head, int d)
+    public void deleteNodeInMiddle(LLNode head, int d)
     {
-        Node n = head;
+        LLNode n = head;
         while(n.next != null)
         {
             if((int)n.next.data == d)
@@ -142,7 +142,7 @@ public class Ch2LinkedLists
     
     public void testQ2p3()
     {
-        Node head = new Node(1);
+        LLNode head = new LLNode(1);
         head.appendToTail(2);
         head.appendToTail(3);
         head.appendToTail(4);
@@ -164,7 +164,7 @@ public class Ch2LinkedLists
      * @param d
      * @return
      */
-    public Node partitionLinkedList(Node head, int d)
+    public LLNode partitionLinkedList(LLNode head, int d)
     {   
         boolean headDataGTd = false; //head data greater than d
         if((int)head.data >= d)
@@ -172,8 +172,8 @@ public class Ch2LinkedLists
             headDataGTd = true;
         }
         
-        Node head2 = null; //holds values >= d
-        Node n = head; //first node (right pointer)
+        LLNode head2 = null; //holds values >= d
+        LLNode n = head; //first node (right pointer)
         int dCount = 0;
         while(n.next != null) 
         {
@@ -191,7 +191,7 @@ public class Ch2LinkedLists
                 {
                     if(head2 == null)
                     {
-                        head2 = new Node(n.next.data);
+                        head2 = new LLNode(n.next.data);
                     }
                     else
                     {
@@ -251,7 +251,7 @@ public class Ch2LinkedLists
     
     public void testQ2p4()
     {
-        Node head = new Node(12);
+        LLNode head = new LLNode(12);
         head.appendToTail(12);
         head.appendToTail(5);
         head.appendToTail(1);
@@ -283,10 +283,10 @@ public class Ch2LinkedLists
      * @param direction "f" if linked list values in forward order, "r" in reverse.
      * @return
      */
-    public Node addLinkedListNums(Node head1, Node head2, String direction)
+    public LLNode addLinkedListNums(LLNode head1, LLNode head2, String direction)
     {
         String str1 = "";
-        Node n1 = head1;
+        LLNode n1 = head1;
         while(n1 != null)
         {
             if(direction.equals("r"))
@@ -298,7 +298,7 @@ public class Ch2LinkedLists
         System.out.println("str1: " + str1);
         
         String str2 = "";
-        Node n2 = head2;
+        LLNode n2 = head2;
         while(n2 != null)
         {
             if(direction.equals("r"))
@@ -314,7 +314,7 @@ public class Ch2LinkedLists
         System.out.println("sum= " + sum);
         
         //create linked list for sum
-        Node sumValuesList = null;
+        LLNode sumValuesList = null;
         String sumStr = Integer.toString(sum);
         for(int i=0; i < sumStr.length(); i++)
         {
@@ -323,7 +323,7 @@ public class Ch2LinkedLists
             
             if(sumValuesList == null)
             {
-               sumValuesList = new Node(val);
+               sumValuesList = new LLNode(val);
             }
             else
             {
@@ -336,24 +336,24 @@ public class Ch2LinkedLists
     
     public void testQ2p5()
     {
-        Node head1 = new Node(1);
+        LLNode head1 = new LLNode(1);
         head1.appendToTail(8);
         head1.appendToTail(3);
         
-        Node head2 = new Node(0);
+        LLNode head2 = new LLNode(0);
         head2.appendToTail(0);
         head2.appendToTail(1);
         
-        Node sumValuesList = addLinkedListNums(head1, head2, "r");
+        LLNode sumValuesList = addLinkedListNums(head1, head2, "r");
         System.out.println("sumValuesList: ");
         printLinkedList(sumValuesList);
     }
     
-    public Node getFirstLoopNodeInCircularLinkedList(Node head)
+    public LLNode getFirstLoopNodeInCircularLinkedList(LLNode head)
     {
-        Map<Integer, Node> nodeMap = new HashMap<>(); 
+        Map<Integer, LLNode> nodeMap = new HashMap<>(); 
         
-        Node n = head;
+        LLNode n = head;
         
         while(n != null)
         {
@@ -361,7 +361,7 @@ public class Ch2LinkedLists
             
             if(nodeMap.containsKey(n.data))
             {
-                Node k = nodeMap.get(n.data);
+                LLNode k = nodeMap.get(n.data);
                 if(k == n)
                 {
                     nodeMap = null;
@@ -386,25 +386,25 @@ public class Ch2LinkedLists
     
     public void testQ2p6()
     {
-        Node a = new Node(1);
-        Node b = new Node(2);
+        LLNode a = new LLNode(1);
+        LLNode b = new LLNode(2);
         a.next = b;
-        Node c = new Node(3);
+        LLNode c = new LLNode(3);
         b.next = c;
-        Node d = new Node(4);
+        LLNode d = new LLNode(4);
         c.next = d;
-        Node e = new Node(5);
+        LLNode e = new LLNode(5);
         d.next = e;
         e.next = c;
         
         //printLinkedList(a);
-        Node fln = getFirstLoopNodeInCircularLinkedList(a);
+        LLNode fln = getFirstLoopNodeInCircularLinkedList(a);
         System.out.println("fln: " + fln);
         System.out.println("fln data: " + fln.data);
     }
     
     
-    public boolean isPalindrome(Node head)
+    public boolean isPalindrome(LLNode head)
     {
         int llLen = getLinkedListLength(head);
         
@@ -424,7 +424,7 @@ public class Ch2LinkedLists
         
         int i = 0;
         
-        Node n = head;
+        LLNode n = head;
         while(n != null)
         {
             //System.out.print("i=" + i);
@@ -461,7 +461,7 @@ public class Ch2LinkedLists
     
     public void testQ2p7()
     {
-        Node head = new Node(0);
+        LLNode head = new LLNode(0);
         head.appendToTail(1);
         head.appendToTail(2);
         head.appendToTail(3);
@@ -474,7 +474,7 @@ public class Ch2LinkedLists
         boolean isPal = isPalindrome(head);
         System.out.println("isPal: " + isPal);
         
-        Node head2 = new Node(0);
+        LLNode head2 = new LLNode(0);
         head2.appendToTail(1);
         head2.appendToTail(2);
         head2.appendToTail(3);
@@ -490,9 +490,9 @@ public class Ch2LinkedLists
     
     ////////////// helpers ///////////////
     
-    public int getDataFromLinkedList(Node head, int index)
+    public int getDataFromLinkedList(LLNode head, int index)
     {
-        Node n = head;
+        LLNode n = head;
         int j = 0;
         try
         {
@@ -512,7 +512,7 @@ public class Ch2LinkedLists
     
     public void test_getDataFromLinkedList()
     {
-        Node head = new Node(1);
+        LLNode head = new LLNode(1);
         head.appendToTail(8);
         head.appendToTail(3);
         head.appendToTail(5);
@@ -524,9 +524,9 @@ public class Ch2LinkedLists
         System.out.println("data: " + data);
     }
     
-    public int getLinkedListLength(Node head)
+    public int getLinkedListLength(LLNode head)
     {
-        Node n = head;
+        LLNode n = head;
         int i = 0;
         while(n != null)
         {
@@ -536,9 +536,9 @@ public class Ch2LinkedLists
         return i;
     }
     
-    void printLinkedList(Node head)
+    void printLinkedList(LLNode head)
     {
-        Node n = head;
+        LLNode n = head;
         while(n != null) 
         {
             String element = n.data + ", ";

@@ -1,21 +1,21 @@
 package ctci5th.util.queue;
 
-import ctci5th.util.list.Node;
+import ctci5th.util.list.LLNode;
 
 public class Queue 
 {
-    public Node first, last;
+    public LLNode first, last;
     
     public void enqueue(Object item)
     {
         if(first == null)
         {
-            last = new Node(item);
+            last = new LLNode(item);
             first = last;
         }
         else
         {
-            last.next = new Node(item);
+            last.next = new LLNode(item);
             last = last.next;
         }
     }
