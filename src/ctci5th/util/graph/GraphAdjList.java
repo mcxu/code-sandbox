@@ -9,7 +9,7 @@ import ctci5th.util.list.LLNode;
 /**
  * Directed graph in adjacency list representation
  */
-public class GraphAdjListImpl 
+public class GraphAdjList 
 {
     private ArrayList<LLImpl> adjList;
     
@@ -17,7 +17,7 @@ public class GraphAdjListImpl
      * Takes the chosen node in a graph
      * @param node
      */
-    public GraphAdjListImpl()
+    public GraphAdjList()
     {
         adjList = new ArrayList<LLImpl>();
     }
@@ -25,7 +25,7 @@ public class GraphAdjListImpl
     public void addEdge(LLNode vtx1, LLNode vtx2)
     {
         int targetRow1 = vtxExists(vtx1);
-        System.out.println("targetRow1: " + targetRow1);
+        System.out.print("targetRow1: " + targetRow1 + "  ");
         
         if(targetRow1 >= 0)
         {
@@ -42,7 +42,7 @@ public class GraphAdjListImpl
         }
         
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -76,19 +76,23 @@ public class GraphAdjListImpl
     
     public static void main(String[] args) 
     {
-        GraphAdjListImpl graph = new GraphAdjListImpl();
+        GraphAdjList graph = new GraphAdjList();
         
         LLNode one = new LLNode(1);
         LLNode two = new LLNode(2);
         LLNode three = new LLNode(3);
         LLNode four = new LLNode(4);
+        LLNode five = new LLNode(5);
         
         graph.addEdge(one, two);
         graph.addEdge(one, three);
         graph.addEdge(three, one);
         graph.addEdge(two, two);
         graph.addEdge(three, four);
+        graph.addEdge(one, five);
+        graph.addEdge(five, one);
         
         graph.printAdjList();
+        
     }
 }
