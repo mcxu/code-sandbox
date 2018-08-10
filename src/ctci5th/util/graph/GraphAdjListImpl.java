@@ -22,37 +22,73 @@ public class GraphAdjListImpl
         adjList = new ArrayList<LLImpl>();
     }
     
-    public void addVertex(LLNode vertex)
+    public void addEdge(LLNode vtx1, LLNode vtx2)
     {
-        for(LLImpl list : adjList)
+        int targetRow1 = vtxExists(vtx1);
+        System.out.println("targetRow1: " + targetRow1);
+        
+        if(targetRow1 >= 0)
         {
-            if(vertex == list.head)
-            {
-                return;
-            }
+            System.out.println("A");
+            //vertex 1 already exists, add vertex 2 to end of list where vertex 1 is head.
+            adjList.get(targetRow1).appendToTail(new LLNode(vtx2.data));
         }
-        adjList.add(new LLImpl(vertex));
+        else
+        {
+            System.out.println("B");
+            //add new head (vertex 1) and append vertex 2
+            adjList.add(new LLImpl(vtx1));
+            adjList.get(adjList.size()-1).appendToTail(new LLNode(vtx2.data));
+        }
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
-    public boolean checkVertexExists(LLNode vertex)
+    public int vtxExists(LLNode vtx)
     {
-        for(LLImpl list : adjList)
+        for(int row=0; row < adjList.size(); row++)
         {
-            if(vertex == list.head)
+            LLImpl list = adjList.get(row);
+            
+            if(vtx == list.head)
             {
-                return true;
+                return row;
             }
         }
-        return false;
+        return -1;
+    }
+    
+    public void printAdjList()
+    {
+        
+        for(int i=0; i < adjList.size(); i++)
+        {   
+            LLImpl llImpl = adjList.get(i);
+            System.out.print("list addr: " + llImpl + "   values:  ");
+            llImpl.print();
+        }
     }
     
     public static void main(String[] args) 
     {
-        GraphAdjListImpl graphAL = new GraphAdjListImpl();
-        LLNode a = new LLNode(1);
-        graphAL.addVertex(a);
-        boolean exist = graphAL.checkVertexExists(a);
-        System.out.println("exist: " + exist);
+        GraphAdjListImpl graph = new GraphAdjListImpl();
+        
+        LLNode one = new LLNode(1);
+        LLNode two = new LLNode(2);
+        LLNode three = new LLNode(3);
+        LLNode four = new LLNode(4);
+        
+        graph.addEdge(one, two);
+        graph.addEdge(one, three);
+        graph.addEdge(three, one);
+        graph.addEdge(two, two);
+        graph.addEdge(three, four);
+        
+        graph.printAdjList();
     }
-
 }
