@@ -28,6 +28,22 @@ public class LLImpl
         this.tail = llNode; //update tail
     }
     
+    public void removeNode(LLNode llNode)
+    {
+        LLNode n = this.head;
+        while(n.next != null)
+        {
+            if(n.next.data.equals(llNode.data))
+            {
+                n.next = n.next.next;
+            }
+            else
+            {
+                n = n.next;
+            }
+        }
+    }
+    
     public LLNode getTail()
     {
         LLNode n = this.head;
@@ -50,8 +66,6 @@ public class LLImpl
         }
         return len;
     }
-    
-    
     
     public void print()
     {

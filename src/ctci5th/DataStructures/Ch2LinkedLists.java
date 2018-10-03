@@ -152,7 +152,7 @@ public class Ch2LinkedLists
         System.out.println("before delete");
         printLinkedList(head);
         
-        deleteNodeInMiddle(head, 3);
+        deleteNodeInMiddle(head, 6);
         System.out.println("after delete");
         printLinkedList(head);
     }
@@ -576,12 +576,12 @@ public class Ch2LinkedLists
         Ch2LinkedLists ch2 = new Ch2LinkedLists();
         //ch2.testQ2p1();
         //ch2.testQ2p2();
-        //ch2.testQ2p3();
+        ch2.testQ2p3();
         //ch2.test_getDataFromLinkedList();
         //ch2.testQ2p4();
         //ch2.testQ2p5();
         //ch2.testQ2p6();
-        ch2.testQ2p7();
+        //ch2.testQ2p7();
     }
 
 }
