@@ -2,7 +2,6 @@ package ctci5th.DataStructures;
 
 import java.util.Iterator;
 
-import ctci5th.util.graph.GraphVertex;
 import ctci5th.util.tree.BTNode;
 
 public class Ch4TreesAndGraphs 
@@ -58,10 +57,10 @@ public class Ch4TreesAndGraphs
 //        
 //    }
     
-    public void visit(GraphVertex vertex)
-    {
-        System.out.println("visited: " + vertex.data);
-    }
+//    public void visit(GraphVertex vertex)
+//    {
+//        System.out.println("visited: " + vertex.data);
+//    }
     
     public void test_searchDFS()
     {
@@ -118,11 +117,6 @@ public class Ch4TreesAndGraphs
         System.out.println("isBal: " + isBal);
     }
     
-    
-    public boolean isRouteBetweenNodes(GraphVertex node)
-    {
-        return false; //TODO
-    }
     
     ///////////////////// helpers ////////////////////
     
