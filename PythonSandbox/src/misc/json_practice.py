@@ -13,7 +13,7 @@ class TransactionsParser(object):
     
     def parseJson(self):   
         # Read in the json file as a string
-        path = "../../../json_files/transactions.json"
+        path = "../../../JavaSandbox/data/transactions.json"
         jsonOpener = open(path, "r")
         jsonText = jsonOpener.read()
         jsonOpener.close()

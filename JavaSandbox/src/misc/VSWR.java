@@ -1,4 +1,4 @@
-package misc.need_to_refactor;
+package misc;
 
 import java.io.Console;
 
