@@ -1,0 +1,20 @@
+{
+    "transactions" : 
+    [
+        {
+            "id": "1",
+            "type" : "CREDIT",
+            "amount" : "300"
+        },
+        {
+            "id": "2",
+            "type" : "DEBIT",
+            "amount" : "500"
+        },
+        {
+            "id" : "3",
+            "type" : "DEBIT",
+            "amount" : "50"
+        }
+    ]
+}
