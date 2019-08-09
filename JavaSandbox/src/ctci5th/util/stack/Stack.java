@@ -6,7 +6,7 @@ public class Stack
 {
     public LLNode top;
     
-    Object pop()
+    public Object pop()
     {
         if(top != null)
         {
@@ -17,14 +17,14 @@ public class Stack
         return null;
     }
     
-    void push(int item)
+    public void push(Object item)
     {
         LLNode t = new LLNode(item);
         t.next = top;
         top = t;
     }
     
-    Object peek()
+    public Object peek()
     {
         return top.data;
     }

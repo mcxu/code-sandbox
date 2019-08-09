@@ -28,7 +28,7 @@ public class Queue
             first = first.next;
             return item;
         }
-        return -1000000;
+        return null;
     }
 
 }
