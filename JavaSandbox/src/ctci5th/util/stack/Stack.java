@@ -2,17 +2,22 @@ package ctci5th.util.stack;
 
 import ctci5th.util.list.LLNode;
 
-public class Stack 
+@SuppressWarnings("unchecked")
+public class Stack<T>
 {
-    public LLNode top;
+    private LLNode top;
     
-    public Object pop()
+    public Stack() 
+    {
+    }
+    
+    public T pop()
     {
         if(top != null)
         {
-            Object item = top.data;
+            Object item = (T) top.data;
             top = top.next;
-            return item;
+            return (T) item;
         }
         return null;
     }
@@ -24,8 +29,21 @@ public class Stack
         top = t;
     }
     
-    public Object peek()
+    public T peek()
     {
-        return top.data;
+        return (T) top.data;
+    }
+    
+    public LLNode peekNode()
+    {
+        return top;
+    }
+    
+    public boolean isEmpty()
+    {
+        if(top == null) {
+            return true;
+        }
+        return false;
     }
 }

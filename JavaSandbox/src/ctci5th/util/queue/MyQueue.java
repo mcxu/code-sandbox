@@ -24,7 +24,7 @@ public class MyQueue
     
     public Object dequeue()
     {
-        while(inStack.top != null) {
+        while(!inStack.isEmpty()) {
             outStack.push(inStack.pop());
         }
             
@@ -33,7 +33,7 @@ public class MyQueue
     
     private void printInStack()
     {
-        LLNode printHeadIn = inStack.top;
+        LLNode printHeadIn = inStack.peekNode();
         while(printHeadIn != null) {
             System.out.println("printHeadIn: " + printHeadIn.data);
             printHeadIn = printHeadIn.next;
@@ -42,7 +42,7 @@ public class MyQueue
     
     private void printOutStack()
     {
-        LLNode printHeadOut = outStack.top;
+        LLNode printHeadOut = outStack.peekNode();
         while(printHeadOut != null) {
             System.out.println("printHeadOut: " + printHeadOut.data);
             printHeadOut = printHeadOut.next;
