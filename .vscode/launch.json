@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Ch2LinkedLists",
+            "request": "launch",
+            "mainClass": "ctci5th.DataStructures.Ch2LinkedLists",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Ch1ArraysAndStrings",
+            "request": "launch",
+            "mainClass": "ctci5th.DataStructures.Ch1ArraysAndStrings",
+            "projectName": "code-sandbox"
+        }
+    ]
+}

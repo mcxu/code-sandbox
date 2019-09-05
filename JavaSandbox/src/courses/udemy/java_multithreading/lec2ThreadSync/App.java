@@ -44,7 +44,7 @@ public class App
 		System.out.println("Press return to stop");
 		Scanner scanner = new Scanner(System.in);
 		scanner.nextLine();
-		
+		scanner.close();
 		proc1.shutdown();
 	}
 

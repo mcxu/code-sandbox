@@ -18,7 +18,7 @@ public class Processor
 	{
 		Scanner scanner = new Scanner(System.in);
 		Thread.sleep(2000);
-		
+		scanner.close();
 		synchronized(this)
 		{
 			System.out.println("Waiting for return key.");
