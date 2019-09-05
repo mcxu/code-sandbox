@@ -135,7 +135,6 @@ class P3():
         print("** test_serialize_then_deserialize: serialized_str: {}".format(serialized_str))
         deserialized = self.deserialize(serialized_str)
         print("** test_serialize_then_deserialize: deserialized: {}".format(deserialized))
-        print("** test_serialize_then_deserialize: first deser val: {}".format(deserialized.val))
         reserialized = self.serialize(deserialized)
         print("** test_serialize_then_deserialize: reserialized: {}".format(reserialized))
     
