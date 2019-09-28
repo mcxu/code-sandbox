@@ -1,7 +1,5 @@
 '''
-Created on Aug 24, 2019
-
-This problem was asked by Stripe.
+This problem was asked by Stripe. [Hard]
 
 Given an array of integers, find the first missing positive integer in linear time and constant space. 
 In other words, find the lowest positive integer that does not exist in the array. 

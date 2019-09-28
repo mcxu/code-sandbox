@@ -1,5 +1,5 @@
 """
-This problem was recently asked by Google.
+This problem was recently asked by Google. [Easy]
 
 Given a list of numbers and a number k, return whether any two numbers from the list add up to k.
 
