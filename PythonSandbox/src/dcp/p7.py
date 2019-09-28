@@ -13,11 +13,11 @@ import string
 import time
 
 class P7:
-    def char2num(self, char):
-        return ord(char) - 96
+    # def char2num(self, char):
+    #     return ord(char) - 96
     
-    def num2char(self, num):
-        return chr(int(num) + 96)
+    # def num2char(self, num):
+    #     return chr(int(num) + 96)
 
     # msg is a string of integers,'lll' for example
     def count_ways_decoded(self, msg, memoize=False):
@@ -62,6 +62,7 @@ class P7:
 
         print("** m: {}".format(m))
         if c in m.keys():
+            print("     found key c in m: {}".format(c))
             return m[c]
 
         print("msg:{}, c:{}, c_ind:{}".format(msg, c, c_ind))
@@ -75,25 +76,41 @@ class P7:
         m[c] = sum
         return sum
 
-    def test_char_num_functions(self):
-        chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'z']
-        for char in chars:
-            print("char2num: char: {}, num: {}".format(char, self.char2num(char)))
+    # https://www.geeksforgeeks.org/count-possible-decodings-given-digit-sequence/
+    def count_ways_decoded_iterative(self, msg, memoize=False):
+        #counts
+        c = {0:1, 1:1}
 
-        nums = [1,2,3,4,5,6,7,8,9,10,26,27]
-        for num in nums:
-            print("num2char: num: {}, char: {}".format(num, self.num2char(num)))
+        for i in range(2,len(msg) + 1):
+            print("i={}, char-1={}".format(i, msg[i-1] or None))
+            c[i] = 0
+
+            # if previous digit in msg is 0
+            if(int(msg[i-1]) > 0):
+                c[i] = c[i-1]
+
+            s1 = (int(msg[i-2]) == 1)
+            s2 = (int(msg[i-2] == 2) and int(msg[i-1] < 7))
+            if(s1 or s2):
+                c[i] += c[i-2]
+        return c[len(msg)]
 
 
     def test_count_ways_decoded(self):
-        msg = '111'
+        msg = '11313231322'
         num_ways = self.count_ways_decoded(msg, memoize = True)
         print("test_count_ways_decoded: num_ways: {}".format(num_ways))
+
+    def test_count_ways_decoded_iterative(self):
+        msg = '112132312'
+        num_ways = self.count_ways_decoded_iterative(msg)
+        print("test_count_ways_decoded_iterative: num_ways: {}".format(num_ways))
 
 def main():
     p7 = P7()
     #p7.test_char_num_functions()
-    p7.test_count_ways_decoded()
+    #p7.test_count_ways_decoded()
+    p7.test_count_ways_decoded_iterative()
 
 if __name__ == "__main__":
     main()
