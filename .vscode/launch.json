@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - ComparisonSandbox",
+            "request": "launch",
+            "mainClass": "algorithms.ComparisonSandbox",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Ch3StacksAndQueues",
             "request": "launch",
             "mainClass": "ctci5th.DataStructures.Ch3StacksAndQueues",
