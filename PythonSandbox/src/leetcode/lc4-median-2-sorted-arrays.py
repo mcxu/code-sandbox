@@ -19,7 +19,7 @@ nums2 = [3, 4]
 The median is (2 + 3)/2 = 2.5
 """
 
-class P4:
+class LC4_Median2SortedArrays:
     def findMedianSortedArrays(self, nums1, nums2):
         """
         :type nums1: List[int]
@@ -101,7 +101,7 @@ class P4:
 
 
 def main():
-    p4 =  P4()
+    p4 =  LC4_Median2SortedArrays()
     p4.test_findMedianSortedArrays()
 
 if __name__ == "__main__":

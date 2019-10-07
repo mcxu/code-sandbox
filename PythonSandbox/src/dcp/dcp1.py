@@ -8,7 +8,7 @@ For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.
 Bonus: Can you do this in one pass?
 """
 
-class P1:
+class DCP1:
     l1 = [10, 15, 3, 7]
     l2 = [10, 5, 15, 3, 2, 7, 4, 6, 5, 1, 8]
     
@@ -53,11 +53,11 @@ class P1:
         
 
     def test1(self):
-        test1 = self.eval(P1.l1, 17) 
+        test1 = self.eval(DCP1.l1, 17) 
         print("test1: {}".format(test1))
     
     def test2(self):
-        test2 = self.eval(P1.l2, 10) 
+        test2 = self.eval(DCP1.l2, 10) 
         print("test2: {}".format(test2))
         
     def test3(self):
@@ -65,14 +65,14 @@ class P1:
         print("test3: {}".format(test3))
     
     def test4(self):
-        test4 = self.eval_single_pass(P1.l1, 17)
+        test4 = self.eval_single_pass(DCP1.l1, 17)
         print("test4: {}".format(test4))
         
-        test4 = self.eval_single_pass(P1.l1, 10)
+        test4 = self.eval_single_pass(DCP1.l1, 10)
         print("test4.1: {}".format(test4))
         
 def main():
-    p1 = P1()
+    p1 = DCP1()
 #     p1.test1()
 #     p1.test2()
 #     p1.test3()

@@ -8,7 +8,7 @@ For example, if our input was [1, 2, 3, 4, 5], the expected output would be [120
 Follow-up: what if you can't use division?
 '''
 
-class P2():
+class DCP2():
     
     def eval(self, a):
         output = []
@@ -31,7 +31,7 @@ class P2():
 
 
 if __name__ == "__main__":
-    p2 = P2()
+    p2 = DCP2()
     a = [1,2,3,4,5]
     out1 = p2.eval(a)
     print("out1: {}".format(out1))

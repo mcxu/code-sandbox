@@ -1,48 +1,4 @@
-"""
-Leetcode biweekly contest 10 (10/5/2019)
-"""
-from queue import Queue
-import time
-
-class BiweeklyContest10Scratch:
-    def __init__(self):
-        pass
-    
-    """
-    1213. Intersection of 3 sorted arrays
-    """
-    def arraysIntersection(self, arr1, arr2, arr3):
-        """
-        :type arr1: List[int]
-        :type arr2: List[int]
-        :type arr3: List[int]
-        :rtype: List[int]
-        """
-        numdict = {}
-        for a in arr1:
-            print("a:{}".format(a))
-            numdict[a] = 1
-        
-        for b in arr2:
-            if(b in numdict.keys()):
-                numdict[b] += 1
-        
-        for c in arr3:
-            if(c in numdict.keys()):
-                numdict[c] += 1
-        
-        print("numdict: {}".format(numdict))
-        
-        # check for occurrence of 3
-        commons = []
-        for key in numdict.keys():
-            print("key: {}".format(key))
-            occ = numdict[key]
-            if(occ == 3):
-                commons.append(key)
-        
-        return sorted(commons)
-
+class P1215_SteppingNumbers:
     """
     5081. Stepping Numbers
     """
@@ -73,6 +29,7 @@ class BiweeklyContest10Scratch:
         num = [10, 20, 30, 40, 100, 1000, 100000, 1000000]
         sns = self.countSteppingNumbersBruteForce(0,num[7])
         print("test_countSteppingNumbers: {}".format(sns))
+
 
     def countSteppingNumbersBFS(self, low, high):
         sns = []
@@ -111,10 +68,9 @@ class BiweeklyContest10Scratch:
         sns = self.countSteppingNumbersBFS(10, 1000000000)
         print("test_countSteppingNumbersBFS: {}".format(sns))
 
-
 def main():
-    bwc10 = BiweeklyContest10Scratch()
-    #bwc10.test_countSteppingNumbersBruteForce()
-    bwc10.test_countSteppingNumbersBFS()
+    p1215 = P1215_SteppingNumbers()
+    #p1215.test_countSteppingNumbersBruteForce()
+    p1215.test_countSteppingNumbersBFS()
 
 main()

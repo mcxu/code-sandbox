@@ -22,7 +22,7 @@ class Node:
         self.left = left
         self.right = right
 
-class P3():
+class DCP3():
     
     def __init__(self):
         pass
@@ -144,7 +144,7 @@ class P3():
 def main():
     node = Node('root', Node('left', Node('left.left')), Node('right'))
     
-    p3 = P3()
+    p3 = DCP3()
     #p3.test_serialize(node)
     #p3.test_deserialize()
     #p3.test_serialize_then_deserialize(node)

@@ -14,7 +14,7 @@ def cons(a, b):
 Implement car and cdr.
 """
 
-class P5():
+class DCP5():
     def cons(self, a, b):
         print("cons: a={}, b={}".format(a,b))
         def pair(f):
@@ -52,7 +52,7 @@ class P5():
     
 
 def main():
-    p5 = P5()
+    p5 = DCP5()
     p5.test_cons()
 
 if __name__ == "__main__":

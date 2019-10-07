@@ -12,7 +12,7 @@ You can modify the input array in-place.
 
 import math
 
-class P4():
+class DCP4():
 
     def first_missing_pos_int(self, input):
         input = self.split_and_sort_positives(input)
@@ -115,12 +115,12 @@ class P4():
         print("test_first_missing_pos_int: fmpi: {}".format(fmpi))
     
     def test_first_missing_pos_int_2(self):
-        l = [-4, -2, -8, 5,3,4,1,2]
+        l = [-4, -2, -8, 5,3,4,1,2,1]
         fmpi = self.first_missing_pos_int(l)
         print("test_first_missing_pos_int: fmpi: {}".format(fmpi))
 
 def main():
-    p4 = P4()
+    p4 = DCP4()
     #p4.test_counting_sort()
     #p4.test_counting_sort_negatives()
     #p4.test_first_missing_pos_int_1()
