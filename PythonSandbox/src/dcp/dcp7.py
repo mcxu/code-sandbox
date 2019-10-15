@@ -12,7 +12,7 @@ You can assume that the messages are decodable. For example, '001' is not allowe
 import string
 import time
 
-class P7:
+class DCP7:
     # def char2num(self, char):
     #     return ord(char) - 96
     
@@ -107,10 +107,10 @@ class P7:
         print("test_count_ways_decoded_iterative: num_ways: {}".format(num_ways))
 
 def main():
-    p7 = P7()
-    #p7.test_char_num_functions()
-    #p7.test_count_ways_decoded()
-    p7.test_count_ways_decoded_iterative()
+    dcp7 = DCP7()
+    #dcp7.test_char_num_functions()
+    #dcp7.test_count_ways_decoded()
+    dcp7.test_count_ways_decoded_iterative()
 
 if __name__ == "__main__":
     main()

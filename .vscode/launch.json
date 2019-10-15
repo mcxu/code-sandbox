@@ -1,5 +1,6 @@
 {
     "configurations": [
+        
         {
             "type": "java",
             "name": "CodeLens (Launch) - ArraySandbox",
@@ -34,6 +35,15 @@
             "request": "launch",
             "mainClass": "ctci5th.DataStructures.Ch1ArraysAndStrings",
             "projectName": "code-sandbox"
+        },
+        {
+            "name": "Python: Current File (Integrated Terminal)",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "cwd": "${workspaceFolder}",
+            "env": {"PYTHONPATH": "${workspaceFolder}"},
+            "console": "integratedTerminal"
         }
     ]
 }

@@ -5,13 +5,11 @@ node in the first tree and a node in the second tree whose values
 sum up to a given integer target.
 """
 
-# Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
-    
 
 class LC1214_TwoSumBSTs:
     def twoSumBSTs(self, root1, root2, target):
@@ -58,43 +56,18 @@ class LC1214_TwoSumBSTs:
         tree = TreeNode(2)
         tree.left = TreeNode(1)
         tree.left.left = TreeNode(0)
+
+        tree.right = TreeNode(5)
         #tree.right = TreeNode(4)
-        d = self.treeDepth(tree)
+        d = self.treeHeight(tree)
         print("depth: " + str(d))
-        #self.printBT(tree)
-
-
-    def printBT(self, tree):
-        self.printHelper(tree, self.treeDepth(tree))
-    
-    def printHelper(self, tree, treeDepth):
-        #TODO fix
-        if tree == None:
-            return
-        s = "{}".format(tree.val)
-        print(s)
-        if tree.left is not None:
-            self.printBT(tree.left)
-        if tree.right is not None:
-            self.printBT(tree.right)
-    
-    # root is depth of 0
-    def treeDepth(self, tree):
-        if tree is None:
-            return 0
-        if tree.left or tree.right is not None:
-            ld = self.treeDepth(tree.left)
-            rd = self.treeDepth(tree.right)
-            if rd > ld:
-                return rd+1
-            else:
-                return ld+1
-        else:
-            return 0
-
+        self.printBT(tree)
 
 def main():
     lc1214 = LC1214_TwoSumBSTs()
     lc1214.test1_twoSumBSTs()
 
 main()
+
+
+

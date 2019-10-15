@@ -101,8 +101,8 @@ class LC4_Median2SortedArrays:
 
 
 def main():
-    p4 =  LC4_Median2SortedArrays()
-    p4.test_findMedianSortedArrays()
+    lc4 =  LC4_Median2SortedArrays()
+    lc4.test_findMedianSortedArrays()
 
 if __name__ == "__main__":
     main()
