@@ -40,6 +40,12 @@ class Node:
                 print("elt added to array:", array)
             
             # add un-visited immediate children to stack
+            """
+            Need to do a pre-order traversal. However, children need to be placed
+            on the stack such that they get taken off left to right. So they need
+            to be put on right to left, which is why the for loop counts downwards
+            in the list of children for some given node.
+            """
             for i in range(len(self.currChildren)-1, -1, -1):
                 childNode = self.currChildren[i]
                 childName = childNode.name
@@ -48,8 +54,18 @@ class Node:
                     self.stackPush(childNode)
                     print("unvisited child added to stack:", self.stack)
             
-            time.sleep(.25)
+            #time.sleep(.25)
+        del self.stack
         return array
+
+
+    def depthFirstSearchRecursive(self, array):
+        array.append(self.name)
+        for childNode in self.children:
+            #print("childNode:", childNode.name)
+            childNode.depthFirstSearchRecursive(array)
+        return array
+
 
     def stackPush(self, name):
         self.stack.append(name)
@@ -109,13 +125,27 @@ class Test:
         if result == ans:
             print("test_depthFirstSearchIterative5: result matches answer!")
 
+    def test_depthFirstSearchRecursive_prompt(self):
+        tree = self.promptTree()
+        result = tree.depthFirstSearchRecursive([])
+        print("test_depthFirstSearchRecursive_prompt: result: ", result)
+
+    def test_depthFirstSearchRecursive5(self):
+        tree = self.testTree5()
+        result = tree.depthFirstSearchRecursive([])
+        print("test_depthFirstSearchRecursive: result: ", result)
+        ans = ["A", "B", "E", "Q", "R", "F", "I", "J", "O", "C", "P", "D", "G", "K", "H", "L", "M", "S", "W", "X", "Y", "Z", "T", "U", "V"]
+        if result == ans:
+            print("test_depthFirstSearchRecursive: result matches answer!")
 
 def main():
     test = Test()
     #test.testTree1()
     #test.test_depthFirstSearchIterative_prompt()
     #test.test_depthFirstSearchIterative2()
-    test.test_depthFirstSearchIterative5()
+    #test.test_depthFirstSearchIterative5()
+    test.test_depthFirstSearchRecursive_prompt()
+    test.test_depthFirstSearchRecursive5()
 
 if __name__ == "__main__":
     main()
