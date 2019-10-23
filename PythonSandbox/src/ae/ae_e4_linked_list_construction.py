@@ -24,13 +24,51 @@ class DoublyLinkedList:
             self.insertAfter(self.tail, node)
         
     def insertBefore(self, node, nodeToInsert):
-        pass
+        k = self.head
+        while k != None:
+            if k == node:
+                if k == self.head:
+                    k.prev = nodeToInsert
+                    nodeToInsert.next = k
+                    self.head = nodeToInsert
+                else:
+                    k.prev.next = nodeToInsert
+                    nodeToInsert.next = k
+                    nodeToInsert.prev = k.prev
+                    k.prev = nodeToInsert
+            k = k.next
+
 
     def insertAfter(self, node, nodeToInsert):
-        pass
+        k = self.head
+        while k != None:
+            if k == node:
+                if k == self.tail:
+                    self.append(nodeToInsert)
+                else:
+                    nodeToInsert.next = k.next
+                    k.next = nodeToInsert
+                    nodeToInsert.prev = k
+                    nodeToInsert.next.prev = nodeToInsert
+            k = k.next
 
     def insertAtPosition(self, position, nodeToInsert):
-        pass
+        k = self.head
+        c = 0
+        while k != None:
+            if c == position:
+                if k == self.head:
+                    k.prev = nodeToInsert
+                    nodeToInsert.next = k
+                    self.head = nodeToInsert
+                else:
+                    k.prev.next = nodeToInsert
+                    nodeToInsert.next = k
+                    nodeToInsert.prev = k.prev
+                    k.prev = nodeToInsert
+            c += 1
+            k = k.next
+        del c,k
     
     def removeNodesWithValue(self, value):
         k = self.head
@@ -67,6 +105,7 @@ class DoublyLinkedList:
         if self.head == None:
             self.head = node
             return self
+
         k = self.head
         while k.next != None:
             k = k.next
@@ -129,12 +168,47 @@ class Test:
         print("dll after removing nodes with value: ", dll.serialize())
         print(" head: {}, tail: {}".format(dll.head.value, dll.tail.value))
 
+    def test_insertAtPosition(self):
+        dll = self.listFromPrompt()
+        dll.insertAtPosition(6, DLLNode(8))
+        print("dll after insert at position:", dll.serialize())
+
+    def test_insertBefore(self):
+        n1 = DLLNode(1); n2 = DLLNode(2); n3 = DLLNode(3); n4 = DLLNode(4)
+        dll = DoublyLinkedList()
+        dll.append(n1).append(n2).append(n3).append(n4)
+        dll.insertBefore(n2, DLLNode(100))
+        print("test_insertBefore: ", dll.serialize())
+        
+    def test_insertAfter(self):
+        n1 = DLLNode(1); n2 = DLLNode(2); n3 = DLLNode(3); n4 = DLLNode(4)
+        dll = DoublyLinkedList()
+        dll.append(n1).append(n2).append(n3).append(n4)
+        print("test_insertAfter: initial list: ", dll.serialize())
+        dll.insertAfter(n4, DLLNode(100))
+        print("test_insertAfter: ", dll.serialize())
+
+    def test_setHead(self):
+        dll = self.listFromPrompt()
+        dll.setHead(DLLNode(100))
+        print("test_setHead: ", dll.serialize())
+
+    def test_setTail(self):
+        dll = self.listFromPrompt()
+        dll.setTail(DLLNode(100))
+        print("test_setTail: ", dll.serialize())
+
 def main():
     test = Test()
     #test.listFromPrompt()
     #test.test_containsNodeWithValue()
     #test.test_remove()
-    test.test_removeNodesWithValue()
+    #test.test_removeNodesWithValue()
+    #test.test_insertAtPosition()
+    #test.test_insertBefore()
+    #test.test_insertAfter()
+    #test.test_setHead()
+    test.test_setTail()
 
 if __name__ == "__main__":
     main()
