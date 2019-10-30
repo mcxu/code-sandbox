@@ -27,8 +27,8 @@ class ProductSum:
                 # within this subproblem, which should start from 0.
                 ps += level*self.productSumHelper(elt, 0, level+1)
             else:
-                print("elt={}, level={}, ps={}".format(elt, level, ps))
                 ps += level*elt
+                print("elt={}, level={}, ps={}".format(elt, level, ps))
         return ps
 
 
