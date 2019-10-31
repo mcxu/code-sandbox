@@ -1,11 +1,46 @@
 package ctci5th.DataStructures;
 
-import ctci5th.util.list.LLNode;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import ctci5th.util.stack.Stack;
 
 public class Ch3StacksAndQueues 
 {
     //Question 3.2: See ../util/stack/Stack3p2.java
+
+    //Question 3.4: Towers of Hanoi
+    //n:num discs, f:from, a:auxilary, t:to
+    //returns: list of [from, to] moves
+    public ArrayList<String[]> hanoi(int n, String f, String a, String t) 
+    {
+        ArrayList<String[]> moves = new ArrayList<>();
+        this.hanoiHelper(n, f, a, t, moves);
+        return moves;
+    }
+
+    public void hanoiHelper(int n, String f, String a, String t, ArrayList<String[]> moves) 
+    {
+        if(n == 0) {
+            return;
+        }
+        //moves A->B (assuming f->t movement from root call, then f->a is A->B)
+        hanoiHelper(n-1, f, t, a, moves); 
+        //moves A->C (assuming f->t movement from root call, then f->t is A->C)
+        moves.add(new String[]{f, t}); 
+        //moves B->C (assuming f->t movement from root call, then a->t is B->C)
+        hanoiHelper(n-1, a, f, t, moves); 
+    }
+
+    public void testHanoi()
+    {
+        ArrayList<String[]> result = hanoi(4, "A", "B", "C");
+        for(int i=0; i<result.size(); i++)
+        {
+            System.out.printf("move %s: %s\n", i+1, Arrays.asList(result.get(i)));
+        }
+    }
+
     //Question 3.5: ../util/queue/MyQueue.java
     
     //sort stack in ascending order
@@ -98,12 +133,12 @@ public class Ch3StacksAndQueues
     }
     
     
-    
     public static void main(String[] args) 
     {
         Ch3StacksAndQueues ch3 = new Ch3StacksAndQueues();
-        ch3.testQuestion3p6();
-        ch3.testQuestion3p6_2();
+        //ch3.testQuestion3p6();
+        //ch3.testQuestion3p6_2();
+        ch3.testHanoi();
     }
 
 }

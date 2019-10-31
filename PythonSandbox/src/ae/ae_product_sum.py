@@ -56,3 +56,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""
+Time complexity: O(n): where n=(num of single num elements) + (num of sub arrays)
+Space complexity: O(d): where d is the number of levels
+"""
