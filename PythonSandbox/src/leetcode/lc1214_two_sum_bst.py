@@ -5,11 +5,8 @@ node in the first tree and a node in the second tree whose values
 sum up to a given integer target.
 """
 
-class TreeNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+from utils.binary_tree_utils import TreeNode
+from utils.binary_tree_utils import BinaryTreeUtils as BTUtils
 
 class LC1214_TwoSumBSTs:
     def twoSumBSTs(self, root1, root2, target):
@@ -18,56 +15,83 @@ class LC1214_TwoSumBSTs:
         :type root2: TreeNode
         :type target: int
         :rtype: bool
-        """
-        if root1==None:
+        """  
+        s = set()
+        self.helper1(root1, s)
+        print("twoSumBSTs: s: ", s)
+        result = self.helper2(root2, target, s)
+        print("twoSumBSTs: result: ", result)
+        return result
+    
+    # do in-order traversal on 1st BST so that the elements in the tree
+    # are put on the list in sorted order.
+    def helper1(self, root, s):
+        if root == None:
+            return
+        self.helper1(root.left, s)
+        print("helper1: val:", root.val)
+        s.add(root.val)
+        self.helper1(root.right, s)
+    
+    # do in-order traversal on 2nd BST, while comparing each element
+    # from the 2nd tree to the ones on l1 (from the 1st tree)
+    def helper2(self, root, target, s):
+        if root == None:
             return False
-        if root2==None:
-            return False
-        print("root1val:{}, root2val:{}".format(root1.val, root2.val))
-        sum = root1.val + root2.val
-        print(" sum: {}, target: {}".format(sum,target))
-        if(sum == target):
+        
+        if self.helper2(root.left, target, s):
             return True
         
-        if sum < target:
-            if root1.val < root2.val:
-                print(" sum<target, sel r1 right")
-                if root1.right != None:
-                    return self.twoSumBSTs(root1.right, root2, target)
-            else: #root1.val > root2.val:
-                print(" sum<target, sel r2 right")
-                if root2.right != None:
-                    return self.twoSumBSTs(root1, root2.right, target)
-        elif sum > target:
-            if root1.val < root2.val:
-                print(" sum>target, sel r2 left")
-                if root2.left != None:
-                    return self.twoSumBSTs(root1, root2.left, target)
-            else: #root1.val > root2.val:
-                print(" sum>target, sel r1 left")
-                if root1.left != None:
-                    return self.twoSumBSTs(root1.left, root2, target)
-        else:
-            print("else")
-            return False
+        # evaluation logic
+        print("helper2: val: {}, target: {}".format(root.val, target))
+        d = target - root.val # difference that needs to be found in l1
+        if d > 0 and d in s:
+            print("    d={}, s={}".format(d, s))
+            return True
+        
+        return self.helper2(root.right, target, s)
+        
 
-
-    def test1_twoSumBSTs(self):
+    def tree1(self):
         tree = TreeNode(2)
         tree.left = TreeNode(1)
         tree.left.left = TreeNode(0)
-
         tree.right = TreeNode(5)
-        #tree.right = TreeNode(4)
-        d = self.treeHeight(tree)
-        print("depth: " + str(d))
-        self.printBT(tree)
+        tree.right.left = TreeNode(4)
+        tree.right.right = TreeNode(6)
+#         d = BTUtils.treeHeight(tree)
+#         print("depth: " + str(d))
+#         BTUtils.printBT(tree)
+        return tree
+    
+    def tree2(self):
+        tree = TreeNode(2)
+        tree.left = TreeNode(1)
+        tree.right = TreeNode(3)
+        tree.right.right = TreeNode(4)
+        return tree
+    
+    def tree3(self):
+        tree = TreeNode(5)
+        tree.left = TreeNode(4)
+        tree.left.left = TreeNode(3)
+        tree.right = TreeNode(7)
+        return tree
+
+    def test1(self):
+        a = self.twoSumBSTs(self.tree2(), self.tree3(), 5)
+        print("test1: ans: ", a)
+    
+    def test2(self):
+        a = self.twoSumBSTs(self.tree1(), self.tree3(), 12)
+        print("test1: ans: ", a)
 
 def main():
     lc1214 = LC1214_TwoSumBSTs()
-    lc1214.test1_twoSumBSTs()
+    
+    BTUtils.printBT(lc1214.tree1())
+    
+    #lc1214.test1()
+    lc1214.test2()
 
 main()
-
-
-

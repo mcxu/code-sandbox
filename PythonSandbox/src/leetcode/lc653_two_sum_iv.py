@@ -26,18 +26,19 @@ class LC653_TwoSumIv:
         if root == None:
             return False
 
-        self.helper(root.left, k, s)
+        if self.helper(root.left, k, s):
+            return True
 
         # evaluation logic, done in-order
         print("root.val={}, s={}".format(root.val, s))
         if s and (k - root.val) in s:
+            print("    d={}, s={}".format(k-root.val, s))
             return True
         else:
             s.add(root.val)
 
-        self.helper(root.right, k, s)
-
-        return False
+        return self.helper(root.right, k, s)
+    
     
     def test_pairExists(self):
         tree = TreeNode(5)
@@ -45,11 +46,25 @@ class LC653_TwoSumIv:
         tree.left.left = TreeNode(2)
         tree.left.right = TreeNode(4)
 
+        tree.right = TreeNode(8)
+        tree.right.left = TreeNode(6)
+        tree.right.right = TreeNode(9)
+        
+        a = self.pairExists(tree, 13)
+        print("a:", a)
+
+    def test_pairExists2(self):
+        tree = TreeNode(5)
+        tree.left = TreeNode(3)
+        tree.left.left = TreeNode(2)
+        tree.left.right = TreeNode(4)
+        
         tree.right = TreeNode(6)
         tree.right.right = TreeNode(7)
         
-        a = self.pairExists(tree, 9)
+        a = self.pairExists(tree, 14)
         print("a:", a)
+        
 
 
     """
@@ -57,47 +72,58 @@ class LC653_TwoSumIv:
     just True or False.
     """
 
-    def pairExists2(self, root, k):
-        return self.helper2(root, k , [])
+    def getBSTPair(self, root, k):
+        return self.helper2(root, k , set())
 
     # lst: list to store traversed values
-    def helper2(self, root, k, lst):
+    def helper2(self, root, k, s):
         if root == None:
             return ()
 
-        self.helper2(root.left, k, lst)
+        if self.helper2(root.left, k, s):
+            return (k-root.val, root.val)
 
         # evaluation logic, done in-order
-        print("root.val={}, lst={}".format(root.val, lst))
-        
-        for ind,val in enumerate(lst):
-            if (k-root.val) == val:
-                return (root.val, val)
+        print("root.val={}, s={}".format(root.val, s))
+        if s and (k-root.val) in s:
+            return (k-root.val, root.val)
+        else:
+            s.add(root.val)
 
-        lst.append(root.val)
-
-        self.helper2(root.right, k, lst)
-
-        return ()
+        return self.helper2(root.right, k, s)
     
-    def test_pairExists2(self):
+    def test_getBSTPair(self):
         tree = TreeNode(5)
         tree.left = TreeNode(3)
         tree.left.left = TreeNode(2)
         tree.left.right = TreeNode(4)
 
+        tree.right = TreeNode(8)
+        tree.right.left = TreeNode(6)
+        tree.right.right = TreeNode(9)
+        
+        a = self.getBSTPair(tree, 14)
+        print("a:", a)
+
+    def test_getBSTPair2(self):
+        tree = TreeNode(5)
+        tree.left = TreeNode(3)
+        tree.left.left = TreeNode(2)
+        tree.left.right = TreeNode(4)
+        
         tree.right = TreeNode(6)
         tree.right.right = TreeNode(7)
         
-        a = self.pairExists2(tree, 7)
+        a = self.pairExists(tree, 5)
         print("a:", a)
-
 
 
 def main():
     lc653 = LC653_TwoSumIv()
     #lc653.test_pairExists()
-    lc653.test_pairExists2()
+    #lc653.test_pairExists2()
+    #lc653.test_getBSTPair()
+    lc653.test_getBSTPair2()
 
 main()
 

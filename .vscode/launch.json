@@ -1,6 +1,5 @@
 {
     "configurations": [
-        
         {
             "type": "java",
             "name": "CodeLens (Launch) - ArraySandbox",
@@ -40,9 +39,8 @@
             "name": "Python: Current File (Integrated Terminal)",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
-            "cwd": "${workspaceFolder}",
-            "env": {"PYTHONPATH": "${workspaceFolder}"},
+            "env": {"PYTHONPATH": "${workspaceFolder}/PythonSandbox/src"},
+            "module" : "PythonSandbox",
             "console": "integratedTerminal"
         }
     ]

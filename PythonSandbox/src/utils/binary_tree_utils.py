@@ -5,29 +5,32 @@ class TreeNode(object):
         self.right = None
 
 class BinaryTreeUtils:
-    def printBT(self, tree):
-        h = self.treeHeight(tree)
+    @staticmethod
+    def printBT(tree):
+        h = BinaryTreeUtils.treeHeight(tree)
         for i in range(0,h+1):
-            self.printLevel(tree, i)
+            BinaryTreeUtils.printLevel(tree, i)
             print("")
 
     # https://www.geeksforgeeks.org/print-level-order-traversal-line-line/
-    def printLevel(self, tree, treeDepth):
+    @staticmethod
+    def printLevel(tree, treeDepth):
         if tree is None:
             return
         
         if(treeDepth == 1):
             print("{}".format(tree.val), end=' ')
         else:
-            self.printLevel(tree.left, treeDepth-1)
-            self.printLevel(tree.right, treeDepth-1)
+            BinaryTreeUtils.printLevel(tree.left, treeDepth-1)
+            BinaryTreeUtils.printLevel(tree.right, treeDepth-1)
     
     # root is height of 0
-    def treeHeight(self, tree):
+    @staticmethod
+    def treeHeight(tree):
         if tree is None:
             return 0
-        ld = self.treeHeight(tree.left)
-        rd = self.treeHeight(tree.right) 
+        ld = BinaryTreeUtils.treeHeight(tree.left)
+        rd = BinaryTreeUtils.treeHeight(tree.right) 
         if rd > ld:
             return rd+1
         else:
@@ -43,9 +46,9 @@ class BinaryTreeUtils:
         tree.right.left = TreeNode(4)
         tree.right.right= TreeNode(8)
 
-        d = self.treeHeight(tree)
+        d = BinaryTreeUtils.treeHeight(tree)
         print("depth: " + str(d))
-        self.printBT(tree)
+        BinaryTreeUtils.printBT(tree)
 
 def main():
     btUtils = BinaryTreeUtils()
