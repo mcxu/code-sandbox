@@ -5,6 +5,7 @@ note: unlike Matlab, where * implies vector multiplication,
 * in python performs scalar multiplication, and @ performs vector.
 """
 import numpy as np
+from google.protobuf.internal.containers import BaseContainer
 
 def matrices_and_vectors():
     A = [[1, 2, 3],
@@ -63,13 +64,30 @@ def matrix_multiplication_properties():
     print(np.array_equal(IA,A))
 
 def inverse_and_transpose():
-    pass
+    A = np.array([[3,4],[5,16]])
+    Ainverse = np.linalg.inv(A)
+    print("Ainverse:\n", Ainverse)
+    Atranspose = np.transpose(A)
+    print("Atranspose:\n", Atranspose)
+
+def quiz():
+#     u = np.array([[8],[1],[4]])
+#     print(np.transpose(u))
+
+    #q4
+    u = np.array([[4],[-4],[-3]])
+    v = np.array([[4],[2],[4]])
+    print(np.transpose(u)@v)
+    
+    
 
 def main():
     #matrices_and_vectors()
     #addition_and_scalar_multiplication()
     #matrix_vector_multiplication()
-    matrix_multiplication_properties()
+    #matrix_multiplication_properties()
+    #inverse_and_transpose()
+    quiz()
     pass
 
 if __name__ == "__main__":
