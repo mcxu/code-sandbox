@@ -32,7 +32,7 @@ class NumberUtils:
         print("a size: ", len(a))
         
     def test2(self):
-        a = self.generateRandomNumbers(0, 100000, 1000, allowDuplicates=False)
+        a = self.generateRandomNumbers(0, 10000, 1000, allowDuplicates=False)
         a = sorted(a)
         print(a)
         print("a size: ", len(a))

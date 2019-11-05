@@ -24,7 +24,7 @@ class BinarySearch:
                 li = medianInd
             
             if medianVal == target:
-                return target
+                return medianInd
             
         return -1
     
