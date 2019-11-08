@@ -11,6 +11,7 @@ You can modify the input array in-place.
 '''
 
 import math
+from utils.sorting_utils import SortingUtils
 
 class DCP4():
 
@@ -32,54 +33,14 @@ class DCP4():
         # split positive and negative numbers
         i=0
         while i < len(input):
-            print("sort_positives")
             num = input[i]
             if num < 0:
                 input.pop(i)
                 i -= 1
             i += 1
-        pos_sorted = self.counting_sort(input)
+        pos_sorted = SortingUtils.countingSort(input)
         print("pos_sorted: {}".format(pos_sorted))
         return pos_sorted
-
-    def counting_sort(self, input):
-        # identify highest value in input
-        hi = -math.inf
-        for val in input:
-            if val > hi:
-                hi = val
-        print("highest val: {}".format(hi))
-
-        # initialize counts array (need to include index up to highest val)
-        counts = [0] * (hi+1)
-
-        sa = [0] * len(counts) # sorted array
-        print("sa initially: {}".format(sa))
-
-        # count number of times each element occurs
-        for i in range(len(input)):
-            input_val = input[i]
-            print("input_val: {}".format(input_val))
-            counts[input_val] = counts[input_val] + 1
-            print("counts: {}, elements: {}".format(counts, len(counts)))
-        
-        # create cumulative count of elements
-        for j in range(1, hi):
-            counts[j+1] = counts[j+1] + counts[j]
-            print("j={}, cumulative count of elements: {}".format(j, counts))
-
-        # sort the data
-        print("input before sort: {}".format(input))
-        for k in range(len(input)-1, -1, -1):
-            input_k = input[k]
-            print("k={}, input_k={}".format(k,input_k))
-            c_of_input_k = counts[input_k]
-            print(" c_of_input_k: {}".format(c_of_input_k))
-            sa[c_of_input_k] = input_k
-            print(" sa: {}".format(sa))
-            counts[input_k] = counts[input_k] - 1
-
-        return sa[1:len(input)+1]
 
     
     # def counting_sort_negatives(self, input):
@@ -96,18 +57,15 @@ class DCP4():
     #     return sorted_negatives
 
     def test_counting_sort(self):
-        input_lists = [
-            [5,2,7,1],
-            [3, 4, -1, 1],
-            [-1, -3, 45, 2, -7, 23, 4, 7, 2, 4]
-            ]
-        for input in input_lists: 
-            a = self.counting_sort(input)
-            print("test_counting_sort: input: {}, output: {}".format(input, a))
+        #nums = [-1, -3, 45, 2, -7, 23, 4, 7, 2, 4]
+        nums = [5,7,3,5,4,7,1,7,9,3,5,7,2,23,65,12,87]
+        a = SortingUtils.countingSort(nums)
+        print("test_counting_sort: input: {}, output: {}".format(nums, a))
 
-    def test_counting_sort_negatives(self):
-        l = [-2,-12,-3,-7]
-        self.counting_sort_negatives(l)
+    def test_split_and_sort_positives(self):
+        nums = [-1, -3, 45, 2, -7, 23, 4, 7, 2, 4]
+        a = self.split_and_sort_positives(nums)
+        print("test_split_and_sort_positives: a: ", a)
 
     def test_first_missing_pos_int_1(self):
         l = [-1, -3, 45, 2, -7, 23, 4, 7, 2, 4]
@@ -122,9 +80,9 @@ class DCP4():
 def main():
     p4 = DCP4()
     #p4.test_counting_sort()
-    #p4.test_counting_sort_negatives()
-    #p4.test_first_missing_pos_int_1()
-    p4.test_first_missing_pos_int_2()
+    #p4.test_split_and_sort_positives()
+    p4.test_first_missing_pos_int_1()
+    #p4.test_first_missing_pos_int_2()
 
 if __name__ == "__main__":
     main()
