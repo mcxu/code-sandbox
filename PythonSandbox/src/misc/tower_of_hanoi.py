@@ -13,8 +13,11 @@ class TowerOfHanoi:
     def hanoiHelper(self, n, f, a, t, moves):
         if n==0:
             return
+        # moves A->B (assuming f->t movement from root call, then f->a is A->B)
         self.hanoiHelper(n-1, f, t, a, moves)
+        # moves A->C (assuming f->t movement from root call, then f->t is A->C)
         moves.append((f,t))
+        # moves B->C (assuming f->t movement from root call, then a->t is B->C)
         self.hanoiHelper(n-1, a, f, t, moves)
 
     def testHanoi(self):

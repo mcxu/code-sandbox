@@ -1,5 +1,4 @@
 """
-Algoexpert - Easy - 2/13 
 Depth First Search
 """
 import time 

@@ -11,7 +11,7 @@ class NumberUtils:
                 return out
             out = set()
         
-        while len(out) != quantity:
+        while len(out) < quantity:
             rn = random.randint(lo, hi)
             
             if allowDuplicates:
@@ -39,8 +39,8 @@ class NumberUtils:
          
 def main():
     nutils = NumberUtils()
-    #nutils.test1()
-    nutils.test2()
+    nutils.test1()
+    #nutils.test2()
 
 if __name__ == "__main__":
     main()
