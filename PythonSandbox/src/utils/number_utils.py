@@ -53,20 +53,20 @@ class NumberUtils:
         a = [-1, -2, -3, -7, -17, -27, -18, -541, -8, -7, 7]
         result = NumberUtils.isolateNegatives(a)
         print("test_isolateNegatives:", result)
-                    
-    def test_getHighestVal(self):
+    @staticmethod                
+    def test_getHighestVal():
         l = [5,7,3,5,4,102,7,1,7,9,87,3,5,7,2,23,65,12]
         hi = NumberUtils.getHighestVal(l)
         print("highest val: ", hi)
-        
-    def test_generateRandomNumbers1(self):
-        a = self.generateRandomNumbers(0, 10, 11, allowDuplicates=False)
+    @staticmethod
+    def test_generateRandomNumbers1():
+        a = NumberUtils.generateRandomNumbers(0, 10, 11, allowDuplicates=False)
         a = sorted(a)
         print(a)
         print("a size: ", len(a))
-        
-    def test_generateRandomNumbers2(self):
-        a = self.generateRandomNumbers(0, 10000, 1000, allowDuplicates=False)
+    @staticmethod   
+    def test_generateRandomNumbers2():
+        a = NumberUtils.generateRandomNumbers(0, 10000, 1000, allowDuplicates=False)
         a = sorted(a)
         print(a)
         print("a size: ", len(a))
