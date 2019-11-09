@@ -1,11 +1,14 @@
 code-sandbox <br>
 Code samples and testing grounds. <br>
+
 author: Michael Xu
+
 --------------------------------------------------------------------
 Useful commands:
 
 SLOC with omission using grep -v: <br>
 git ls-files | grep -v "\/js" | grep -v ".metadata" | grep -v ".txt" | xargs wc -l <br>
+
 --------------------------------------------------------------------
 VSCode setup info:
 
