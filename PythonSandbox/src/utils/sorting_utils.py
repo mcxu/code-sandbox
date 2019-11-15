@@ -1,4 +1,5 @@
 from utils.number_utils import NumberUtils
+from lib2to3.fixer_util import Number
 
 class SortingUtils:
     
@@ -121,12 +122,19 @@ class SortingUtils:
         a = []
         s = SortingUtils.mergeSort(a)
         print("sorting empty: ", s)
+    
+    @staticmethod
+    def test_mergeSort3():
+        a = NumberUtils.generateRandomNumbers(0, 10000, 100, allowDuplicates=False)
+        s = SortingUtils.mergeSort(a)
+        print("sorted: ", s)
 
 def main():
     #SortingUtils.test_countingSort()
     #SortingUtils.test_mergeArrays()
     #SortingUtils.test_mergeSort()
-    SortingUtils.test_mergeSort2()
+    #SortingUtils.test_mergeSort2()
+    SortingUtils.test_mergeSort3()
 
 if __name__ == "__main__":
     main()

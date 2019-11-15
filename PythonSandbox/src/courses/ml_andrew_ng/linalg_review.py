@@ -5,7 +5,6 @@ note: unlike Matlab, where * implies vector multiplication,
 * in python performs scalar multiplication, and @ performs vector.
 """
 import numpy as np
-from google.protobuf.internal.containers import BaseContainer
 
 def matrices_and_vectors():
     A = [[1, 2, 3],
