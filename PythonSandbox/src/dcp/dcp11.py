@@ -12,48 +12,48 @@ Hint: Try preprocessing the dictionary into a more efficient data structure to s
 class DCP11:
     def __init__(self):
         self.prefixMap = {
-            "d" : ["dog", "deer", "deal"],
+            "a" : ["anesthesiologist", "antihypertensive","aminotransferase", "arteriosclerosis",
+                   "anthropomorphism", "accommodationist" ,"archconservative", "atrioventricular"],
+            "d" : ["dog", "doge", "deer", "deal"],
             "y" : ["yell", "yellow", "yes"]
             }
     
     def autoComplete(self):
         run = True
         while(run):
-            query = input("Query: ")
-            if query == "<exit>":
+            s = input("Query: ")
+            if s == "<exit>":
                 run = False
                 print("exited the program")
             else:
                 # do search
                 print("doing search")
-                if query in self.prefixMap.keys():
+                if s in self.prefixMap.keys():
                     # check if there's an exact match in prefixMap
-                    print("match(a): ", self.prefixMap[query])
-                elif query[0] in self.prefixMap.keys():
+                    print("match(a): ", self.prefixMap[s])
+                elif s[0] in self.prefixMap.keys():
                     # check if 1st char of query matches anything in prefixMap
-                    wordList = self.prefixMap.get(query[0])
-                    matches = self.filterByPrefix(wordList, query)
+                    wordList = self.prefixMap.get(s[0])
+                    matches = self.filterByPrefix(wordList, s)
                     # update map
                     if matches:
-                        self.prefixMap[query] = matches
+                        self.prefixMap[s] = matches
                         print("match(b): ", matches)
                     else:
-                        print("match for {} not found.".format(query))
+                        print("match for {} not found.".format(s))
                 else:
                     # match not found
-                    print("match for {} not found.".format(query))
+                    print("match for {} not found.".format(s))
                 print("map state: ", self.prefixMap)
                         
     # filter list of words by prefix
     def filterByPrefix(self, wordList, pfx):
         matches = []
         for word in wordList:
-            print("filterByPrefix: word: ", word)
+            #print("filterByPrefix: word: ", wosrd)
             if pfx == word:
-                print("A")
                 matches.append(word)
             else:
-                print("B")
                 i = 0 
                 
                 # increment limit, determined by shortest term
