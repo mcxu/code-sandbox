@@ -12,10 +12,10 @@ Hint: Try preprocessing the dictionary into a more efficient data structure to s
 class DCP11:
     def __init__(self):
         self.prefixMap = {
-            "a" : ["anesthesiologist", "antihypertensive","aminotransferase", "arteriosclerosis",
-                   "anthropomorphism", "accommodationist" ,"archconservative", "atrioventricular"],
-            "d" : ["dog", "doge", "deer", "deal"],
-            "y" : ["yell", "yellow", "yes"]
+#             "a" : set(["anesthesiologist", "antihypertensive","aminotransferase", "arteriosclerosis",
+#                    "anthropomorphism", "accommodationist" ,"archconservative", "atrioventricular"]),
+            "d" : set(["dog", "doge", "deer", "deal"]),
+            "y" : set(["yell", "yellow", "yes", "yeet", "yesterday"])
             }
     
     def autoComplete(self):
@@ -25,6 +25,11 @@ class DCP11:
             if s == "<exit>":
                 run = False
                 print("exited the program")
+            elif s == "<add>":
+                #add entry
+                entry = input("Add entry: ")
+                print("entry to add: ", entry)
+                self.addEntry(entry)
             else:
                 # do search
                 print("doing search")
@@ -45,14 +50,31 @@ class DCP11:
                     # match not found
                     print("match for {} not found.".format(s))
                 print("map state: ", self.prefixMap)
-                        
+    
+    # add entry to prefixMap
+    def addEntry(self, entry):
+        if entry[0] not in self.prefixMap.keys():
+            # handles case where 1st char is completely new
+            self.prefixMap[entry[0]] = set()
+            self.prefixMap[entry[0]].add(entry)
+        else: 
+            # handles case where 1st char matches a char in the map
+            # add entry to all existing prefixes
+            for i in range(1, len(entry)+1):
+                strToi = entry[0:i]
+                if strToi in self.prefixMap.keys():
+                    self.prefixMap.get(strToi).add(entry)
+            
+        print("prefixMap after add:\n", self.prefixMap)
+            
+                
     # filter list of words by prefix
     def filterByPrefix(self, wordList, pfx):
-        matches = []
+        matches = set()
         for word in wordList:
             #print("filterByPrefix: word: ", wosrd)
             if pfx == word:
-                matches.append(word)
+                matches.add(word)
             else:
                 i = 0 
                 
@@ -65,7 +87,7 @@ class DCP11:
                     i += 1
                 
                 if i == len(pfx):
-                    matches.append(word)
+                    matches.add(word)
             #print("match added: ", matches)
         return matches
                             
@@ -76,26 +98,3 @@ def main():
     dcp11.autoComplete()
 
 main()
-
-"""
-Query: y
-doing search
-match(a):  ['yell', 'yellow', 'yes']
-map state:  {'d': ['dog', 'deer', 'deal'], 'y': ['yell', 'yellow', 'yes']}
-Query: ye
-doing search
-match(b):  ['yell', 'yellow', 'yes']
-map state:  {'d': ['dog', 'deer', 'deal'], 'y': ['yell', 'yellow', 'yes'], 'ye': ['yell', 'yellow', 'yes']}
-Query: yell
-doing search
-match(b):  ['yell', 'yellow']
-map state:  {'d': ['dog', 'deer', 'deal'], 'y': ['yell', 'yellow', 'yes'], 'ye': ['yell', 'yellow', 'yes'], 'yell': ['yell', 'yellow']}
-Query: yes
-doing search
-match(b):  ['yes']
-map state:  {'d': ['dog', 'deer', 'deal'], 'y': ['yell', 'yellow', 'yes'], 'ye': ['yell', 'yellow', 'yes'], 'yell': ['yell', 'yellow'], 'yes': ['yes']}
-Query: yellow
-doing search
-match for yellow not found.
-map state:  {'d': ['dog', 'deer', 'deal'], 'y': ['yell', 'yellow', 'yes'], 'ye': ['yell', 'yellow', 'yes'], 'yell': ['yell', 'yellow'], 'yes': ['yes']}
-"""
