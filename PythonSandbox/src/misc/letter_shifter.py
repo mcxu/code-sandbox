@@ -10,7 +10,7 @@ class LetterShifter:
         sList = list(s)
         for i,ltr in enumerate(sList):
             inc = ord(ltr) + k
-            if inc > ord("z"):
+            while inc > ord("z"):
                 inc = ord("a") + (inc%ord("z")-1)
             sList[i] = chr(inc)
         return "".join(sList)
@@ -23,7 +23,7 @@ class LetterShifter:
     
     @staticmethod
     def test_shiftLetters2():
-        s = "xyzdfjslbls"; k = 7
+        s = "abc"; k = 52
         s = LetterShifter.shiftLetters(s, k)
         print("shifted: ", s)
 
