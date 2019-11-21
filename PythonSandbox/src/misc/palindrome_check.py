@@ -14,7 +14,8 @@ class PalindromeCheck:
         s = ["abcba",
              "bbbb",
              "a",
-             "bbas"]
+             "bbaasdfasdfkjkdksdldolejladkldsas",
+             "saippuakivikauppias" ]
         for elt in s:
             b = PalindromeCheck.palindromeCheck(elt)
             print("Result for {}: {}".format(elt, b))
