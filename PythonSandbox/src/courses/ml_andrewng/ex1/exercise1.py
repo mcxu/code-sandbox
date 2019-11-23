@@ -41,9 +41,13 @@ class Ex1:
         plt.ylabel("FoodTruckProfit")
     
     @staticmethod
-    def linRegFoodTruckProfit():
+    def linReg(X, y):
         pass
         
+
+    @staticmethod
+    def test_linReg(self):
+        pass
 
 def main():
     Ex1.plotEx1Data1()
