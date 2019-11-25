@@ -20,3 +20,4 @@ https://github.com/microsoft/vscode-python/issues/6934 <br>
 misc:
 
 https://www.bigocheatsheet.com/ <br>
+http://www.martinbroadhurst.com/combinatorial-algorithms.html <br>
