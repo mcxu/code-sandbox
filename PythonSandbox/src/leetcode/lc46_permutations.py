@@ -57,7 +57,7 @@ class LC46:
             print("test_permute results: ", results)
             print("test_permute number of permutations: ", len(results))
             print("")
-    
+            
 def main():
     lc46 = LC46()
     lc46.test_permute()

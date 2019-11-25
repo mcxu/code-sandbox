@@ -10,7 +10,7 @@ class Node:
 
         # stack list
         self.stack = []
-        self.currChildren = None
+        #self.currChildren = None
 
     def addChild(self, name):
         self.children.append(Node(name))
@@ -29,7 +29,6 @@ class Node:
         while(self.stack):
             print("--- top of while loop ---")
             poppedNode = self.stackPop()
-            self.currChildren = poppedNode.children
             poppedName = poppedNode.name
             print("poppedName:", poppedName)
 
@@ -45,15 +44,14 @@ class Node:
             to be put on right to left, which is why the for loop counts downwards
             in the list of children for some given node.
             """
-            for i in range(len(self.currChildren)-1, -1, -1):
-                childNode = self.currChildren[i]
+            for i in range(len(poppedNode.children)-1, -1, -1):
+                childNode = poppedNode.children[i]
                 childName = childNode.name
                 print("childName:", childName)
                 if childName not in array:
                     self.stackPush(childNode)
-                    print("unvisited child added to stack:", self.stack)
+                    #print("unvisited child added to stack:", self.stack)
             
-            #time.sleep(.25)
         del self.stack
         return array
 
@@ -142,9 +140,9 @@ def main():
     #test.testTree1()
     #test.test_depthFirstSearchIterative_prompt()
     #test.test_depthFirstSearchIterative2()
-    #test.test_depthFirstSearchIterative5()
-    test.test_depthFirstSearchRecursive_prompt()
-    test.test_depthFirstSearchRecursive5()
+    test.test_depthFirstSearchIterative5()
+    #test.test_depthFirstSearchRecursive_prompt()
+    #test.test_depthFirstSearchRecursive5()
 
 if __name__ == "__main__":
     main()
