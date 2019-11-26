@@ -15,8 +15,12 @@ Output:
 """
 
 #import time
+import sys
+from utils.number_utils import NumberUtils
+sys.setrecursionlimit(10**6)
 
 class LC46:
+    # number of permutations in entire list
     def permute(self, nums):
         # helper function
         def permuteHelper(nums, results):
@@ -49,18 +53,56 @@ class LC46:
         numsList = [
             [1,2,3],
             [1,2,3,4],
-            [1,2,3,4,5]
-            ]
+            [1,2,3,4,5,6]]
+        
         for nums in numsList:
             results = self.permute(nums)
             print("test_permute nums: ", nums)
             print("test_permute results: ", results)
             print("test_permute number of permutations: ", len(results))
             print("")
-            
+    
+    # find all k-permutations from a list of n-elements
+    # by filtering out all [0:k] duplicates from permuting entire list
+    def test_permute_partial(self):
+        numsList = [
+            [1,2,3],
+            [1,2,3,4],
+            [1,2,3,4,5,6]]
+        k = 2
+        for nums in numsList:
+            #k = len(nums) # same as permuting entire list
+            results = self.permute(nums)
+            resultsCopy = results.copy()
+            results_k = []
+            for i in range(len(results)):
+                results[i] = results[i][:k]
+                if results[i] not in results_k:
+                    results_k.append(results[i])
+                
+            print("test_permute_partial nums: ", nums)
+            print("test_permute_partial results: ", resultsCopy)
+            print("test_permute_partial results_k: ", results_k)
+            print("test_permute_partial number of permutations: ", len(results))
+            print("test_permute_partial number of k-permutations: ", len(results_k))
+            print("")
+    
+    # n items taken k at a time (order matters)
+    def nPk_formula(self, n, k):
+        perms = NumberUtils.factorial(n)/NumberUtils.factorial(n-k)
+        return int(perms)
+    
+    def test_nPk_formula(self):
+        n = 6
+        k = 1
+        ans = self.nPk_formula(n, k)
+        print("num permutations: ", ans)
+     
 def main():
     lc46 = LC46()
-    lc46.test_permute()
+    #lc46.test_permute()
+    lc46.test_permute_partial()
+    #lc46.test_nPk_formula()
 
 main()
             
