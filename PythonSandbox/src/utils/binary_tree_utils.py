@@ -1,3 +1,7 @@
+class BTreeNode():
+    def __init__(self, x):
+        pass
+
 class TreeNode(object):
     def __init__(self, x):
         self.val = x

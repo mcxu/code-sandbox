@@ -62,9 +62,20 @@ class LC46:
             print("test_permute number of permutations: ", len(results))
             print("")
     
+    # find all permutations of size k in array nums
+    def permutePartial(self, nums, k):
+        #k = len(nums) # same as permuting entire list
+        results = self.permute(nums)
+        results_k = []
+        for i in range(len(results)):
+            results[i] = results[i][:k]
+            if results[i] not in results_k:
+                results_k.append(results[i])
+        return results_k
+    
     # find all k-permutations from a list of n-elements
     # by filtering out all [0:k] duplicates from permuting entire list
-    def test_permute_partial(self):
+    def test_permutePartial(self):
         numsList = [
             [1,2,3],
             [1,2,3,4],
@@ -72,21 +83,12 @@ class LC46:
             [1,2,3,'a','b','c']]
         k = 3
         for nums in numsList:
-            #k = len(nums) # same as permuting entire list
-            results = self.permute(nums)
-            resultsCopy = results.copy()
-            results_k = []
-            for i in range(len(results)):
-                results[i] = results[i][:k]
-                if results[i] not in results_k:
-                    results_k.append(results[i])
-                
+            results_k = self.permutePartial(nums, k)
             print("test_permute_partial nums: ", nums)
-            print("test_permute_partial results: ", resultsCopy)
             print("test_permute_partial results_k: ", results_k)
-            print("test_permute_partial number of permutations: ", len(results))
             print("test_permute_partial number of k-permutations: ", len(results_k))
-            print("")
+            print("") 
+
     
     # n items taken k at a time (order matters)
     def nPk_formula(self, n, k):
@@ -102,7 +104,7 @@ class LC46:
 def main():
     lc46 = LC46()
     #lc46.test_permute()
-    lc46.test_permute_partial()
+    lc46.test_permutePartial()
     #lc46.test_nPk_formula()
 
 main()

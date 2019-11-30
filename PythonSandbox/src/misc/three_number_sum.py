@@ -9,13 +9,42 @@ input: ([12, 3, 1, 2, -6, 5, -8, 6], 0)
 output: [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]]
 """
 
+import sys
+sys.setrecursionlimit(10**6)
+
 class TNS:
     
     @staticmethod
     def threeNumberSum(array, targetSum):
         validTriplets = []
-        
+        arrSorted = sorted(array)
+        for i in range(len(arrSorted)-1):
+            print("array: ", array)
+            arr = arrSorted[i:]
+            print("i= ", i)
+            print("arr: ",arr)
+            TNS.helper(arr, targetSum, validTriplets, 0, 1, len(arr)-1)
         return validTriplets
+    
+    
+    #p1: pointer to 1st index,  p2: ptr to 2nd index, p3: ptr to 3rd index.
+    @staticmethod
+    def helper(array, targetSum, validTriplets, i1, i2, i3):
+        
+        n1 = array[i1]; n2 = array[i2]; n3 = array[i3]
+        sum = n1 + n2 + n3
+        
+        if i2 == i3:
+            return
+        
+        if sum == targetSum:
+            validTriplets.append([n1,n2,n3])
+        
+        if sum > targetSum:
+            TNS.helper(array, targetSum, validTriplets, i1, i2, i3-1)
+        else:
+            TNS.helper(array, targetSum, validTriplets, i1, i2+1, i3)
+         
     
     @staticmethod
     def test_threeNumberSum():
@@ -24,10 +53,11 @@ class TNS:
         ts = 0
         output = TNS.threeNumberSum(l, ts)
         print("output: ", output)
-
+        
+    
 
 def main():
-    #ThreeNumSum.test_threeNumberSum()
+    TNS.test_threeNumberSum()
     pass
     
 main()
