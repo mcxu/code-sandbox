@@ -17,6 +17,12 @@ class NumberUtils:
         return negNums, array
     
     @staticmethod
+    def test_isolateNegatives():
+        a = [-1, -2, -3, -7, -17, -27, -18, -541, -8, -7, 7]
+        result = NumberUtils.isolateNegatives(a)
+        print("test_isolateNegatives:", result)
+    
+    @staticmethod
     def getHighestVal(array):
         hi = array[0]
         for i in range(1,len(array)):
@@ -24,6 +30,12 @@ class NumberUtils:
             if val > hi:
                 hi = val
         return hi
+    
+    @staticmethod                
+    def test_getHighestVal():
+        l = [5,7,3,5,4,102,7,1,7,9,87,3,5,7,2,23,65,12]
+        hi = NumberUtils.getHighestVal(l)
+        print("highest val: ", hi)
     
     @staticmethod
     def generateRandomNumbers(lo, hi, quantity, allowDuplicates=True):
@@ -49,34 +61,37 @@ class NumberUtils:
             return list(out)
             
     @staticmethod
-    def test_isolateNegatives():
-        a = [-1, -2, -3, -7, -17, -27, -18, -541, -8, -7, 7]
-        result = NumberUtils.isolateNegatives(a)
-        print("test_isolateNegatives:", result)
-    @staticmethod                
-    def test_getHighestVal():
-        l = [5,7,3,5,4,102,7,1,7,9,87,3,5,7,2,23,65,12]
-        hi = NumberUtils.getHighestVal(l)
-        print("highest val: ", hi)
-    @staticmethod
     def test_generateRandomNumbers1():
         a = NumberUtils.generateRandomNumbers(0, 10, 11, allowDuplicates=False)
         a = sorted(a)
         print(a)
         print("a size: ", len(a))
+        
     @staticmethod   
     def test_generateRandomNumbers2():
         a = NumberUtils.generateRandomNumbers(0, 10000, 1000, allowDuplicates=False)
         a = sorted(a)
         print(a)
         print("a size: ", len(a))
+    
+    @staticmethod
+    def factorial(n):
+        if n == 0:
+            return 1
+        else:
+            return n*NumberUtils.factorial(n-1)
+    
+    @staticmethod
+    def test_factorial():
+        ans = NumberUtils.factorial(5)
+        print("factorial: ", ans)
          
 def main():
     nutils = NumberUtils()
     #nutils.test_generateRandomNumbers1()
     #nutils.test_generateRandomNumbers2()
-    nutils.test_getHighestVal()
-
+    #nutils.test_getHighestVal()
+    nutils.test_factorial()
 
 if __name__ == "__main__":
     main()

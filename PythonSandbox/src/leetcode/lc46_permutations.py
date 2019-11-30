@@ -68,8 +68,9 @@ class LC46:
         numsList = [
             [1,2,3],
             [1,2,3,4],
-            [1,2,3,4,5,6]]
-        k = 2
+            [1,2,3,4,5,6],
+            [1,2,3,'a','b','c']]
+        k = 3
         for nums in numsList:
             #k = len(nums) # same as permuting entire list
             results = self.permute(nums)
