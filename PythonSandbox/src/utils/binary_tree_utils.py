@@ -27,7 +27,7 @@ class BinaryTreeUtils:
         else:
             BinaryTreeUtils.printLevel(tree.left, treeDepth-1)
             BinaryTreeUtils.printLevel(tree.right, treeDepth-1)
-    
+            
     # root is height of 0
     @staticmethod
     def treeHeight(tree):
