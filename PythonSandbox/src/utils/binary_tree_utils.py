@@ -1,10 +1,10 @@
 class BTreeNode():
-    def __init__(self, x):
+    def __init__(self, value):
         pass
 
 class TreeNode(object):
-    def __init__(self, x):
-        self.val = x
+    def __init__(self, value):
+        self.value = value
         self.left = None
         self.right = None
 
@@ -23,7 +23,7 @@ class BinaryTreeUtils:
             return
         
         if(treeDepth == 1):
-            print("{}".format(tree.val), end=' ')
+            print("{}".format(tree.value), end=' ')
         else:
             BinaryTreeUtils.printLevel(tree.left, treeDepth-1)
             BinaryTreeUtils.printLevel(tree.right, treeDepth-1)
