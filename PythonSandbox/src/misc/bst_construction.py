@@ -66,28 +66,24 @@ class BST:
                 print("target value found: {}, self.value: {}".format(value, self))
                 print("parentnode: {}, parentNode value: {}".format(parentNode, parentNode.value))
                 if self.right != None and self.left != None:
-                    print("A")
+                    print("A: right and left both exist")
                     # successor is min value from the right branch
                     successor = self.right.findMinValNode() 
                     print("successor found: ", successor.value)
                     print("successor addr: ", successor)
-                
                     svtemp = successor.value
-                    self.remove(successor.value)
-                    
-                    # replace current node value with minimum value
-                    self.value = svtemp
-                    successor = None
+                    self.remove(successor.value, parentNode) # remove successor node recursively
+                    self.value = svtemp # replace current node value with minimum value
                 elif self.right == None and self.left != None:
-                    print("B")
+                    print("B: right is none, left exists")
                     self.value = self.left.value
                     self.left = None
                 elif self.right != None and self.left == None:
-                    print("C")
+                    print("C: right exists, left is none")
                     self.value = self.right.value
                     self.right = None
                 else:
-                    print("D")
+                    print("D: both are none")
                     if self == parentNode.right:
                         parentNode.right = None
                     elif self == parentNode.left:
@@ -104,7 +100,7 @@ class BST:
                     self.right.remove(successor.value)
                 else:
                     print("G")
-                    print("parentNode: {}, self.value: {}".format(parentNode, self.value))
+                    print("self.value: {}".format(self.value))
                     self.value = self.left.value
                     print("self.value after reassign: ", self.value)
                     temp = self.left
