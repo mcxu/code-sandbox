@@ -6,7 +6,6 @@ Do this in-place. Does not need to maintain order of other ints in array.
 Sample input: [2, 1, 2, 2, 2, 3, 4, 2], 2
 Sample output: [1, 3, 4, 2, 2, 2, 2, 2] (the numbers 1, 3, and 4 could be ordered differently)
 """
-import array
 
 class MVEnd:
     @staticmethod
