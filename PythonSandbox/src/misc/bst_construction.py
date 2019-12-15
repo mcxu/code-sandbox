@@ -217,4 +217,5 @@ def main():
     #t.testTree2()
     t.testTree4()
 
-main()
+if __name__ == "__main__":
+    main()

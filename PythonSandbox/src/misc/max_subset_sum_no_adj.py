@@ -11,6 +11,10 @@ class MS:
     """
     inclPrev: max sum including previous element
     exclPrev: max sum excluding previous element
+    
+    Complexity
+    Time: O(n): each element in array needs to be accessed.
+    Space: O(1): inclPrev, exclPrev, and the temp variables store 1 item each iteration.
     """
     @staticmethod
     def maxSubsetSumNoAdjacent(array):

@@ -12,6 +12,11 @@ Sample input:
     / \   \
    8   9   10
 Sample output: [15,16,18,10,11]
+
+Complexity:
+Time: O(n), where n is number of nodes in tree
+Space: O(2^d) worst case, where d is the depth of the tree. B/c the output must store the same 
+    number of sums as there are leaves.
 """
 class BTNode:
     def __init__(self, value):
