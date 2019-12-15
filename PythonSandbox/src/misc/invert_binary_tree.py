@@ -11,8 +11,8 @@ class BTNode:
 
 class Prob:
     """ Complexity
-    Time: O(n): all nodes must be traversed.
-    Space: O(1): for each node there is just a temp node variable, but previous traversals are not stored.
+    Time: O(n): n=num nodes, because all nodes must be traversed.
+    Space: O(d ~ lg(n)): d=tree depth, because the recursive call stack never exceeds the deepest path in the tree.
     """
     @staticmethod
     def invertBinaryTree(tree):
