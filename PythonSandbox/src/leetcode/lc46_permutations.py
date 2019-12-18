@@ -103,8 +103,8 @@ class LC46:
      
 def main():
     lc46 = LC46()
-    #lc46.test_permute()
-    lc46.test_permutePartial()
+    lc46.test_permute()
+    #lc46.test_permutePartial()
     #lc46.test_nPk_formula()
 
 main()
