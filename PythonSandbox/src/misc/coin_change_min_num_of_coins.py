@@ -14,13 +14,11 @@ class Prob:
     Complexity
     Time: 
         outer for loop: j -> denom(d) iterations: O(d)
-        inner for loop: i -> n, n-1, n-2, n-3, ... iterations: O(lg(n))
+        inner for loop: i -> d, d-1, d-2, d-3, ... iterations: O(lg(d))
         get min value from array: O(d), since array is size d
-        O(d)*O(lg(n)) + O(d) = O(d)*[O(lg(n)) + 1] = O(d * lg(n))
+        O(d)*O(lg(d)) + O(d) = O(d)*[O(lg(d)) + 1] = O(d * lg(d))
     Space:
         O(d) for storage array
-        O(d*n) for nested for loops
-        O(d) + O(d*n) = O(d)*[1 + O(n)] = O(d*n)
     """
     @staticmethod
     def minNumberOfCoinsForChange(n, denoms):
