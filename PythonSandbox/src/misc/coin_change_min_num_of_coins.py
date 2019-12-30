@@ -87,9 +87,49 @@ class Prob:
         nc = Prob.minNumberOfCoinsForChange(n, denoms)
         print("test5: num coins: ", nc)
 
+    @staticmethod
+    def minNumberOfCoinsForChange2(n, denoms):
+        # init array to store min number of ways
+        minWays = [float("inf") for i in range(n+1)]
+        minWays[0] = 0
+        print("minWays: ", minWays)
+        print("initial min in minWays: ", min(minWays))
+
+        for i in range(0, n+1, 1):
+            print("i=", i)
+            for j in range(len(denoms)):
+                d = denoms[j]
+                print(" j= {}, d= {}".format(j,d))
+                if i >= d:
+                    minWays[i] = min(minWays[i], minWays[i-d] + 1)
+                    print("     minWays: ", minWays)
+            print("minWays:", minWays)
+        
+        minWaysFinal = minWays[n]
+        if minWaysFinal != float("inf"):
+            return minWaysFinal
+        else:
+            return -1
+
+    @staticmethod
+    def test6():
+        n = 7
+        denoms = [1,5,10]
+        Prob.minNumberOfCoinsForChange2(n, denoms)
+
+    @staticmethod
+    def test7():
+        # correct answer is 2
+        n = 135
+        denoms = [39, 45, 130, 40, 4, 1, 60, 75]
+        nc = Prob.minNumberOfCoinsForChange2(n, denoms)
+        print("test7: num coins: ", nc)
+
+
 #Prob.test1()
 #Prob.test2()
 #Prob.test3()
 #Prob.test4()
-Prob.test5()
-
+#Prob.test5()
+#Prob.test6()
+Prob.test7()
