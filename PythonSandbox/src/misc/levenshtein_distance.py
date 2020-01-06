@@ -8,6 +8,11 @@ Sample output: 2 (insert "y", subsitute "c" for "d")
 """
 
 class Prob:
+    
+    """
+    Time complexity: O(len(str1)*len(str2)), since this many subproblems need to be iterated through
+    Space complexity: same as time complexity
+    """
     @staticmethod
     def levenshteinDistance(str1, str2):
         # 2d array to store number of ops
