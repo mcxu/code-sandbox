@@ -9,10 +9,26 @@ Sample output: 19 ([1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1])
 
 class KD:
     
-#     @staticmethod
-#     def kadanesAlgorithm(array):
-#         pass
-    
+    """
+    Algorithm: maxEndingHere = max{maxEndingHere + array[i], array[i]}
+    Time complexity: O(n), where n=num elements in array. Since this is a single pass through array.
+    Space complexity: O(1), since maxSoFar and maxEndingHere just stores the latest maxes (single value).
+    """
+    @staticmethod
+    def kadanesAlgorithm(array):
+        maxEndingHere = array[0]
+        maxSoFar = maxEndingHere
+        for i in range(1, len(array)):
+            val = array[i]
+            print("val: ", val)
+            maxEndingHere = max(val, maxEndingHere+val)
+            print("maxEndingHere: ", maxEndingHere)
+            if maxEndingHere > maxSoFar:
+                maxSoFar = maxEndingHere
+                print("maxSoFar set to: ", maxSoFar)
+        print("maxSoFar: ", maxSoFar)
+        return maxSoFar
+            
     
     """
     Brute force:
@@ -58,6 +74,6 @@ class KD:
         
 #KD.test1()
 #KD.test2() 
-#KD.test3()      
+KD.test3()      
 
     
