@@ -10,53 +10,72 @@ Sample output: True
 '''
 
 class SC:
+    
+    """
+    Note, this performs single cycle check with EACH value.
+    Time complexity: O(n^2), since array has n values, and inner while has n iterations.
+    Space complexity: O(n), since visits has n values.
+    """
     @staticmethod
     def hasSingleCycle(array):
         
         for i in range(len(array)):
-            visited = [False for val in array]
-            print("visited initialized: ", visited)
+            visits = [0 for i in array]
+            print("*** len array: ", len(array))
             
             startVal = array[i]
-            print("*** i= %s, startVal: %s" % (i,startVal))
+            print("** i= %s, startVal: %s" % (i,startVal))
             
             # check for single cycle from each number
-            deltaInd = i + startVal
-            val = 0
+            deltaInd = i
+            moveVal = startVal
             j = 0
             while j < len(array):
-                print("j= {}, deltaInd: {}".format(j,deltaInd))
-
-                deltaInd = deltaInd + val
+                print("j= {}, deltaInd: {}, moveVal: {}".format(j,deltaInd, moveVal))
+                
+                deltaInd = (deltaInd + moveVal) % len(array)
                 print("    deltaInd set to: ", deltaInd)
                 
-                if deltaInd >= len(array):
-                    deltaInd = deltaInd % len(array)
-                    print("    (A) deltaInd changed to: ", deltaInd)
-                    
-                if deltaInd < 0:
-                    deltaInd = len(array) + deltaInd
-                    print("    (B) deltaInd changed to: ", deltaInd)
+                moveVal = array[deltaInd]
+                print("    moveVal is now: ", moveVal)
                 
-                val = array[deltaInd]
-                print("    val: ", val)
-                
-                visited[deltaInd] = True
-                print("    visited: ", visited)
+                visits[deltaInd] += 1 
+                print("    visits: ", visits)
                 
                 j+=1
-            
-            if False in visited:
-                return False
+
+            if any(n != 1 for n in visits): return False
         
         return True
         
     
     @staticmethod
     def test1():
-        array = [2,3,1,-4,-4,2]
+        array = [2,3,1,-4,-4,2] # True
         ans = SC.hasSingleCycle(array)
         print("test1: ans: ", ans)
+    
+    @staticmethod
+    def test2():
+        array = [10, 11, -6, -23, -2, 3, 88, 908, -26] # True
+        ans = SC.hasSingleCycle(array)
+        print("test2: ans: ", ans)
+        
+    @staticmethod
+    def test3():
+        array = [1, 2, 3, 4, -2, 3, 7, 8, -26] # True
+        ans = SC.hasSingleCycle(array)
+        print("test3: ans: ", ans)
+    
+    @staticmethod
+    def test4():
+        array = [1,-1,1]
+        ans = SC.hasSingleCycle(array)
+        print("test4: ans: ", ans)
+        
 
 
-SC.test1()
+#SC.test1()
+#SC.test2()
+#SC.test3()
+SC.test4()
