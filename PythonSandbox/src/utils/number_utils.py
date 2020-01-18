@@ -85,13 +85,35 @@ class NumberUtils:
     def test_factorial():
         ans = NumberUtils.factorial(5)
         print("factorial: ", ans)
+    
+    # is n a prime number
+    @staticmethod
+    def isPrime(n):
+        if n <= 1:
+            return False
+        
+        for i in range(1, n+1):
+            #print("i= ", i)
+            if n % i == 0:
+                if i != 1 and i != n:
+                    return False
+
+        return True
+    
+    @staticmethod
+    def test_isPrime():
+        ns = [i for i in range(21)]
+        for n in ns:
+            p = NumberUtils.isPrime(n)
+            print("n: {}, p: {}".format(n,p))
+        
          
 def main():
-    nutils = NumberUtils()
     #nutils.test_generateRandomNumbers1()
     #nutils.test_generateRandomNumbers2()
     #nutils.test_getHighestVal()
-    nutils.test_factorial()
+    #nutils.test_factorial()
+    NumberUtils.test_isPrime()
 
 if __name__ == "__main__":
     main()
