@@ -98,7 +98,7 @@ class Prob:
     
     @staticmethod
     def test1():
-        input = 5
+        input = 4
         m = Prob.getSpiralMatrix(input)
         Prob.printMatrix(m)
 

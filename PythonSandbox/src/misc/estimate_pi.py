@@ -6,6 +6,9 @@ import random
 import math
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import threading
+import time
+import queue
 
 class EstPi:
     
@@ -42,13 +45,13 @@ class EstPi:
     for [1,sampleSize] inclusive. 
     """
     @staticmethod
-    def runErrorSimulation(sampleSize=2000):
+    def runErrorSimulation(sampleSize=10000):
         nSquare = 0
         nQCircle = 0
         
-        nVals = []
-        piEsts = []
-        errorRates = []
+        nVals = queue.Queue(maxsize=sampleSize)
+        piEsts = queue.Queue(maxsize=sampleSize)
+        errorRates = queue.Queue(maxsize=sampleSize)
         piEstFinal = 0
         errorRateFinal = 0
         
@@ -60,59 +63,73 @@ class EstPi:
         estPiSubplotAx.set_xlabel("sample size (n)")
         estPiSubplotAx.set_ylabel('Estimated Value of Pi')
         estPiSubplotAx.axhline(y=math.pi, color="red")
-        estPiSubplotAx.plot(nVals, piEsts, '-', linewidth=1)
+        estPiSubplotAx.plot(list(nVals.queue), list(piEsts.queue), '-', linewidth=1)
         plt.grid()
         
         errorRateSubplotAx = fig.add_subplot(2, 1, 2)
         errorRateSubplotAx.set_xlabel('sample size (n)')
         errorRateSubplotAx.set_ylabel('Error Rate')
         errorRateSubplotAx.axhline(y=0, color="red")
-        errorRateSubplotAx.plot(nVals, errorRates, '-', linewidth=1)
+        errorRateSubplotAx.plot(list(nVals.queue), list(errorRates.queue), '-', linewidth=1)
         plt.grid()
         
-        def animate(n):
+        # run simulation
+        def generateSamples(threadName):
+            print("generateSamples thread started. threadName: ", threadName)
             nonlocal nSquare, nQCircle, piEstFinal, errorRateFinal
-            #print("estPiSubplotAx.lines: {}, errorRateSubplotAx.lines: {}".format(len(estPiSubplotAx.lines), len(errorRateSubplotAx.lines)))
-            if n > 0:
-                # run simulation
+            for i in range(1, sampleSize+1):
                 x = random.uniform(0,1)
                 y = random.uniform(0,1)
                 rp = math.sqrt(x**2 + y**2)
-                
+                #print("x: {}, y: {}".format(x, y))
                 nSquare += 1
                 if rp <= 1:
                     nQCircle += 1
+                #print("nSquare: {}, nQCircle: {}".format(nSquare, nQCircle))
                 piEst = 4 * nQCircle/nSquare 
                 #print("nSquare: {}, nQCircle: {}, piEst: {}".format(nSquare, nQCircle, piEst))
                 errorRate = abs(piEst - math.pi)/math.pi
                 
-                if n % 10 == 0:
-                    nVals.append(n)
-                    piEsts.append(piEst)
-                    errorRates.append(errorRate)
+                nVals.put(i, block=False)
+                piEsts.put(piEst)
+                errorRates.put(errorRate)
+                print("i={}, piEst={}, errorRate={}".format(i, piEst, errorRate))
+                time.sleep(.001)
+            
+            piEstFinal = list(piEsts.queue)[-1]
+            errorRateFinal = list(errorRates.queue)[-1]
                     
-                    if len(estPiSubplotAx.lines) > 1:
-                        estPiSubplotAx.lines[1].remove()
-                    estPiSubplotAx.plot(nVals, piEsts, '-', linewidth=1, color="blue")
-                    
-                    if len(errorRateSubplotAx.lines) > 1:
-                        errorRateSubplotAx.lines[1].remove()
-                    errorRateSubplotAx.plot(nVals, errorRates, '-', linewidth=1, color="blue")
-                    
-                    plt.draw()
+        
+        def animate(n):
+            nonlocal nVals, piEsts, errorRates
+            #print("estPiSubplotAx.lines: {}, errorRateSubplotAx.lines: {}".format(len(estPiSubplotAx.lines), len(errorRateSubplotAx.lines)))
+            print("animate n={}".format(n))
+            nScaled = n*10
+            if nVals and n % 2 == 0:
+                if len(estPiSubplotAx.lines) > 1:
+                    estPiSubplotAx.lines[1].remove()
+                estPiSubplotAx.plot(list(nVals.queue)[0:nScaled], list(piEsts.queue)[0:nScaled], '-', linewidth=1, color="blue")
+                 
+                if len(errorRateSubplotAx.lines) > 1:
+                    errorRateSubplotAx.lines[1].remove()
+                errorRateSubplotAx.plot(list(nVals.queue)[0:nScaled], list(errorRates.queue)[0:nScaled], '-', linewidth=1, color="blue")
+            
+                plt.draw()
                 
-                if n >= sampleSize:
-                    piEstFinal = piEst
-                    errorRateFinal = errorRate
-             
-        ani = animation.FuncAnimation(fig, animate, interval=1, repeat=False, frames=sampleSize+1)
+            if nScaled >= sampleSize and nVals.qsize() >= sampleSize:
+                print("stopping animation")
+                ani.event_source.stop()
+                
+                # print pi for largest sample size
+                print("pi estimate for {} samples: {}".format(sampleSize, piEstFinal))
+                print("error rate: ", errorRateFinal)
+                
+
+        intvl = 1 # milliseconds
+        ani = animation.FuncAnimation(fig, animate, interval=intvl, repeat=False, frames=None)
+        genSampleThread = threading.Thread(target=generateSamples, args=(1,))    
+        genSampleThread.start()
         plt.show()
-        
-        # print pi for largest sample size
-        print("pi estimate for {} samples: {}".format(sampleSize, piEstFinal))
-        print("error rate: ", errorRateFinal)
-        
-        
 
 #EstPi.test_estimatePi()
 EstPi.runErrorSimulation()
