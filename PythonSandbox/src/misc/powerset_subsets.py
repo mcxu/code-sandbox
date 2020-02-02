@@ -89,8 +89,31 @@ class PS:
     def test2():
         array = [1,2,3,4]
         ps = PS.powersetIterative(array)
-        print("test2: powerset: ", ps)
+        print("test2: powersetIterative: ", ps)
+        
+    """
+    Return all subsets that add up to a given sum.
+    """
+    @staticmethod
+    def subsetSum(array, targetSum):
+        pwrset = [[]]
+        for val in array:
+            for i in range(len(pwrset)):
+                pwrset.append(pwrset[i] + [val])
+        print("pwrset after: ", pwrset)
+        
+        valids = []
+        for ss in pwrset:
+            if sum(ss) == targetSum:
+                valids.append(ss)
+        return valids
+    
+    @staticmethod
+    def test3():
+        array = [2,3,4,5,6]
+        ans = PS.subsetSum(array, int(sum(array)/2))
+        print("test3: subsetSum: ", ans)
                    
 #PS.test1()
-PS.test2()
-
+#PS.test2()
+PS.test3()
