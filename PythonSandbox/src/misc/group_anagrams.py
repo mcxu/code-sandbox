@@ -49,4 +49,29 @@ class Prob:
         output = Prob.groupAnagrams(words)
         print("test1: output: ", output)
 
-Prob.test1()
+    @staticmethod
+    def groupAnagrams2(words):
+        anMap = {}
+        for word in words:
+            sWord = "".join(sorted(word))
+            if sWord in anMap.keys():
+                anMap[sWord].append(word)
+            else:
+                anMap[sWord] = [word]
+        
+        print("anMap: ", anMap)
+        
+        output = []
+        for key in anMap.keys():
+            grp = anMap[key]
+            output.append(grp)
+        return output
+        
+    @staticmethod
+    def test2():
+        words = ["yo", "act", "flop", "tac", "cat", "oy", "olfp"]
+        output = Prob.groupAnagrams2(words)
+        print("test2: output: ", output)
+    
+#Prob.test1()
+Prob.test2()
