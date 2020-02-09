@@ -2,6 +2,7 @@ from utils.number_utils import NumberUtils
 
 class SortingUtils:
     
+    """ Counting Sort """
     @staticmethod
     def countingSort(array):
         # if the array is blank, then return it
@@ -53,6 +54,7 @@ class SortingUtils:
         print("test_countingSort: before sort:", l)
         print("test_countingSort: after sort:", sa)
 
+    """ Merge Sort """
     @staticmethod
     def mergeSort(array):
         if not array or len(array)==1:
@@ -127,6 +129,12 @@ class SortingUtils:
         a = NumberUtils.generateRandomNumbers(0, 10000, 100, allowDuplicates=False)
         s = SortingUtils.mergeSort(a)
         print("sorted: ", s)
+    
+    """ Quick Sort """
+    @staticmethod
+    def quickSort(array):
+        pass
+    
 
 def main():
     #SortingUtils.test_countingSort()

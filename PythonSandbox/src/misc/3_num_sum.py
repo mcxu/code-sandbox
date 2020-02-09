@@ -19,7 +19,6 @@ class TNS:
         validTriplets = []
         arrSorted = sorted(array)
         for i in range(len(arrSorted)-1):
-            print("array: ", array)
             arr = arrSorted[i:]
             print("i= ", i)
             print("arr: ",arr)
@@ -30,7 +29,7 @@ class TNS:
     #p1: pointer to 1st index,  p2: ptr to 2nd index, p3: ptr to 3rd index.
     @staticmethod
     def helper(array, targetSum, validTriplets, i1, i2, i3):
-        
+        print("helper: i1={}, i2={}, i3={}".format(i1,i2,i3))
         n1 = array[i1]; n2 = array[i2]; n3 = array[i3]
         sum = n1 + n2 + n3
         

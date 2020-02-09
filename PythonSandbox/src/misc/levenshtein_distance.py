@@ -16,7 +16,7 @@ class Prob:
     @staticmethod
     def levenshteinDistance(str1, str2):
         # 2d array to store number of ops
-        ops = [[-1 for i in range(len(str1)+1)] for j in range(len(str2)+1)]
+        ops = [[0 for i in range(len(str1)+1)] for j in range(len(str2)+1)]
         print("ops: ", ops)
         
         # populate null row and column (convention from row to column)
