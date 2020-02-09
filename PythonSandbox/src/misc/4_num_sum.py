@@ -36,7 +36,7 @@ class Prob:
             quad = [v1,v2,v3,v4]
             if quad not in quads:
                 quads.append([v1,v2,v3,v4])
-            print("quads updated: ", quads)
+                print("quads updated: ", quads)
         
         if arraySectionSum > target:
             print("A")
@@ -44,7 +44,7 @@ class Prob:
         else:
             print("B")
             Prob.helper(arraySection, target, quads, i1, i2, i3+1, i4)
-            Prob.helper(arraySection, target, quads, i1, i2+1, i3+1, i4)
+            Prob.helper(arraySection, target, quads, i1, i2+1, i3, i4)
 
     @staticmethod
     def test1():
