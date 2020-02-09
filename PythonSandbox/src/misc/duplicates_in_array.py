@@ -2,6 +2,7 @@
 Find 1st duplicate value in list.
 Find all values that have duplicates in list.
 Find all values that are duplicated n times.
+First non-repeating character.
 '''
 
 class Prob:
@@ -70,8 +71,28 @@ class Prob:
             print("case: {}, n: {}".format(case,n))
             fd = Prob.findNduplicates(case, n)
             print("fd: ", fd)
+    
+    @staticmethod
+    def find1stNonRepeatingNum(array):
+        counts = [0] * (max(array)+1)
+        for i in range(len(array)):
+            val = array[i]
+            counts[val] += 1
+        for i in range(len(counts)):
+            count = counts[i]
+            if count == 1:
+                return i
+        return -1
+    
+    @staticmethod
+    def test4():
+        a1 = [1,2,3,4,8,3,4,8,1,2,5]
+        chr = Prob.find1stNonRepeatingNum(a1)
+        print("test4: chr: ", chr)
         
 #Prob.test1()
 #Prob.test2()
-Prob.test3()
+#Prob.test3()
+Prob.test4()
+
 
