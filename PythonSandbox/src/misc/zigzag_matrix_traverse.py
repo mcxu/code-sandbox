@@ -15,17 +15,16 @@ Sample output: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
 class Prob:
     
     """
-    This one only works strictly with square (nxn) matrices!
     Time complexity: O(n^2), where n is a dimension of the matrix.
     Space complexity: O(n^2), where n is a dimension of the matrix. traversed stores n^2 values.
     """
     @staticmethod
     def zigzagTraverse(array):
-        traversed = [array[0][0]]
-        i = 0
-        y = 1
+        traversed = []
+        i = 0 # not needed, just to count
+        y = 0
         x = 0
-        direction = True # True = going right up, False = going left down
+        direction = False # True = going right up, False = going left down
         while 0 <= y < len(array) and 0 <= x < len(array[0]):
             currVal = array[y][x]
             print("i: {}, y: {}, x: {}, currVal: {}, direction: {}".format(i, y, x, currVal, direction))
@@ -79,6 +78,8 @@ class Prob:
     def test1():
 #         array = [[1]]
 #         array = [[1,2,3,4,5]]
+#         array = [1, 3, 4, 7, 8], [2, 5, 6, 9, 10]
+#         array = [[1, 3], [2, 4], [5, 7], [6, 8], [9, 10]]
 #         array= [[1,3],[2,4]]
 #         array = [[1,3,4,10],
 #                  [2,5,9,11],
