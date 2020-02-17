@@ -15,8 +15,9 @@ Sample output: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
 class Prob:
     
     """
-    Time complexity: O(n^2), where n is a dimension of the matrix.
-    Space complexity: O(n^2), where n is a dimension of the matrix. traversed stores n^2 values.
+    This works for generalized matrix dimensions (n rows x m columns)
+    Time complexity: O(n*m), where n,m are dimensions of the matrix.
+    Space complexity: O(n*m), need to store n*m traversed values.
     """
     @staticmethod
     def zigzagTraverse(array):
