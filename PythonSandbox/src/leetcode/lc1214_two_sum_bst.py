@@ -29,8 +29,8 @@ class LC1214_TwoSumBSTs:
         if root == None:
             return
         self.helper1(root.left, s)
-        print("helper1: val:", root.val)
-        s.add(root.val)
+        print("helper1: value:", root.value)
+        s.add(root.value)
         self.helper1(root.right, s)
     
     # do in-order traversal on 2nd BST, while comparing each element
@@ -43,8 +43,8 @@ class LC1214_TwoSumBSTs:
             return True
         
         # evaluation logic
-        print("helper2: val: {}, target: {}".format(root.val, target))
-        d = target - root.val # difference that needs to be found in l1
+        print("helper2: val: {}, target: {}".format(root.value, target))
+        d = target - root.value # difference that needs to be found in l1
         if d > 0 and d in s:
             print("    d={}, s={}".format(d, s))
             return True
