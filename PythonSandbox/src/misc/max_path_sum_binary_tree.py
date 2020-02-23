@@ -22,7 +22,13 @@ class BTNode():
         self.right = None
 
 class Prob:
-    
+    '''
+    Time complexity: O(n), n=number of nodes, since traversal covers all n nodes.
+    Space complexity: O(log(n)), or that it's proportional to the depth of the tree.
+        If we have a relatively balanced tree, then O(log(n)) is an average.
+        If we have a very unbalanced tree (worst case), like a linked list, 
+        then space complexity is O(n), since there will be n calls on the recursive call stack.
+    '''
     @staticmethod
     def maxPathSum(tree):
         # The var for storing the max path sum. This begins with -inf to ensure the algorithm works
