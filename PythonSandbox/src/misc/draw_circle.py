@@ -35,7 +35,7 @@ class CircleDraw:
         
     def drawPoint(self, x, y):
         #print("DEBUG: plotting point: [{}, {}]".format(x,y))
-        self.circleSubplotAx.scatter(x,y, s=1)
+        self.circleSubplotAx.scatter(x,y, s=2)
         plt.draw()
     
     def test_drawCircle(self):
