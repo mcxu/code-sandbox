@@ -1,5 +1,5 @@
 '''
-Kadane's Algorithm
+Kadane's Algorithm (max sum subarray)
 Given input array of integers, return max sum from the subarray 
 that consists only of adjacent values from the input array.
 
@@ -72,8 +72,8 @@ class KD:
         ans = KD.kadanesAlgorithm(array)
         print("test3 ans: ", ans)
         
-#KD.test1()
+KD.test1()
 #KD.test2() 
-KD.test3()      
+#KD.test3()      
 
     
