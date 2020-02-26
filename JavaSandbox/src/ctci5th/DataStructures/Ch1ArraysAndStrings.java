@@ -432,8 +432,8 @@ public class Ch1ArraysAndStrings
         //ch1.testQ1p3();
         //ch1.testQ1p4();
         //ch1.testQ1p5();
-        //ch1.testQ1p6();
-        ch1.testQ1p7();
+        ch1.testQ1p6();
+        //ch1.testQ1p7();
     }
 
 }
