@@ -28,14 +28,23 @@ class DCP2():
             # append prod to output
             output.append(prod)
         return output
-
+    
+    def eval2(self, a):
+        maxProd = a[0]
+        for i in range(1, len(a)):
+            maxProd = maxProd * a[i]
+        
+        out = []
+        for i in range(len(a)):
+            out.append(int(maxProd/a[i]))
+        return out
 
 if __name__ == "__main__":
     p2 = DCP2()
     a = [1,2,3,4,5]
-    out1 = p2.eval(a)
+    out1 = p2.eval2(a)
     print("out1: {}".format(out1))
     
     b = [3,2,1]
-    out2 = p2.eval(b)
+    out2 = p2.eval2(b)
     print("out2: {}".format(out2))
