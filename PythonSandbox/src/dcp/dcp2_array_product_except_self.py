@@ -9,7 +9,8 @@ Follow-up: what if you can't use division?
 '''
 
 class DCP2():
-    ''' eval:
+    ''' 
+    eval
     Time complexity: O(n^2) where n:num values in a. Because of nested for loops.
     Space complexity: O(n), since the output stores up to n products.
     '''
@@ -32,7 +33,8 @@ class DCP2():
             output.append(prod)
         return output
     
-    ''' eval2: using division
+    ''' 
+    eval2: using division
     Time complexity: O(n), where n~len(a). Because the 2 sequential for loops traverse at most n elements.
     Space complexity: O(n), because out stores at most n products.
     '''
@@ -46,17 +48,18 @@ class DCP2():
             out.append(int(maxProd/a[i]))
         return out
     
-    ''' eval3: can't use division, solve in O(n). (https://www.youtube.com/watch?v=khTiTSZ5QZY)
+    ''' 
+    eval3: can't use division, solve in O(n). (https://www.youtube.com/watch?v=khTiTSZ5QZY)
     Time complexity: O(n): 4*n iterations: 2*n iters in for loop to populate leftProds and rightProds.
         2*n iters for return for loop with zip(leftProds,rightProds).
-    Space complexity: 2*n total values stored in leftProds and rightProds
+    Space complexity: O(n): 2*n total values stored in leftProds and rightProds
     '''
     def eval3(self, a):
         leftProds = [1]
         rightProds = [1]
         
-        # make a separate array of products to the left of a value in the input array 
-        # and a separate array of products to to the right of a value in the input array.
+        # make a separate array of products to the left and including value in the input array up to (length-1)th value
+        # and a separate array of products to to the right and including value in the input array down to (1)th value
         # If there is no value to the left or right, then value in the aux arrays is 1.
         for i in range(0, len(a)-1):
             leftProds.append(leftProds[-1]*a[i])
@@ -64,13 +67,31 @@ class DCP2():
         print("leftProds populated: ", leftProds)
         print("rightProds populated: ", rightProds)
         return [i*j for i,j in zip(leftProds, rightProds)]
+    
+    ''' 
+    eval4: Solve this in O(n) time, O(1) space. The output array does not count as extra space.
+    '''
+    def eval4(self, a):
+        prods = [1] # output array
+         
+        # make a separate array of products to the left and including value in the input array up to (length-1)th value
+        # If there is no value to the left, then value in the auxilary array is 1.
+        for i in range(0, len(a)-1):
+            prods.append(prods[-1]*a[i])
+ 
+        latestProduct = 1
+        for i in range(len(a)-1, -1, -1):
+            prods[i] *= latestProduct
+            latestProduct *= a[i]
+            
+        return prods
 
 if __name__ == "__main__":
     p2 = DCP2()
     a = [1,2,3,4,5]
-    out1 = p2.eval3(a)
+    out1 = p2.eval4(a)
     print("out1: {}".format(out1))
     
-    b = [3,2,1]
-    out2 = p2.eval3(b)
-    print("out2: {}".format(out2))
+#     b = [3,2,1]
+#     out2 = p2.eval3(b)
+#     print("out2: {}".format(out2))
