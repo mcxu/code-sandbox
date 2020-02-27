@@ -349,8 +349,8 @@ public class Ch1ArraysAndStrings
         System.out.println("before rotate:");
         AlgUtils.printMatrix(matrix2);
         String[][] out1 = rotateSqMatrix90DegCCW(matrix2); //point left
-        out1 = rotateSqMatrix90DegCCW(out1); //point down
-        out1 = rotateSqMatrix90DegCCW(out1); //point right
+//        out1 = rotateSqMatrix90DegCCW(out1); //point down
+//        out1 = rotateSqMatrix90DegCCW(out1); //point right
         System.out.print("end result:\n");
         AlgUtils.printMatrix(out1);
     }

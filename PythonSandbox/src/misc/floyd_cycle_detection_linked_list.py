@@ -2,13 +2,13 @@
 Floyd's Cycle Detection Algorithm (Tortoise and Hare Algorithm)
 
 Version 1: Given linked list, return true if cycle exists, false otherwise.
-
 Version 2: Given linked list, if cycle exists, break the cycle, then 
     return the node value where the cycle begins. If the LL doesn't have a cycle, 
     then return None
     
 Walkthrough: https://www.youtube.com/watch?v=zbozWoMgKW0
-Theory: 
+Theory: https://www.youtube.com/watch?v=LUm2ABqAs1w
+
 '''
 import time
 
@@ -28,6 +28,7 @@ class Prob:
         fast = head
         
         while fast != None and fast.next != None:
+            print("fast value: ", fast.value)
             fast = fast.next.next
             slow = slow.next
             if fast == slow:
@@ -87,15 +88,15 @@ class Prob:
     @staticmethod
     def list4():
         head = Node(0)
-        beforeCycle = head.append(1).append(2).append(3).append(4)
-        startCycle = beforeCycle.append(5)
+        beforeCycle = head.append(1).append(2).append(3)
+        startCycle = beforeCycle.append(5).append(6)
         startCycle.next = beforeCycle
         return head
     
     @staticmethod
     def list5():
         head = Node(0)
-        head.append(1).append(2).append(3).append(4).append(5).append(6).append(7).append(8).append(9)
+        head.append(1).append(2).append(3).append(4).append(5).append(6).append(7).append(8)
         return head
     
     @staticmethod
@@ -109,7 +110,8 @@ class Prob:
     @staticmethod
     def test1():
         #head = Prob.list1()
-        head = Prob.list4()
+        #head = Prob.list4()
+        head = Prob.list5()
         ans = Prob.hasCycleV1(head)
         print("test1: ans: ", ans)
     
@@ -118,11 +120,11 @@ class Prob:
         #head = Prob.list1()
         #head = Prob.list2()
         #head = Prob.list3()
-        #head = Prob.list4()
-        head = Prob.list5()
+        head = Prob.list4()
+        #head = Prob.list5()
         ans = Prob.hasCycleV2(head)
         print("test2: ans: ", ans)
         
-#Prob.test1()
-Prob.test2()
+Prob.test1()
+#Prob.test2()
 
