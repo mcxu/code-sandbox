@@ -16,13 +16,16 @@ class KD:
     """
     @staticmethod
     def kadanesAlgorithm(array):
+        print("array: ", array)
         maxEndingHere = array[0]
         maxSoFar = maxEndingHere
         for i in range(1, len(array)):
             val = array[i]
             print("val: ", val)
-            maxEndingHere = max(val, maxEndingHere+val)
             print("maxEndingHere: ", maxEndingHere)
+            print("maxSoFar: ", maxSoFar)
+            maxEndingHere = max(val, maxEndingHere+val)
+            print("maxEndingHere after: ", maxEndingHere)
             if maxEndingHere > maxSoFar:
                 maxSoFar = maxEndingHere
                 print("maxSoFar set to: ", maxSoFar)
