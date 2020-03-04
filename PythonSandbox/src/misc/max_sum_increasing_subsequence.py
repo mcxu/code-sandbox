@@ -11,10 +11,16 @@ Sample output: [110, [10, 20, 30, 50]]
 
 https://www.geeksforgeeks.org/maximum-sum-increasing-subsequence-dp-14/
 https://www.youtube.com/watch?v=99ssGWhLPUE
-Related: misc/longest_increasing_subsequence.py
+Related: misc/max_sum_decreasing_subsequece.py, misc/longest_increasing_subsequence.py 
 '''
 
 class Prob:
+    '''
+    n: number of values in array
+    Time complexity: O(n^2) since there is a nested for loop going from [0,i] of the outer for loop.
+    The while loop to construct the sequence is just O(n).
+    Space complexity: O(n) since there are 2 auxiliary arrays to store max sum, and indices, for subproblems.
+    '''
     @staticmethod
     def maxSumIncreasingSubsequence(array):
         maxSumUpToVal = [n for n in array]
