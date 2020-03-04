@@ -8,41 +8,54 @@ Given array of integers, return an array of length 2 of the following:
 
 Sample input: [10, 70, 20, 30, 50, 11, 30]
 Sample output: [110, [10, 20, 30, 50]]
+
+https://www.geeksforgeeks.org/maximum-sum-increasing-subsequence-dp-14/
+https://www.youtube.com/watch?v=99ssGWhLPUE
+Related: misc/longest_increasing_subsequence.py
 '''
+
 class Prob:
     @staticmethod
     def maxSumIncreasingSubsequence(array):
         maxSumUpToVal = [n for n in array]
-        maxSumValues = []
-        maxSumOverall = -float('inf')
-        maxValuesOverall = []
+        maxSumIndices = [None for n in array] # store the index of the latest upToVal that fits criteria:
+        # upToVal < inputVal AND inputVal + maxSumUpToVal at the upToVal's index > maxSumUpToVal at the inputVal's index.
+        maxSumIndex = 0 # index for keeping track of where the index of the max sum is in maxSumUpToVal
         
         for i in range(len(array)):
             print("---")
             print("array: ", array)
+            print("maxSumUpToVal before: ", maxSumUpToVal)
+            print("maxSumIndices before: ", maxSumIndices)
             inputVal = array[i]
-            maxSumValues.clear()
             
             for j in range(0, i):
-                print("ival={}, jval={}".format(array[i],array[j]))
                 upToVal = array[j]
+                print("inputVal={}, upToVal={}".format(array[i], upToVal))
                 if upToVal < inputVal and inputVal + maxSumUpToVal[j] > maxSumUpToVal[i]:
-                    print("A")
                     maxSumUpToVal[i] = inputVal + maxSumUpToVal[j]
-                    maxSumValues.append(upToVal)
-            
-            maxSumValues.append(inputVal)
-            
-            if maxSumUpToVal[i] > maxSumOverall:
-                print("B. maxSumUpToVal: {}".format(maxSumUpToVal[i]))
-                maxSumOverall = maxSumUpToVal[i]
-                maxValuesOverall = maxSumValues.copy()
-                    
-            print("maxSumUpToVal: ", maxSumUpToVal)
-            print("maxSumValues: ", maxSumValues)
-            print("maxSumOverall: ", maxSumOverall)
-            print("maxValuesOverall: ", maxValuesOverall)
-        return [maxSumOverall, maxValuesOverall]
+                    print("    setting maxSumUpToVal[{}] to {}".format(i, inputVal + maxSumUpToVal[j]))
+                    maxSumIndices[i] = j
+                    print("    setting maxSumIndices[{}] to {}".format(i,j))
+                
+            if maxSumUpToVal[i] > maxSumUpToVal[maxSumIndex]:
+                maxSumIndex = i
+                print("maxSumIndex updated: ", maxSumIndex, "    maxSum is now: ", maxSumUpToVal[maxSumIndex])
+                        
+            print("maxSumUpToVal after: ", maxSumUpToVal)
+            print("maxSumIndices after: ", maxSumIndices)
+            print("maxSumIndex: ", maxSumIndex)
+        
+        # construct actual sequence of values    
+        maxSumValues = []
+        tmpIndex = maxSumIndex
+        while tmpIndex != None:
+            maxSumValues.insert(0, array[tmpIndex])
+            tmpIndex = maxSumIndices[tmpIndex]
+        
+        print("maxSumValues after: ", maxSumValues)
+        print("maxSumIndex after: ", maxSumIndex)
+        return [maxSumUpToVal[maxSumIndex], maxSumValues]
                 
     @staticmethod
     def test1():
@@ -66,12 +79,13 @@ class Prob:
         
     @staticmethod
     def test4():
-        array = [10, 15, 4, 5, 11, 14, 31, 25, 31, 23, 25, 31, 50] # correct: [164, [10, 11, 14, 23, 25, 31, 50]
+        array = [10, 15, 4, 5, 11, 14, 31, 25, 31, 23, 25, 31, 50] 
+        # correct ans: [164, [10, 11, 14, 23, 25, 31, 50]
         ans = Prob.maxSumIncreasingSubsequence(array)
         print("test4: ans: ", ans)
         
         
 #Prob.test1()
 #Prob.test2()
-#Prob.test3()
-Prob.test4()
+Prob.test3()
+#Prob.test4()
