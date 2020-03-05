@@ -37,18 +37,18 @@ class Prob:
             for j in range(0, i):
                 jVal = array[j]
                 
-                if jVal < iVal and longestUpToVal[j]+1 > longestUpToVal[i]:
-                    longestUpToVal[i] = longestUpToVal[j]+1
+                if jVal < iVal:
+                    longestUpToVal[i] = max(longestUpToVal[j]+1, longestUpToVal[i])
                     print("longestUpToVal: ", longestUpToVal)
         
         return max(longestUpToVal)
     
     @staticmethod
     def test1():
-        #array = [3, 10, 2, 1, 20]
+        array = [3, 10, 2, 1, 20]
         #array = [3,2]
         #array = [50, 3, 10, 7, 40, 80]
-        array = [10, 22, 9, 33, 21, 50, 41, 60, 80]
+        #array = [10, 22, 9, 33, 21, 50, 41, 60, 80]
         ans = Prob.longestIncreasingSubsequence(array)
         print("ans: ", ans)
         

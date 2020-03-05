@@ -93,5 +93,5 @@ class Prob:
         
 #Prob.test1()
 #Prob.test2()
-Prob.test3()
-#Prob.test4()
+#Prob.test3()
+Prob.test4()
