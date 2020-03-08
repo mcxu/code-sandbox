@@ -1,4 +1,9 @@
 '''
+Longest decreasing subsequence
+
+Given array of ints, find the longest subsequence that has all values in increasing order.
+Also return the values themselves.
+
 https://www.geeksforgeeks.org/longest-decreasing-subsequence/
 
 Examples:
@@ -17,16 +22,33 @@ class Prob:
         # store longest decreasing subsequence up to a val in the input array.
         longestUpToVal = [1 for _ in array]
         
+        # store index of the last number in the previous longest decreasing subsequence.
+        longestDecIndices = [None for _ in array]
+        
+        # store the index of the longest decreasing subsequence count so far
+        longestSeqInd = 0
+        
         for i in range(len(array)):
             inputVal = array[i]
             
             for j in range(0,i):
                 upToVal = array[j]
                 
-                if upToVal > inputVal:
-                    longestUpToVal[i] = max(longestUpToVal[j]+1, longestUpToVal[i])
+                if upToVal > inputVal and longestUpToVal[j]+1 > longestUpToVal[i]:
+                    longestUpToVal[i] = longestUpToVal[j]+1
+                    longestDecIndices[i] = j
                 print("longestUpToVal: ", longestUpToVal)
-        return max(longestUpToVal)
+            
+            if longestUpToVal[i] > longestUpToVal[longestSeqInd]:
+                longestSeqInd = i
+        
+        longestSubseq = []
+        tmpInd = longestSeqInd
+        while tmpInd != None:
+            longestSubseq.insert(0, array[tmpInd])
+            tmpInd = longestDecIndices[tmpInd]
+            
+        return [max(longestUpToVal), longestSubseq]
     
     @staticmethod
     def test1():

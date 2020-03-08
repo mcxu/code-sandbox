@@ -2,6 +2,7 @@
 Longest Increasing Subsequence
 
 Given array of ints, find the longest subsequence that has all values in increasing order.
+Also return the values themselves.
 
 Examples:
 Input  : arr[] = {3, 10, 2, 1, 20}
@@ -31,17 +32,35 @@ class Prob:
         # Init to all 1 because the longest increasing subsequence of a val by itself is 1.
         longestUpToVal = [1 for _ in array] 
         
+        #store the index of the last number of the previous longest increasing subsequence
+        longestIncIndices = [None for _ in array] 
+        
+        # store the index of the longest increasing subsequence count so far
+        longestSeqInd = 0
+        
         for i in range(len(array)):
             iVal = array[i]
             
             for j in range(0, i):
                 jVal = array[j]
                 
-                if jVal < iVal:
-                    longestUpToVal[i] = max(longestUpToVal[j]+1, longestUpToVal[i])
+                if jVal < iVal and longestUpToVal[j]+1 > longestUpToVal[i]:
+                    longestUpToVal[i] = longestUpToVal[j]+1
                     print("longestUpToVal: ", longestUpToVal)
-        
-        return max(longestUpToVal)
+                    longestIncIndices[i] = j
+                    print("longestIncIndices: ", longestIncIndices)
+            
+            if longestUpToVal[i] > longestUpToVal[longestSeqInd]:
+                longestSeqInd = i
+                print("longestSeqInd: ", longestSeqInd)
+            
+        longestSubseq = []
+        tmpIndex = longestSeqInd
+        while tmpIndex != None:
+            longestSubseq.insert(0, array[tmpIndex])
+            tmpIndex = longestIncIndices[tmpIndex]
+        print("longestSubseq: ", longestSubseq)
+        return [max(longestUpToVal), longestSubseq]
     
     @staticmethod
     def test1():
