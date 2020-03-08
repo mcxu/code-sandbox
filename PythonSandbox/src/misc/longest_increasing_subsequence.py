@@ -32,7 +32,7 @@ class Prob:
         # Init to all 1 because the longest increasing subsequence of a val by itself is 1.
         longestUpToVal = [1 for _ in array] 
         
-        #store the index of the last number of the previous longest increasing subsequence
+        #store the index of the previous number in the longest increasing subsequence
         longestIncIndices = [None for _ in array] 
         
         # store the index of the longest increasing subsequence count so far

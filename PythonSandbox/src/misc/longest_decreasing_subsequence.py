@@ -4,8 +4,6 @@ Longest decreasing subsequence
 Given array of ints, find the longest subsequence that has all values in increasing order.
 Also return the values themselves.
 
-https://www.geeksforgeeks.org/longest-decreasing-subsequence/
-
 Examples:
 Input: arr[] = [15, 27, 14, 38, 63, 55, 46, 65, 85]
 Output: 3
@@ -14,6 +12,8 @@ Explanation: The longest decreasing sub sequence is [63, 55, 46]
 Input: arr[] = [50, 3, 10, 7, 40, 80]
 Output: 3
 Explanation: The longest decreasing subsequence is [50, 10, 7]
+
+https://www.geeksforgeeks.org/longest-decreasing-subsequence/
 '''
 
 class Prob:
@@ -22,7 +22,7 @@ class Prob:
         # store longest decreasing subsequence up to a val in the input array.
         longestUpToVal = [1 for _ in array]
         
-        # store index of the last number in the previous longest decreasing subsequence.
+        # store index of the previous number in longest decreasing subsequence.
         longestDecIndices = [None for _ in array]
         
         # store the index of the longest decreasing subsequence count so far

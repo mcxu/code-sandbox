@@ -24,8 +24,10 @@ class Prob:
     @staticmethod
     def maxSumIncreasingSubsequence(array):
         maxSumUpToVal = [n for n in array]
-        maxSumIndices = [None for n in array] # store the index of the latest upToVal that fits criteria:
-        # upToVal < inputVal AND inputVal + maxSumUpToVal at the upToVal's index > maxSumUpToVal at the inputVal's index.
+        
+        # at some index i in this array, store the index of the previous array value
+        # in the max sum increasing subsequence
+        maxSumIndices = [None for n in array]
         maxSumIndex = 0 # index for keeping track of where the index of the max sum is in maxSumUpToVal
         
         for i in range(len(array)):
