@@ -30,8 +30,7 @@ class Prob:
             # if the LSB (rightmost bit) is 0, then binStr is Even
             if binStr[-1] == '0':
                 # right shift: divide by 2
-                binNum = int(binStr, 2)
-                binStr = bin(binNum >> 1) 
+                binStr = binStr[0:-1]
             # if the LSB is 1 then binStr is Odd
             elif binStr[-1] == '1':
                 # substract 1
