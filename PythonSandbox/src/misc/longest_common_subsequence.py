@@ -59,6 +59,12 @@ class Prob:
 
     '''
     This version uses pointers to point to the previous LCS solution for some given char combination.
+    Let l1=len(str1), l2=len(str2)
+    Time complexity: O(l1*l2) for nested y and x for loops. 
+        Within nested for loops 2*O(1) to update lcsLengthMatrix and pointerMatrix, respectively.
+        Backtrack takes max(l1,l2) time.
+        Total time complexity = O(l1*l2) * 2O(1) + O(max(l1,l2)) = 2*O(l1*l2) = O(l1*l2)
+    Space complexity: lcsLengthMatrix = O(l1*l2), pointerMatrix = O(l1*l2), both is still O(l1*l2).
     '''
     @staticmethod
     def longestCommonSubsequenceUsingPointer(str1, str2):
@@ -143,8 +149,13 @@ class Prob:
         str2 = "AAAAAAAAAAAAAAAAAA"
         lcs = alg(str1, str2)
         print("test4: lcs: ", lcs)
-    
 
+    @staticmethod
+    def test5(alg):
+        str1 = "ABC"
+        str2 = "ABCDEFG"
+        lcs = alg(str1, str2)
+        print("test5: lcs: ", lcs)
         
 def main():
     alg1 = Prob.longestCommonSubsequence
@@ -153,7 +164,8 @@ def main():
     #Prob.test1(alg2)
     #Prob.test2(alg2)
     #Prob.test3(alg2)
-    Prob.test4(alg2)
+    #Prob.test4(alg2)
+    Prob.test5(alg2)
 
 main()
 
