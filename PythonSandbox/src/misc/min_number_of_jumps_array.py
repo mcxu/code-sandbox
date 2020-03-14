@@ -42,11 +42,24 @@ class Prob:
     
     '''
     Dynamic programming solution
+    Let n = len(array)
+    Time complexity: O(n^2) because of the nested for loops
+    Space complexity: O(n) because of the aux array that stores n solutions.
     '''
     @staticmethod
     def minNumberOfJumpsDP(array):
-        pass
-    
+        # store min number of jumps up to the current value in the array
+        aux = [float('inf') for _ in array] # assume infinite jumps initially
+        aux[0] = 0 # there are 0 jumps for the 0th number to itself
+        for i in range(1, len(array)):
+            for j in range(0, i):
+                jVal = array[j]
+                if i <= j + jVal: # as long as i is within reach of j + its value
+                    aux[i] = min(aux[j]+1, aux[i]) # take the minimum number of jumps up to ith value
+        
+        return aux[-1]
+            
+                    
     @staticmethod
     def test1(alg):
         array = [3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3]
@@ -65,7 +78,7 @@ def main():
     alg1 = Prob.minNumberOfJumps
     alg2 = Prob.minNumberOfJumpsDP
     
-    Prob.test1(alg2)
-    #Prob.test2(alg1)
+    #Prob.test1(alg2)
+    Prob.test2(alg2)
     
 main()
