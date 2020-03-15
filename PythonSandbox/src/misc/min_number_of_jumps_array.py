@@ -52,11 +52,14 @@ class Prob:
         aux = [float('inf') for _ in array] # assume infinite jumps initially
         aux[0] = 0 # there are 0 jumps for the 0th number to itself
         for i in range(1, len(array)):
+            print("i={}, iVal={}".format(i, array[i]))
             for j in range(0, i):
                 jVal = array[j]
+                print("    j={}, jVal={}".format(j, jVal))
                 if i <= j + jVal: # as long as i is within reach of j + its value
+                    print("        aux[j]+1={}, aux[i]={}".format(aux[j]+1, aux[i]))
                     aux[i] = min(aux[j]+1, aux[i]) # take the minimum number of jumps up to ith value
-        
+                print("        aux now:", aux)
         return aux[-1]
             
                     
@@ -78,7 +81,7 @@ def main():
     alg1 = Prob.minNumberOfJumps
     alg2 = Prob.minNumberOfJumpsDP
     
-    #Prob.test1(alg2)
-    Prob.test2(alg2)
+    Prob.test1(alg2)
+    #Prob.test2(alg2)
     
 main()
