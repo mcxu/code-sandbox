@@ -11,7 +11,17 @@ Sample output: 48
 
 class Prob:
     '''
-    Recursive brute force
+    Recursive brute force approach.
+    Let n = len(heights)
+    Time complexity: O(n), since the left and right recursive helpers together iterate through n elements.
+        The waterArea() function first finds the index of the max value, then calls the recursive helpers for 
+        the subarrays to the left and right of that index. For left helper, every time it finds the index i of the 
+        max element in the subarray, it iterates from i+1 to j, where j is the index of the LAST maximum.
+        The right helper has the same logic, but the iteration is done in reverse: iterate from ith index of the current
+        max value DOWN TO j+1, where j is the index of the LAST maximum. So if the MAXINDROOT is near the middle, then
+        each helper will iterate through n/2 elements. If the MAXINDROOT is near one of the ends, then one helper just 
+        finishes right off the bat while the other iterates through n elements.
+    Space complexity: O(n), since waterAmts stores n elements
     '''
     @staticmethod
     def waterArea(heights):
@@ -26,7 +36,8 @@ class Prob:
         return sum(waterAmts)
         
     '''
-    left = True means this is for looking to the left subarray, False means to the right subarray
+    left = True     means this is for looking to the left subarray, 
+    left = False     means to the right subarray
     '''
     @staticmethod
     def waterAreaHelper(heights, maxInd, waterAmts, left):
