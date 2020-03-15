@@ -13,7 +13,8 @@ class Prob:
     '''
     Recursive brute force approach.
     Let n = len(heights)
-    Time complexity: O(n), since the left and right recursive helpers together iterate through n elements.
+    Time complexity: O(n^2), since the left and right recursive helpers together iterate through n elements,
+        and searching for the max element in the subarray is an O(n) operation as well, so O(n^2).
         The waterArea() function first finds the index of the max value, then calls the recursive helpers for 
         the subarrays to the left and right of that index. For left helper, every time it finds the index i of the 
         max element in the subarray, it iterates from i+1 to j, where j is the index of the LAST maximum.
