@@ -71,9 +71,16 @@ class Prob:
             print("maxHeightRight: ", maxHeightRight)
             maxIndRight = heightsRight.index(maxHeightRight)
             print("maxIndRight: ", maxIndRight)
-            for i in range(maxIndRight+maxInd, maxInd, -1):
+            for i in range(maxIndRight+maxInd+1, maxInd, -1):
                 waterAmts[i] = maxHeightRight - heights[i]
             Prob.waterAreaHelper(heights, maxIndRight+maxInd+1, waterAmts, left=False)
+    
+    '''
+    Dynamic programming
+    '''
+    @staticmethod
+    def waterAreaDP(heights):
+        pass
     
     @staticmethod
     def test1(alg):
@@ -101,8 +108,8 @@ class Prob:
 def main():
     alg1 = Prob.waterArea
     
-    #Prob.test1(alg1)
+    Prob.test1(alg1)
     #Prob.test2(alg1)
-    Prob.test3(alg1)
+    #Prob.test3(alg1)
 
 main()
