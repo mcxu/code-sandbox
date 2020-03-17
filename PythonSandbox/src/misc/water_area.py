@@ -71,7 +71,7 @@ class Prob:
             print("maxHeightRight: ", maxHeightRight)
             maxIndRight = heightsRight.index(maxHeightRight)
             print("maxIndRight: ", maxIndRight)
-            for i in range(maxIndRight+maxInd+1, maxInd, -1):
+            for i in range(maxIndRight+maxInd, maxInd, -1):
                 waterAmts[i] = maxHeightRight - heights[i]
             Prob.waterAreaHelper(heights, maxIndRight+maxInd+1, waterAmts, left=False)
     

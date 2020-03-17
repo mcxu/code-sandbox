@@ -8,6 +8,7 @@ I would like you to implement drawCircle(int a, int b, int r) which should draw 
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
 class CircleDraw:
     def __init__(self):
@@ -56,8 +57,8 @@ class CircleDraw:
                 self.drawPoint(-x+2*a, y) # quadrant 2
                 self.drawPoint(-x+2*a, -y+2*b) # quadrant 3
                 self.drawPoint(x, -y+2*b) # quadrant 4
-                plt.pause(.0001)
-        
+                plt.pause(.00001)
+                
         plt.ioff()
         plt.show()
     
