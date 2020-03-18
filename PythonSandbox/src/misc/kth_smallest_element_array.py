@@ -50,14 +50,14 @@ class Prob:
         array = [7, 10, 4, 3, 20, 15]
         k = 3
         ans = Prob.kthSmLg(array, k, smallest=True)
-        print("test1 ans: ", ans)
+        print("test1 k={}, ans: {}".format(k, ans))
 
     @staticmethod
     def test2():
         array = [7, 10, 7, 3, 20, 15]
         k = 6
         ans = Prob.kthSmLg(array, k, smallest=False)
-        print("test1 ans: ", ans)
+        print("test2 k={}, ans: {}".format(k, ans))
 
 #Prob.test1()
 Prob.test2()

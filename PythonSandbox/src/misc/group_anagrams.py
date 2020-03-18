@@ -20,7 +20,7 @@ class Prob:
                 else:
                     countMap[char] = 1
             countMapList.append(countMap)
-        
+        print("countMapList: ", countMapList)
         anMap = {} # store lists of anagrams with format word:[anagram,...]
         # check for anagrams using countMapList
         i = 0
@@ -30,7 +30,8 @@ class Prob:
             while j < len(words):
                 if countMapList[j] == countMapList[i]:
                     anMap[words[i]].append(words[j])
-                    words.pop(j); countMapList.pop(j)
+                    words.pop(j)
+                    countMapList.pop(j)
                     j -= 1
                 j += 1
             i += 1
@@ -73,5 +74,5 @@ class Prob:
         output = Prob.groupAnagrams2(words)
         print("test2: output: ", output)
     
-#Prob.test1()
-Prob.test2()
+Prob.test1()
+#Prob.test2()
