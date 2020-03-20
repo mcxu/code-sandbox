@@ -1,7 +1,6 @@
 """
 Depth First Search
 """
-import time 
 
 class Node:
     def __init__(self, name):
@@ -59,7 +58,7 @@ class Node:
     def depthFirstSearchRecursive(self, array):
         array.append(self.name)
         for childNode in self.children:
-            #print("childNode:", childNode.name)
+            print("childNode:", childNode.name)
             childNode.depthFirstSearchRecursive(array)
         return array
 
@@ -140,9 +139,9 @@ def main():
     #test.testTree1()
     #test.test_depthFirstSearchIterative_prompt()
     #test.test_depthFirstSearchIterative2()
-    test.test_depthFirstSearchIterative5()
+    #test.test_depthFirstSearchIterative5()
     #test.test_depthFirstSearchRecursive_prompt()
-    #test.test_depthFirstSearchRecursive5()
+    test.test_depthFirstSearchRecursive5()
 
 if __name__ == "__main__":
     main()

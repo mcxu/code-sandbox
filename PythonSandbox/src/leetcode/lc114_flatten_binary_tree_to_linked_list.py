@@ -23,9 +23,6 @@ class Solution:
         if root == None:
             return None
         
-        self.flatten(root.left)
-        self.flatten(root.right)
-        
         if root.left != None:
             tmpRight = root.right
             root.right = root.left
@@ -36,6 +33,9 @@ class Solution:
                 tmpLeft = tmpLeft.right
             
             tmpLeft.right = tmpRight
+        
+        self.flatten(root.left)
+        self.flatten(root.right)
         
         return None
 
@@ -71,7 +71,7 @@ class Solution:
         utils.printBT(rf)
 
     def test2(self):
-        root = self.tree3()
+        root = self.tree2()
         self.flatten(root)
         rf = root
         utils.printBT(rf)
