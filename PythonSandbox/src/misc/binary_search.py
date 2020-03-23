@@ -7,9 +7,12 @@ Sample input: [0, 1, 21, 33, 45, 45, 61, 71, 72, 73], 33
 Sample output: 3
 """
 
-import time
-
 class BinarySearch:
+    '''
+    Let n = number of elements in array
+    Time complexity: O(log_2(n)), since each iteration involves searching 1/2 the previous range.
+    Space complexity: O(1), since the additional space required does not scale up with num elements.
+    '''
     def binarySearch(self, array, target):
         li = 0 # lower index
         ui = len(array)-1 # upper index
