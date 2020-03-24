@@ -36,10 +36,7 @@ class BinaryTreeUtils:
             return 0
         ld = BinaryTreeUtils.treeHeight(tree.left)
         rd = BinaryTreeUtils.treeHeight(tree.right) 
-        if rd > ld:
-            return rd+1
-        else:
-            return ld+1
+        return max(ld+1, rd+1)
 
 
     def test1(self):
@@ -50,6 +47,7 @@ class BinaryTreeUtils:
         tree.right = TreeNode(5)
         tree.right.left = TreeNode(4)
         tree.right.right= TreeNode(8)
+        tree.right.right.left = TreeNode(12)
 
         d = BinaryTreeUtils.treeHeight(tree)
         print("depth: " + str(d))
