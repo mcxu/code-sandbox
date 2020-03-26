@@ -6,7 +6,7 @@ Sample input: "([])(){}(())()()"
 Sample output: True
 '''
 
-class BB(object):
+class Prob:
     
     """
     Time complexity: O(n), n=len(string). Since for loop iterates through all chars.
@@ -53,7 +53,41 @@ class BB(object):
         testArray = [s5, s6]
         for s in testArray:
             print("------------- test1: s: ", s)
-            res = BB.balancedBrackets(s)
+            res = Prob.balancedBrackets(s)
             print("test1 result: ", res)
-
-BB.test1()
+    
+    '''
+    Given string '><<><', edit the string so that it is balanced: <><<><>>
+    '''
+    @staticmethod
+    def balanceString(s):
+        stack = []
+        for i in range(len(s)):
+            sym = s[i]
+            print("sym: ", sym)
+            
+            if not stack:
+                stack.append(sym)
+            else:
+                if stack[-1] == '<' and sym == '>':
+                    stack.pop()
+                else:
+                    stack.append(sym)
+        print("stack: ", stack)
+        
+        for sym in stack:
+            if sym == '>':
+                s = '<'+s
+            if sym == '<':
+                s = s + '>'
+        return s
+    
+    @staticmethod
+    def test2():
+        #s = '><<><'
+        s = '>>>>>>>>>>>>>'
+        balStr = Prob.balanceString(s)
+        print("test2 balStr: ", balStr)
+        
+#Prob.test1()
+Prob.test2()
