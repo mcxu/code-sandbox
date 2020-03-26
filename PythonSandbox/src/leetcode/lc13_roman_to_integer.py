@@ -13,6 +13,13 @@ M             1000
 '''
 
 class Solution:
+    '''
+    Trick: go backwards instead of forwards.
+    Let n = len(s)
+    Time complexity: O(n), since n elements are iterated through.
+    Space complexity: O(1), since tot stores the sum so far during the iteration of each char.
+        (Assuming that rti map can be ignored, since that is necessary for this algorithm to work.)
+    '''
     def romanToInt(self, s: str) -> int:
         rti = {
             'I' : 1,
