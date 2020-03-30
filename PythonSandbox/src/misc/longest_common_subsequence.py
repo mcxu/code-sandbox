@@ -76,8 +76,8 @@ class Prob:
         Stores the pointers that point back to the latest solution up to the current coordinate
         The key below makes a path to the LCS for the combo of the last characters in str1 and str2.
         \    (put this in the cell when a match is found, means to examine further down both strings)
-        --   (put this in the cell when for some cell [y,x], cell to left >= cell above, means to move to the next char in str1 (y-axis)
-        |    (put this in the cell when for some cell [y,x], cell above > cell to left, means to move the next char in str2 (x-axis)
+        --   (put this in the cell when for some cell [y,x], cell to left >= cell above, means to move to the next char in str1 (x-axis)
+        |    (put this in the cell when for some cell [y,x], cell above > cell to left, means to move the next char in str2 (y-axis)
         '''
         pointerMatrix = [[None for _ in range(len(str1)+1)] for _ in range(len(str2)+1)]
         
