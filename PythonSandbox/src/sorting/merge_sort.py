@@ -1,37 +1,36 @@
+'''
+Merge Sort
+
+
+'''
+
 from utils.number_utils import NumberUtils
 
 class Prob:
-
-    """ Merge Sort """
     @staticmethod
     def mergeSort(array):
         if not array or len(array)==1:
             return array
         median = int(len(array)/2)
-        l = array[:median]
-        r = array[median:]
-        print("mergeSort: median:{}, l:{}, r:{}".format(median,l,r))
-        sl = Prob.mergeSort(l)
-        sr = Prob.mergeSort(r)
+        left = array[:median]
+        right = array[median:]
+        #print("mergeSort: median:{}, l:{}, r:{}".format(median,left,right))
+        sl = Prob.mergeSort(left)
+        sr = Prob.mergeSort(right)
         return Prob.mergeArrays(sl,sr)
     
     # merge pre-sorted arrays
     @staticmethod
     def mergeArrays(l,r):
-        
-        # check if empty
-        if not l:
-            return l
-        if not r:
-            return r
+        print("merging arrays: l:{}, r:{}".format(l,r))
         
         out = []
         i = 0
         j = 0
         while(i<len(l) and j<len(r)):
             lv = l[i]; rv = r[j]
-            print("=====\ni={}, j={}".format(i,j))
-            print("l:{}, r:{}, lv:{}, rv:{}".format(l,r, lv, rv))
+            #print("=====\ni={}, j={}".format(i,j))
+            #print("l:{}, r:{}, lv:{}, rv:{}".format(l,r, lv, rv))
             
             if lv <= rv:
                 out.append(lv)
@@ -39,18 +38,14 @@ class Prob:
             else:
                 out.append(rv)
                 j += 1
-                
-            print("out: {}".format(out))
         
-        # handle remaining left
-        while(i < len(l)):
-            out.append(l[i])
-            i += 1
-        
-        # handle remaining right
-        while(j < len(r)):
-            out.append(r[j])
-            j += 1
+        if i < len(l):
+            # handle remaining left
+            out += l[i:]
+        elif j < len(r):
+            # handle remaining right
+            out += r[j:]
+            
         return out    
     
     @staticmethod
@@ -83,4 +78,4 @@ class Prob:
 #Prob.test_mergeArrays()
 #Prob.test_mergeSort()
 #Prob.test_mergeSort2()
-Prob.test_mergeSort3()
+#Prob.test_mergeSort3()
