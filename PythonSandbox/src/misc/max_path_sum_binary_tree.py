@@ -83,7 +83,7 @@ class Prob:
                 return 0
             print("tree value: ", tree.value) 
             print("    mps: ", mps)
-             
+            
             # Do postorder traversal; access the root AFTER recursively calling left and right.
             # This is so that for each node, you have the previously computed mps for left and right
             # children, and work your way up. The comparison with 0 is so that if the current
@@ -100,7 +100,7 @@ class Prob:
             # Determine which path up to child + tree.value should be chosen
             mpsUpToCurrNode = max(mpsUpToLeftChild, mpsUpToRightChild) + tree.value
             print("    mpsUpToCurrNode: {} for tree value: {}".format(mpsUpToCurrNode, tree.value))
-             
+            i
             return mpsUpToCurrNode
           
         currPathSum(tree)

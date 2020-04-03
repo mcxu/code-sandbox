@@ -9,46 +9,17 @@ Sample output: 3 (2x1 + 1x5)
 
 class Prob:
     
-    """
-    Initial attempt
-    Complexity
-    Time: 
-        outer for loop: j -> denom(d) iterations: O(d)
-        inner for loop: i -> d, d-1, d-2, d-3, ... iterations: O(d)
-        Total: O(d^2)
-    Space:
-        O(d) for storage array
-    """
     @staticmethod
-    def minNumberOfCoinsForChange(n, denoms):
-        denoms = sorted(denoms) # O(n*log_2(n)) time
-        print("denoms sorted: ", denoms)
+    def minNumOfCoinsForChangeRec(n, denoms):
         
-        # stores results for min number of coins for solution with denoms[i:]
-        # where i -> 0 to len(denoms)
-        numCoinsForDenom = [float("inf")] * len(denoms) # O(d) space
-        
-        for j in range(len(denoms)-1, -1, -1):
-            print("------ j= %s d[j]= %s" % (j, denoms[j]))
-            numCoins = 0
-            nCopy = n
-            for i in range(j, -1, -1):
-                d = denoms[i]
-                print("i= %s, d= %s, n= %s" % (i, d, nCopy))
-                quo = int(nCopy/d)
-                if quo > 0:
-                    numCoins += quo
-                print("    numCoins=", numCoins)
-                nCopy = nCopy%d
-                print("    remainder n= %s" % (nCopy))
+        def helper(n, denoms):
             
-            print("numCoins final: ", numCoins)
-            if nCopy == 0: numCoinsForDenom[j] = numCoins
-            print("numCoinsForDenom: ", numCoinsForDenom)
-        
-        minCoins = min(numCoinsForDenom) # O(n) time
-        if minCoins == float("inf"): return -1
-        else: return minCoins
+            if n < 0:
+                return 0
+            if n == 0:
+                return 1
+            
+            
     
     '''
     Dynamic programming, iterative. Using minWays array to store solns to subproblems.
@@ -57,23 +28,26 @@ class Prob:
     Space complexity: O(n), since mnc stores <= n+1 solns to subproblems.
     '''
     @staticmethod
-    def minNumberOfCoinsForChangeDP(n, denoms):
+    def minNumOfCoinsForChangeDP(n, denoms):
+        denoms = sorted(denoms)
+        
         # init array to store min number of ways
         # Let mnc (min num coins) be an array to store solns to subproblems.)
         mnc = [float("inf") for i in range(n+1)] # O(n) space
         mnc[0] = 0 # if n=0, then there are 0 number of coins needed.
-        print("mnc: ", mnc)
         print("initial min in mnc: ", min(mnc))
 
         for i in range(n+1): # O(n) time
-            print("i=", i)
-            for j in range(len(denoms)): # O(d) time
-                d = denoms[j]
-                print(" j= {}, d= {}".format(j,d))
-                if i >= d:
-                    mnc[i] = min(mnc[i], mnc[i-d] + 1)
-                    print("     mnc: ", mnc)
-        
+            #print("i=", i)
+            for d in range(len(denoms)): # O(d) time
+                denom = denoms[d]
+                #print(" d= {}, denom= {}".format(d,denom))
+                if i >= denom:
+                    mnc[i] = min(mnc[i], mnc[i-denom] + 1)
+                    #print("     mnc: ", mnc)
+                else:
+                    break
+        print("mnc: ", mnc)
         minWaysFinal = mnc[n]
         if minWaysFinal == float("inf"):
             return -1
@@ -118,11 +92,17 @@ class Prob:
         numCoins = alg(n, denoms)
         print("test5: num coins: ", numCoins)
 
+    @staticmethod
+    def test6(alg):
+        n = 6249
+        denoms = [186,419,83,408]
+        numCoins = alg(n, denoms)
+        print("test6: num coins: ", numCoins)
 
-#alg = Prob.minNumberOfCoinsForChange
-alg = Prob.minNumberOfCoinsForChangeDP
+alg = Prob.minNumOfCoinsForChangeDP
 #Prob.test1(alg)
 #Prob.test2(alg)
 #Prob.test3(alg)
-Prob.test4(alg)
+#Prob.test4(alg)
 #Prob.test5(alg)
+Prob.test6(alg)

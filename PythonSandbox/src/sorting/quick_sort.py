@@ -40,13 +40,13 @@ class Prob:
                 j += 1
                 print("j incremented to:", j)
             i += 1
-        
+            
         # return the partition index
         return j-1
             
     @staticmethod
     def swap(array, i, j): # in place
-        print("swap i={} with j={}".format(i,j))
+        print("swap a[{}]={} with a[{}]={}".format(i, array[i], j, array[j]))
         tmp = array[i]
         array[i] = array[j]
         array[j] = tmp
@@ -62,8 +62,8 @@ class Prob:
     
     @staticmethod
     def test1():
-        #array = [2,3,5,1,4]
-        array = [8,4,7,10,3,6,9,2,5,1]
+        array = [2,3,1,5,4]
+        #array = [8,4,7,10,3,6,9,2,5,1]
         qs = Prob.quickSort(array)
         print("test1: ", qs)
     

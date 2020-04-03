@@ -131,8 +131,10 @@ class Prob:
     def test4():
         #n = 4 
         #n = 7 # with allowed [1, 5], should return 4
-        n = 10
-        allowed = [3,2]
+#         n = 10
+#         allowed = [3,2]
+        n = 25
+        allowed = [1,5,10,25]
         numWays = Prob.numWaysUpStairsAllowed(n, allowed)
         print("test4 numWays: ", numWays)
     
