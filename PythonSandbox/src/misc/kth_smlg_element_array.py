@@ -119,8 +119,58 @@ class Prob:
         k = 8
         res = Prob.kthLargestQuickselect(array, k)
         print("test3 res: ", res)
+
+    # ----------------------------------------------------------
+    
+    '''
+    If it's ok to mutate original array.
+    Time complexity: O(k*len(arr))
+    Space complexity: O(1)
+    '''
+    @staticmethod
+    def kthFromMin(arr, k):
+        for _ in range(k):
+            minimum = float('inf')
+            minInd = 0
+            for i in range(len(arr)):
+                val = arr[i]
+                if val < minimum:
+                    minimum = val
+                    minInd = i
+            arr.pop(minInd) 
+        return minimum
+    
+    '''
+    Does not mutate original array.
+    Time complexity: O(k*len(arr))
+    Space complexity: O(len(arr))
+    '''
+    @staticmethod
+    def kthFromMinNonEdit(arr, k):
+        # 1 means valid to evaluate. 0 means already previously picked, so dont evaluate again.
+        aux = [1 for _ in arr]
+        for _ in range(k):
+            minimum = float('inf')
+            minInd = 0
+            for i in range(len(arr)):
+                val = arr[i]
+                if val < minimum and aux[i] == 1:
+                    minimum = val
+                    minInd = i
+            
+            aux[minInd] = 0
+        return minimum
+
+    @staticmethod
+    def test4():
+        a = [3,7,10,9,2,5,11,-1]
+        k = int(len(a)/2)
+        print("a: {}, k= {}".format(a,k))
+        m = Prob.kthFromMinNonEdit(a, k)
+        print("a after:", a)
+        print(m)
     
 #Prob.test1()
 #Prob.test2()
-Prob.test3()
-
+#Prob.test3()
+Prob.test4()

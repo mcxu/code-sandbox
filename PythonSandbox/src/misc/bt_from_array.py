@@ -10,7 +10,7 @@ class Prob:
     @staticmethod
     def btFromArray(arr, i, root):
         if i < len(arr):
-            if i < 0 or arr[i] == -1:
+            if i < 0 or arr[i] == -1 or arr[i]==None:
                 return root
             newNode = Node(arr[i])
             root = newNode
