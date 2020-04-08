@@ -9,6 +9,11 @@ If the target is not found in the array, return [-1, -1].
 '''
 
 class Solution:
+    '''
+    Let n = len(nums), m = number of instances of target value
+    Time complexity: O(log2(n) + m), since the binary search is O(log2(n)) and the expansion is O(m)
+    Space complexity: O(1), since the pointers that store information are loInd, medInd, highInd, and i,j in expand().
+    '''
     def searchRange(self, nums, target):
         loInd = 0
         hiInd = len(nums)-1
