@@ -4,11 +4,13 @@ Given two binary search trees, return True if and only if there is a
 node in the first tree and a node in the second tree whose values 
 sum up to a given integer target.
 """
+class TreeNode:
+    def __init__(self, x):
+        self.value = x
+        self.left = None
+        self.right = None
 
-from utils.binary_tree_utils import TreeNode
-from utils.binary_tree_utils import BinaryTreeUtils as BTUtils
-
-class LC1214_TwoSumBSTs:
+class Solution:
     def twoSumBSTs(self, root1, root2, target):
         """
         :type root1: TreeNode
@@ -39,7 +41,7 @@ class LC1214_TwoSumBSTs:
         if root == None:
             return False
         
-        if self.helper2(root.left, target, s):
+        if self.helper2(root.left, target, s) == True:
             return True
         
         # evaluation logic
@@ -51,6 +53,11 @@ class LC1214_TwoSumBSTs:
         
         return self.helper2(root.right, target, s)
         
+    # -----------------------------------------------------------------------------
+    # using preorder traversal for each
+
+    def twoSumBSTs2(self, root1, root2, target):
+        pass
 
     def tree1(self):
         tree = TreeNode(2)
@@ -59,9 +66,6 @@ class LC1214_TwoSumBSTs:
         tree.right = TreeNode(5)
         tree.right.left = TreeNode(4)
         tree.right.right = TreeNode(6)
-#         d = BTUtils.treeHeight(tree)
-#         print("depth: " + str(d))
-#         BTUtils.printBT(tree)
         return tree
     
     def tree2(self):
@@ -86,12 +90,5 @@ class LC1214_TwoSumBSTs:
         a = self.twoSumBSTs(self.tree1(), self.tree3(), 12)
         print("test1: ans: ", a)
 
-def main():
-    lc1214 = LC1214_TwoSumBSTs()
-    
-    BTUtils.printBT(lc1214.tree1())
-    
-    #lc1214.test1()
-    lc1214.test2()
-
-main()
+s = Solution()
+s.test1()
