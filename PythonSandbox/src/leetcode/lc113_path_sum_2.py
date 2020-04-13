@@ -37,23 +37,18 @@ class Solution:
             print("root is none, return nothing")
             return
         runSum += root.val
-        path.append(root.val)
         print("root: {}, runSum: {}, path: {}".format(root.val, runSum, path))
         
+        # if runSum == sum, then path must include current root.val
         if root.left is None and root.right is None and runSum == sum:
-            validPaths.append(path.copy())
+            pathCopy = path.copy()
+            pathCopy.append(root.val)
+            validPaths.append(pathCopy)
             print("validPaths: ", validPaths)
-        
-        print("A")
-        self.helper(root.left, sum, runSum, path, validPaths)
-        print("end A")
-        print("B")
-        self.helper(root.right, sum, runSum, path, validPaths)
-        print("end B")
-        
-        print("POPPING, root: ", root.val)
-        path.pop()
-        print("AFTER POP: path: ", path)
+            return
+
+        self.helper(root.left, sum, runSum, path+[root.val], validPaths)
+        self.helper(root.right, sum, runSum, path+[root.val], validPaths)
     
     def test1(self):
         root = TreeNode(5)
