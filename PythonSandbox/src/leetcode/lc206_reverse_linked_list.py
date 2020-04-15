@@ -20,18 +20,13 @@ class Solution:
         
         prev = None
         curr = head
-        nxt = curr.next
         while curr != None:
-            print("currval: ", curr.val)
-            if nxt == None:
-                curr.next = prev
-                head = curr
-                break
+            next = curr.next
             curr.next = prev
             prev = curr
-            curr = nxt
-            nxt = curr.next
+            curr = next
         
+        head = prev
         return head
     
     def test1(self):

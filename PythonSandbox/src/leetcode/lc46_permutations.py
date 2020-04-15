@@ -16,44 +16,46 @@ Output:
 
 #import time
 import sys
-from utils.number_utils import NumberUtils
 sys.setrecursionlimit(10**6)
 
-class LC46:
+class Solution:
     # number of permutations in entire list
     def permute(self, nums):
         # helper function
         def permuteHelper(nums, results):
             if nums in results:
                 #print("    list {} already in results.".format(nums))
-                return results
+                return 
             else:
                 #print("    appending {} to results.".format(nums))
-                results.append(nums)
+                numsCopy = nums.copy()
+                results.append(numsCopy)
             #print("results: ", results)
             
             for i in range(len(nums)-1):
-                #print("    i:{}, nums:{}".format(i,nums))
-                newPerm = nums.copy()
                 # swap the ith and (i+1)th, to make a new permutation
-                tmp = newPerm[i+1]
-                newPerm[i+1] = newPerm[i]
-                newPerm[i] = tmp
+                swap(nums, i, i+1)
                 #print("    after swap: nums:{}, newPerm:{}".format(nums, newPerm))
+                permuteHelper(nums, results)
+                # swap the ith and (i+1)th, to make a new permutation
+                swap(nums, i, i+1)
                 
-                # recursive call
-                permuteHelper(newPerm, results)
-                
-            return results
+            return 
         
+        def swap(nums, i, j):
+            nums[i],nums[j] = nums[j],nums[i]
+
         # populate list of results using permuteHelper
-        return permuteHelper(nums, [])
+        results = []
+        permuteHelper(nums, results)
+        return results
             
     def test_permute(self):
         numsList = [
-            [1,2,3],
-            [1,2,3,4],
-            [1,2,3,4,5,6]]
+            [1,2,3]
+            # [1,2,3,4],
+            # [1,2,3,4,5,6]
+            ]
         
         for nums in numsList:
             results = self.permute(nums)
@@ -90,9 +92,19 @@ class LC46:
             print("") 
 
     
+    def factorial(self, n):
+        if n == 0 or n == 1:
+            return 1
+        return n * self.factorial(n-1)
+
+    def test_factorial(self):
+        n = 4
+        res = self.factorial(n)
+        print("test_factorial: ", res)
+
     # n items taken k at a time (order matters)
     def nPk_formula(self, n, k):
-        perms = NumberUtils.factorial(n)/NumberUtils.factorial(n-k)
+        perms = self.factorial(n)/self.factorial(n-k)
         return int(perms)
     
     def test_nPk_formula(self):
@@ -102,10 +114,11 @@ class LC46:
         print("num permutations: ", ans)
      
 def main():
-    lc46 = LC46()
-    lc46.test_permute()
-    #lc46.test_permutePartial()
-    #lc46.test_nPk_formula()
+    s = Solution()
+    s.test_permute()
+    #s.test_permutePartial()
+    #s.test_factorial()
+    #s.test_nPk_formula()
 
 main()
             

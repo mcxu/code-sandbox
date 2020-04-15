@@ -10,6 +10,9 @@ All numbers (including target) will be positive integers.
 The solution set must not contain duplicate combinations.
 '''
 class Solution:
+    '''
+
+    '''
     def combinationSum(self, candidates, target):
         solutions = []
         self.helper(candidates, target, [], solutions)
@@ -22,7 +25,6 @@ class Solution:
             return
         
         if target == 0:
-            #print(" appending:", sol)
             sortedSol = sorted(sol)
             if sortedSol not in solutions:
                 solutions.append(sortedSol)
@@ -46,4 +48,4 @@ class Solution:
     
 s = Solution()
 s.test1()
-s.test2()
+#s.test2()

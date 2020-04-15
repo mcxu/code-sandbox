@@ -1,7 +1,8 @@
 '''
 This problem was asked by Google. [Medium]
 
-Given the root to a binary tree, implement serialize(root), which serializes the tree into a string, and deserialize(s), which deserializes the string back into the tree.
+Given the root to a binary tree, implement serialize(root), which serializes the tree into a string, 
+and deserialize(s), which deserializes the string back into the tree.
 
 For example, given the following Node class
 
@@ -23,9 +24,6 @@ class Node:
         self.right = right
 
 class DCP3():
-    
-    def __init__(self):
-        pass
          
     '''
     root is a tree object
@@ -66,18 +64,16 @@ class DCP3():
     
     
     def deserialize_node_list(self, node_list, node_obj):
-        print("========= top of deserialize_node_list =========")
         print("deserialize_node_list: initial node_list: {},  node_obj: {}".format(node_list, node_obj.val));
         if not node_list:
             return node_obj
          
         node_str = node_list.pop(0)
-        print("deserialize_node_list: item_str: {}".format(node_str))
         
         # create children
         if(node_str == "left"):
-            print("deserialize_node_list: Creating a left node")
             node_obj.left = Node("left")
+            print("deserialize_node_list: Creating a left node")
         if(node_str == "right"):
             node_obj.right = Node("right")
             print("deserialize_node_list: Creating a right node")
@@ -86,7 +82,6 @@ class DCP3():
         if("." in node_str):
             print("deserialize_node_list: subnode exists node_str: {}".format(node_str))
             sub_node_list = node_str.split(".")
-            print("deserialize_node_list: sub_node_list: {}".format(sub_node_list))
             sub_node_str = sub_node_list.pop(0)
             if(sub_node_str == "left"):
                 node_obj.left = self.deserialize_sub_node_list(sub_node_list, node_obj.left, "left")
@@ -108,11 +103,11 @@ class DCP3():
         # create children
         node_val += ("." + sub_node_str)
         if(sub_node_str == "left"):
-            print("deserialize_sub_node_list: Creating a left node. node_val: {}".format(node_val))
             node_obj.left = Node(node_val)
+            print("deserialize_sub_node_list: Creating a left node. node_val: {}".format(node_val))
         if(sub_node_str == "right"):
-            print("deserialize_sub_node_list: Creating a right node. node_val: {}".format(node_val))
             node_obj.right = Node(node_val)
+            print("deserialize_sub_node_list: Creating a right node. node_val: {}".format(node_val))
     
         return self.deserialize_sub_node_list(sub_node_list, node_obj, node_val)
             
@@ -139,7 +134,8 @@ class DCP3():
         print("** test_serialize_then_deserialize: reserialized: {}".format(reserialized))
     
     def test_assert(self, node):
-        assert self.deserialize(self.serialize(node)).left.left.val == 'left.left'
+        res = self.deserialize(self.serialize(node)).left.left.val == 'left.left'
+        print("res: ", res)
     
 def main():
     node = Node('root', Node('left', Node('left.left')), Node('right'))

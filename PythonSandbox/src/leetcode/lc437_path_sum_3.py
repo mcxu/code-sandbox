@@ -74,8 +74,8 @@ class Solution:
         self.pathSum(root, sum)
         print("test1: count: ", self.count)
         
-# sol = Solution()
-# sol.test1()
+sol = Solution()
+sol.test1()
 
 class Solution2:
     def pathSum(self, root: TreeNode, sum: int) -> int:

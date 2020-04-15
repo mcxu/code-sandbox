@@ -4,8 +4,6 @@
 https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
 '''
 
-from utils.binary_tree_utils import BinaryTreeUtils as utils
-
 class TreeNode:
     def __init__(self, x):
         self.val = x
@@ -53,8 +51,6 @@ class Solution:
         
         root.right = TreeNode(5)
         root.right.right = TreeNode(6)
-        print("tree1:")
-        utils.printBT(root)
         return root
 
     def tree3(self):
@@ -68,13 +64,11 @@ class Solution:
         rf = self.flatten(root) #root flattened
         print("rf: ", rf.val)
         print("rf.right.val", rf.right.val)
-        utils.printBT(rf)
 
     def test2(self):
         root = self.tree2()
         self.flatten(root)
         rf = root
-        utils.printBT(rf)
         print("rf root: ", rf.val)
         print("rf.left: ", rf.left)
         print("rf.right: ", rf.right.val)

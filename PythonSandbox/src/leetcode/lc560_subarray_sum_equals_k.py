@@ -56,8 +56,6 @@ class Solution:
                 sumMap[runSum] = sumMap[runSum]+1
             else:
                 sumMap[runSum] = 1
-    
-
         
         print("sumMap: ")
         for key in sumMap.keys():

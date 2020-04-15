@@ -81,7 +81,9 @@ class DCP2():
  
         latestProduct = 1
         for i in range(len(a)-1, -1, -1):
+            print("i=", i)
             prods[i] *= latestProduct
+            print("prods: ", prods)
             latestProduct *= a[i]
             
         return prods

@@ -128,7 +128,7 @@ class Solution:
         for row in board:
             print(" ", row)
 
-        word = "baaaaaaaaaaaaaaaaaa" # True
+        word = "baaaaaaaaaaaaaaa" # True
         #word = "caaaaaaaaaaaaaaaa" # False
         res = self.exist(board, word)
         print("test6 res: ", res)

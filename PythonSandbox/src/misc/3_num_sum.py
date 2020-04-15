@@ -18,7 +18,7 @@ class TNS:
     def threeNumberSum(array, targetSum):
         validTriplets = []
         arrSorted = sorted(array)
-        for i in range(len(arrSorted)-1):
+        for i in range(len(arrSorted)-1): # O(n) time
             arr = arrSorted[i:]
             print("i= ", i)
             print("arr: ",arr)
@@ -26,7 +26,10 @@ class TNS:
         return validTriplets
     
     
-    #p1: pointer to 1st index,  p2: ptr to 2nd index, p3: ptr to 3rd index.
+    '''
+    Worst O(n) time, because of the if else at the end, either i3-1 or i2+1.
+    p1: pointer to 1st index,  p2: ptr to 2nd index, p3: ptr to 3rd index.
+    '''
     @staticmethod
     def helper(array, targetSum, validTriplets, i1, i2, i3):
         print("helper: i1={}, i2={}, i3={}".format(i1,i2,i3))

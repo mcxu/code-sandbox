@@ -1,4 +1,4 @@
-from utils.number_utils import NumberUtils
+#from utils.number_utils import NumberUtils
 class Combinations:
     @staticmethod
     def solve(target, sum, candidates, answer):
@@ -23,7 +23,7 @@ class Combinations:
     @staticmethod
     def test_solve():
         candidates = [10, 1, 2, 7, 6, 1, 5]
-        candidates.sort();
+        candidates.sort()
         Combinations.solve(8, 0, candidates, [])
     
     """
@@ -35,7 +35,7 @@ class Combinations:
         return Combinations.arrayCkHelper(inputArray, k, [])
     
     
-    #uses DFS to traverse all combinations of size k (TODO)
+    #uses DFS to traverse all combinations of size k (TODO: incorrect)
     @staticmethod
     def arrayCkHelper(inputArray, k, visited=[], solns=[]):
         num = inputArray.pop(0)
@@ -87,11 +87,11 @@ class Combinations:
             print("test_nCk_recursive: number of combinations: ", results)
             print("")
     
-    @staticmethod
-    def nCk_formula(n, k):
-        n = NumberUtils.factorial(n)
-        d = NumberUtils.factorial(n-k)*NumberUtils.factorial(k)
-        return int(n/d)
+    # @staticmethod
+    # def nCk_formula(n, k):
+    #     n = NumberUtils.factorial(n)
+    #     d = NumberUtils.factorial(n-k)*NumberUtils.factorial(k)
+    #     return int(n/d)
     
     @staticmethod
     def test_nCk_formula():
@@ -107,8 +107,8 @@ class Combinations:
             print("")
 
 def main():
-    Combinations.test_arrayCk()
     #Combinations.test_solve()
+    Combinations.test_arrayCk()
     #Combinations.test_nCk_recursive()
     #Combinations.test_nCk_formula()
 

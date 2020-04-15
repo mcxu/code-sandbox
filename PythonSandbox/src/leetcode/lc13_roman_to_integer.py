@@ -51,7 +51,7 @@ class Solution:
             i = i-1
                 
         print("tot: ", tot)
-        return int(tot)
+        return tot
         
     def test1(self):
         #s = "MCMXCIV" # 1994

@@ -23,33 +23,33 @@ class TreeNode:
         self.right = None
 
 class Solution:
-#     def levelOrder(self, root: TreeNode) -> List[List[int]]:
-#         levelMap = {} # levels: [values]
-#         self.helper(root,0,levelMap)
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        levelMap = {} # levels: [values]
+        self.helper(root,0,levelMap)
         
-#         travOut = []
-#         i = 0
-#         while i in levelMap.keys():
-#             levelVals = levelMap[i]
-#             travOut.append(levelVals)
-#             i += 1
-#         return travOut
+        travOut = []
+        i = 0
+        while i in levelMap.keys():
+            levelVals = levelMap[i]
+            travOut.append(levelVals)
+            i += 1
+        return travOut
         
-#     def helper(self, root, currLevel, levelMap):
-#         if root == None:
-#             return 
-#         if currLevel in levelMap.keys():
-#             levelMap[currLevel].append(root.val)
-#         else:
-#             levelMap[currLevel] = [root.val]
-#         #print("levelMap: ", levelMap)
+    def helper(self, root, currLevel, levelMap):
+        if root == None:
+            return 
+        if currLevel in levelMap.keys():
+            levelMap[currLevel].append(root.val)
+        else:
+            levelMap[currLevel] = [root.val]
+        #print("levelMap: ", levelMap)
         
-#         self.helper(root.left, currLevel+1, levelMap)
-#         self.helper(root.right, currLevel+1, levelMap)
+        self.helper(root.left, currLevel+1, levelMap)
+        self.helper(root.right, currLevel+1, levelMap)
         
 # ========================== using BFS ====================
 
-    def levelOrder(self, root):
+    def levelOrderIterative(self, root):
         if root == None:
             return []
         
