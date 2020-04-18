@@ -76,8 +76,8 @@ def test2():
     c = st.contains(notContainStr)
     print("c: ",c)
     
-#test1()
-test2()   
+test1()
+#test2()   
 
 
 
