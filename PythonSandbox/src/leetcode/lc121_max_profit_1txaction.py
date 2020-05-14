@@ -19,7 +19,7 @@ class Solution:
         maxSellInd = 1
         profitSoFar = 0
         for i in range(1, len(prices)):
-            #print("i={}".format(i))
+            print("i={}".format(i))
             
             sellPrice = prices[i]
             if sellPrice >= prices[maxSellInd]:
@@ -34,8 +34,11 @@ class Solution:
             if minBuyInd >= maxSellInd:
                 #print("mbi and msi crossed")
                 maxSellInd = i
-                
+
+            priceDiff = prices[maxSellInd]-prices[minBuyInd] 
+            print("priceDiff: ", priceDiff)
             profitSoFar = max(profitSoFar, prices[maxSellInd]-prices[minBuyInd])
+            print("profitSoFar: ", profitSoFar)
         
         return profitSoFar
     
@@ -53,4 +56,4 @@ class Solution:
 
 s = Solution()
 s.test1()
-s.test2()
+#s.test2()

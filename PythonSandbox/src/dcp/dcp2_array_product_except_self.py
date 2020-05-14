@@ -59,7 +59,7 @@ class DCP2():
         rightProds = [1]
         
         # make a separate array of products to the left and including value in the input array up to (length-1)th value
-        # and a separate array of products to to the right and including value in the input array down to (1)th value
+        # and a separate array of products to the right and including value in the input array down to (1)th value
         # If there is no value to the left or right, then value in the aux arrays is 1.
         for i in range(0, len(a)-1):
             leftProds.append(leftProds[-1]*a[i])
@@ -91,7 +91,8 @@ class DCP2():
 if __name__ == "__main__":
     p2 = DCP2()
     a = [1,2,3,4,5]
-    out1 = p2.eval4(a)
+    #out1 = p2.eval4(a)
+    out1 = p2.eval3(a)
     print("out1: {}".format(out1))
     
 #     b = [3,2,1]

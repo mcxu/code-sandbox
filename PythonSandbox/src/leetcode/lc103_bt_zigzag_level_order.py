@@ -23,7 +23,7 @@ class TreeNode:
         self.right = None
 
 class Solution:
-    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+    def zigzagLevelOrder(self, root: TreeNode) -> [[int]]:
         levelMap = {}
         self.helper(root, 0, levelMap)
         #print("levelMap after: ", levelMap)
@@ -48,3 +48,15 @@ class Solution:
             
         self.helper(root.left, depth+1, levelMap)
         self.helper(root.right, depth+1, levelMap)
+
+    def test1(self):
+        root = TreeNode(3)
+        root.left = TreeNode(9)
+        root.right = TreeNode(20)
+        root.right.left = TreeNode(15)
+        root.right.right = TreeNode(7)
+        res = self.zigzagLevelOrder(root)
+        print("test1 res: ", res)
+
+s = Solution()
+s.test1()

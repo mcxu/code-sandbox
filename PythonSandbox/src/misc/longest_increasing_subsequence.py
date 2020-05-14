@@ -35,24 +35,24 @@ class Prob:
         #store the index of the previous number in the longest increasing subsequence
         longestIncIndices = [None for _ in array] 
         
-        # store the index of the longest increasing subsequence count so far
+        # store the index of the longest increasing subsequence value so far
         longestSeqInd = 0
         
         for i in range(len(array)):
             iVal = array[i]
-            
+            print("i=", i)
             for j in range(0, i):
                 jVal = array[j]
-                
+                print(" j=",j)
                 if jVal < iVal and longestUpToVal[j]+1 > longestUpToVal[i]:
                     longestUpToVal[i] = longestUpToVal[j]+1
-                    print("longestUpToVal: ", longestUpToVal)
+                    print(" longestUpToVal: ", longestUpToVal)
                     longestIncIndices[i] = j
-                    print("longestIncIndices: ", longestIncIndices)
+                    print(" longestIncIndices: ", longestIncIndices)
             
             if longestUpToVal[i] > longestUpToVal[longestSeqInd]:
                 longestSeqInd = i
-                print("longestSeqInd: ", longestSeqInd)
+                print(" longestSeqInd: ", longestSeqInd)
             
         longestSubseq = []
         tmpIndex = longestSeqInd

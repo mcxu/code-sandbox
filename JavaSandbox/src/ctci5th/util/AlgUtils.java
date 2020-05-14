@@ -2,6 +2,8 @@ package ctci5th.util;
 
 import java.util.HashMap;
 
+import ctci5th.util.list.LLNode;
+
 public class AlgUtils 
 {
     public static HashMap<Character, Integer> getCharFreqInStr(String testStr) 
@@ -45,7 +47,7 @@ public class AlgUtils
         System.out.println((int) 'a');
         System.out.println((int) 'b');
     }
-
+    
     public static void main(String[] args) 
     {
         //test_getCharFreqInStr();

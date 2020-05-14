@@ -9,10 +9,4 @@ public class FileUtils {
             System.out.println(fileNames);
         }
     }
-
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
-    }
-
 }

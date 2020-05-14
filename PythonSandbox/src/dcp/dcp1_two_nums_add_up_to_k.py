@@ -45,7 +45,8 @@ class DCP1:
             diff = k - given_list[i]
             if diff in out_set:
                 return True
-            out_set.add(given_list[i])
+            else:
+                out_set.add(given_list[i])
         return False
         
 
@@ -65,7 +66,7 @@ class DCP1:
         test4 = self.eval_single_pass(DCP1.l1, 17)
         print("test4: {}".format(test4))
         
-        test4 = self.eval_single_pass(DCP1.l1, 10)
+        test4 = self.eval_single_pass(DCP1.l1, 14)
         print("test4.1: {}".format(test4))
         
 def main():

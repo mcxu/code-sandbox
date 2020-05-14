@@ -23,12 +23,12 @@ class DCP7:
             if i==0 or i == 1:
                 return 1
             if i == 2:
-                print("i is 2")
+                print("i is 2. substr: ", msg[:i])
                 if int(msg[:i]) < 26:
-                    print("A")
+                    print("A") # you can have msg[1] or msg[0:2] be valid ways.
                     return 2
                 else:
-                    print("B")
+                    print("B") # you can only have msg[1] be a valid way.
                     return 1
             
             numWays = helper(msg, i-1)
@@ -44,8 +44,8 @@ class DCP7:
     def test1(self):
         #msg = '111' # should be 3 (1,1,1 and 1,11 and 11,1)
         #msg = '1111' # should be 5
-        #msg = '3317' # should be 2 (3,3,1,7 and 3,3,17)
-        msg = '11313231322' # returns 48
+        msg = '3317' # should be 2 (3,3,1,7 and 3,3,17)
+        #msg = '11313231322' # returns 48
         numWays = self.numWaysDecoded(msg)
         print("test1: numWays: {}".format(numWays))
 
@@ -114,9 +114,9 @@ class DCP7:
 def main():
     sol = DCP7()
     #sol.test_char_num_functions()
-    #sol.test1()
+    sol.test1()
     #sol.test2()
-    sol.test3()
+    #sol.test3()
 
 if __name__ == "__main__":
     main()

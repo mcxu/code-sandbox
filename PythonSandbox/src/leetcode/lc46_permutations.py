@@ -19,10 +19,22 @@ import sys
 sys.setrecursionlimit(10**6)
 
 class Solution:
+    '''
+    Let n = number of elmements in list
+    Time complexity: O(n!*n). Number of perms formula P(n,r)=n!/(n-r)! so this formula is order n!.
+    The extra O(n) comes from the for loop where you are looping from index [0,n-1] elements for each
+    current perm to find new perms.
+    Space complexity: O(n!*n). Order of n! total perms each corresponding to a helper call on the stack.
+    The extra n comes from the for loop, which places n-1 calls on the stack for each current perm.
+    '''
     # number of permutations in entire list
     def permute(self, nums):
+        c = 0
         # helper function
         def permuteHelper(nums, results):
+            nonlocal c
+            c += 1
+            print("c: ", c)
             if nums in results:
                 #print("    list {} already in results.".format(nums))
                 return 
@@ -52,9 +64,9 @@ class Solution:
             
     def test_permute(self):
         numsList = [
-            [1,2,3]
-            # [1,2,3,4],
-            # [1,2,3,4,5,6]
+            #[1,2,3]
+            #[1,2,3,4],
+            [1,2,3,4,5,6]
             ]
         
         for nums in numsList:

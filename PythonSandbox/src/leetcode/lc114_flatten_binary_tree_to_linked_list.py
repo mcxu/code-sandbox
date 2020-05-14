@@ -60,10 +60,11 @@ class Solution:
         return root
     
     def test1(self):
-        root = self.tree2()
-        rf = self.flatten(root) #root flattened
-        print("rf: ", rf.val)
-        print("rf.right.val", rf.right.val)
+        root = self.tree1()
+        self.flatten(root) #root flattened
+        print("root: ", root.val)
+        print("root.right: ", root.right.val)
+
 
     def test2(self):
         root = self.tree2()
@@ -76,7 +77,7 @@ class Solution:
         print("rf.right.right: ", rf.right.right.val)
     
 sol = Solution()
-#sol.test1()
-sol.test2()
+sol.test1()
+#sol.test2()
 
         

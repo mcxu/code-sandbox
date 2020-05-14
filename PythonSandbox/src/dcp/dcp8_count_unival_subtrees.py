@@ -23,18 +23,18 @@ class DCP8():
     def countUnivalSubtrees(self, root):
         if root == None:
             return 0
-        else:
-            thisTreeUnival = self.isTreeUnival(root)
-            print("countUnivalSubtrees: thisTreeUnival:", thisTreeUnival)
-            numLeftTrees = self.countUnivalSubtrees(root.left)
-            print("countUnivalSubtrees: numLeftTrees: {} at rootval: {}".format(numLeftTrees, root.val))
-            numRightTrees = self.countUnivalSubtrees(root.right)
-            print("countUnivalSubtrees: numRightTrees: {} at rootval: {}".format(numRightTrees, root.val))
-            
-            if thisTreeUnival:
-                return 1 + numLeftTrees + numRightTrees
-            else:
-                return numLeftTrees + numRightTrees
+
+        thisTreeUnival = self.isTreeUnival(root)
+        print("countUnivalSubtrees: thisTreeUnival:", thisTreeUnival)
+        numLeftTrees = self.countUnivalSubtrees(root.left)
+        print("countUnivalSubtrees: numLeftTrees: {} at rootval: {}".format(numLeftTrees, root.val))
+        numRightTrees = self.countUnivalSubtrees(root.right)
+        print("countUnivalSubtrees: numRightTrees: {} at rootval: {}".format(numRightTrees, root.val))
+        
+        if thisTreeUnival:
+            return 1 + numLeftTrees + numRightTrees
+
+        return numLeftTrees + numRightTrees
             
 
     # determine if tree is a unival tree from a given node downwards to leaves

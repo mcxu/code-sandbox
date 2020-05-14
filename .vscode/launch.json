@@ -2,6 +2,76 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Ch2q1_RemoveDuplicatesUnsortedLL",
+            "request": "launch",
+            "mainClass": "ctci5th.DataStructures.Ch2LinkedLists.Ch2q1_RemoveDuplicatesUnsortedLL",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Ch1q7_IfMxNMatrix0",
+            "request": "launch",
+            "mainClass": "ctci5th.DataStructures.Ch1ArraysAndStrings.Ch1q7_IfMxNMatrix0",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Ch1q6_RotateMatrix90Deg",
+            "request": "launch",
+            "mainClass": "ctci5th.DataStructures.Ch1ArraysAndStrings.Ch1q6_RotateMatrix90Deg",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Ch1q5_StringCompression",
+            "request": "launch",
+            "mainClass": "ctci5th.DataStructures.Ch1ArraysAndStrings.Ch1q5_StringCompression",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Ch1q4_ReplaceSpacesWithP20",
+            "request": "launch",
+            "mainClass": "ctci5th.DataStructures.Ch1ArraysAndStrings.Ch1q4_ReplaceSpacesWithP20",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Ch1q3_1StrPermutationOfOther",
+            "request": "launch",
+            "mainClass": "ctci5th.DataStructures.Ch1ArraysAndStrings.Ch1q3_1StrPermutationOfOther",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Ch1p2_ReverseString",
+            "request": "launch",
+            "mainClass": "ctci5th.DataStructures.Ch1ArraysAndStrings.Ch1p2_ReverseString",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Ch1p1_StringAllUniqueChars",
+            "request": "launch",
+            "mainClass": "ctci5th.DataStructures.Ch1ArraysAndStrings.Ch1p1_StringAllUniqueChars",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - HelloWorldThreading",
+            "request": "launch",
+            "mainClass": "misc.HelloWorldThreading",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - FileUtils",
+            "request": "launch",
+            "mainClass": "util.FileUtils",
+            "projectName": "code-sandbox"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - ArraySandbox",
             "request": "launch",
             "mainClass": "algorithms.ArraySandbox",
@@ -39,8 +109,10 @@
             "name": "Python: Current File (Integrated Terminal)",
             "type": "python",
             "request": "launch",
-            "env": {"PYTHONPATH": "${workspaceFolder}/PythonSandbox/src"},
-            "module" : "PythonSandbox",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/PythonSandbox/src"
+            },
+            "module": "PythonSandbox",
             "console": "integratedTerminal"
         }
     ]
