@@ -76,44 +76,68 @@ class TicTacToe:
 class Driver:
     def __init__(self):
         self.ttt = TicTacToe()
-    
+
+    # error checking for user inputs
+    # returns [inputGood, y, x]
+    def inputCheck(self, inputCoord):
+        inputSplit = inputCoord.split(",")
+        if len(inputSplit) < 2:
+            return [False, None, None]
+        y = int(inputSplit[0])
+        x = int(inputSplit[1])
+        if 0 <= y <= 2 and 0 <= x <= 2:
+            return [True, y, x]
+        else:
+            return [False, None, None]
+
     def runGame(self):
-        currPlayer = self.ttt.p1
-        print("currPlayer:", currPlayer)
-        exists3InRow = self.ttt.detect3InARow(currPlayer)
-        gridAllFilled = self.ttt.isGridAllFilled()
-        while exists3InRow == False and not gridAllFilled:
-            print("{} input a coordinate in the format: y,x".format(currPlayer)),
-            inputCoord = input()
-            inputSplit = inputCoord.split(",")
-            updateStatus = self.ttt.updateGrid(currPlayer, int(inputSplit[0]), int(inputSplit[1]))
-            if updateStatus:
-                print("grid has been updated to:")
-                for row in self.ttt.grid:
-                    print(" ", row)
-
-                exists3InRow = self.ttt.detect3InARow(currPlayer)
-                gridAllFilled = self.ttt.isGridAllFilled()
-
-                if gridAllFilled == True:
-                    break
-
-                # switch players:
-                if currPlayer == self.ttt.p1:
-                    currPlayer = self.ttt.p2
+        try:
+            currPlayer = self.ttt.p1
+            print("currPlayer:", currPlayer)
+            exists3InRow = self.ttt.detect3InARow(currPlayer)
+            gridAllFilled = self.ttt.isGridAllFilled()
+            y,x = None, None
+            while exists3InRow == False and not gridAllFilled:
+                print("{} input a coordinate in the format: y,x".format(currPlayer)),
+                inputCoord = input()
+                inputGood = self.inputCheck(inputCoord)
+                if inputGood[0]:
+                    y = inputGood[1]
+                    x = inputGood[2]
                 else:
-                    currPlayer = self.ttt.p1
-            else:
-                print("     !!! Hey {}, that cell has already been filled.".format(currPlayer))
-        
-        if exists3InRow == True:    
-            print("{} has won.".format(currPlayer))
-        elif gridAllFilled == True:
-            print("The game is a draw.")
+                    continue
 
-        print("game grid final: ")
-        for row in self.ttt.grid:
-            print(" ", row)
+                updateStatus = self.ttt.updateGrid(currPlayer, y, x)
+                if updateStatus:
+                    print("grid has been updated to:")
+                    for row in self.ttt.grid:
+                        print(" ", row)
+
+                    exists3InRow = self.ttt.detect3InARow(currPlayer)
+                    gridAllFilled = self.ttt.isGridAllFilled()
+
+                    if gridAllFilled == True:
+                        break
+
+                    # switch players:
+                    if currPlayer == self.ttt.p1:
+                        currPlayer = self.ttt.p2
+                    else:
+                        currPlayer = self.ttt.p1
+                else:
+                    print("     !!! Hey {}, that cell has already been filled.".format(currPlayer))
+            
+            if exists3InRow == True:    
+                print("{} has won.".format(currPlayer))
+            elif gridAllFilled == True:
+                print("The game is a draw.")
+
+            print("game grid final: ")
+            for row in self.ttt.grid: print(" ", row)
+
+        except KeyboardInterrupt:
+            print("Game stopped, grid state:")
+            for row in self.ttt.grid: print(" ", row)
 
 driver = Driver()
 driver.runGame()
