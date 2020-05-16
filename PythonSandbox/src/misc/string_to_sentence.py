@@ -1,4 +1,5 @@
 '''
+Word Break Problem ?
 Given a string of words, and a dictionary of words.
 Turn the string into a sentence and return it. 
 If this cannot be done, then return None.
@@ -17,35 +18,49 @@ output: None (Since "there" is a not a word in the dictionary, the whole sentenc
 class StringToSentence:
     '''
     Let n = len(s)
-    Time: O(n^2), since there is a single while loop iterating through string s,
-        but within this loop, the substr takes worst case O(n) time complexity.
-        if substr in diction is just O(1) since dictionary is a set.
-    Space: (Assuming we are not counting out variable to contribute to this).
-        It is O(n) since the substr variable stores worst case all of s.
+        d = len of longest word in dictionary.
+    Time: O(n^n): Since for loop calls stringToSentence n times recursively.
+    Space: O(n*d): For some substring that exists in dictionary, d means there is a new level of recursion.
+        starting from the (last+1)th char from that substring till the end of s.
+    Not sure if this analysis is correct.
     '''
     def stringToSentence(self, s, dictionary):
-        loInd=0
-        hiInd=0
-        out = ""
-        while hiInd < len(s):
-            substr = s[loInd:hiInd+1]
+        if not s or s in dictionary:
+            return s
+        for i in range(len(s)):
+            substr = s[:i+1]
             if substr in dictionary:
-                out += (substr + " ")
-                hiInd+=1
-                loInd=hiInd
-            else:
-                hiInd += 1
-        
-        if loInd >= len(s):
-            return out[:-1]
-        
+                nextWord = self.stringToSentence(s[i+1:], dictionary)
+                if nextWord:
+                    return substr + " " + nextWord
+        # for cases where there are no substr in dictionary
         return None
-    
+
     def test1(self):
         s = "hellothere"
-        dictionary = set(["hello", "there"])
+        #dictionary = set(["hello", "them"])
+        #dictionary = set(["hello", "there"])
+        dictionary = set(["hello", "the", "there"])
+        res = self.stringToSentence(s, dictionary)
+        print("res: ", res)
+
+    def test2(self):
+        s = "hellothereafter"
+        #dictionary = set(["hello", "them"])
+        #dictionary = set(["hello", "there"])
+        dictionary = set(["hello", "there", "the", "after"])
+        res = self.stringToSentence(s, dictionary)
+        print("res: ", res)
+
+    def test3(self):
+        s = "hellothereeveraftertomorrow"
+        #dictionary = set(["hello", "them"])
+        #dictionary = set(["hello", "there"])
+        dictionary = set(["hello", "there", "aft", "ever", "morrow", "tom", "the", "after", "tomorrow"])
         res = self.stringToSentence(s, dictionary)
         print("res: ", res)
 
 prob = StringToSentence()
 prob.test1()
+prob.test2()
+prob.test3()
