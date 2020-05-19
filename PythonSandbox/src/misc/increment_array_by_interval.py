@@ -49,7 +49,17 @@ class Solution:
             [[1,4], 1],
             [[3,6], 2]]
         res = self.incrementArrayValues(arr, intervals)
-        print("test1 res: ", res)
+        print("res: ", res)
+
+    def test2(self):
+        arr = [0,1,1,2,2,1,1,0]
+        intervals = [
+            [[1,4], 1],
+            [[3,6], 2],
+            [[0,7], 10]]
+        res = self.incrementArrayValues(arr, intervals)
+        print("res: ", res)
 
 prob = Solution()
-prob.test1()
+#prob.test1()
+prob.test2()
