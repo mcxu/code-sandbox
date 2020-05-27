@@ -56,4 +56,4 @@ class Solution:
         res = Solution.editName(name, netWorth)
         print("res: ", res)
 
-Solution.test()
+Solution.test1()
