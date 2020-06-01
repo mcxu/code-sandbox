@@ -56,7 +56,7 @@ class StringToSentence:
         s = "hellothereeveraftertomorrow"
         #dictionary = set(["hello", "them"])
         #dictionary = set(["hello", "there"])
-        dictionary = set(["hello", "there", "aft", "ever", "morrow", "tom", "the", "after", "tomorrow"])
+        dictionary = set(["hello", "there", "aft", "ever", "morrow", "to", "the", "after"])
         res = self.stringToSentence(s, dictionary)
         print("res: ", res)
 
