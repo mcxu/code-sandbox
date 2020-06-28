@@ -26,7 +26,8 @@ class SRS:
             "lrbbbbb",
             "abddab",
             "qwertyyyqwertyyyqwertyyyqwertyyy",
-            "qwertyyyyqwertyyy"
+            "qwertyyyyqwertyyyqwertyyyyqwertyyy",
+            "qwertyyyyqwertyyyqwertyyyyqwertyyyqqq"
         ]
         for i,s in enumerate(strings):
             print("--- TEST NO.: ", i)
