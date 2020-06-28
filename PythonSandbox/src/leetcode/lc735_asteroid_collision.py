@@ -7,7 +7,7 @@ Find out the state of the asteroids after all collisions. If two asteroids meet,
 If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.
 '''
 class Solution:
-    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+    def asteroidCollision(self, asteroids: [int]) -> [int]:
         stack = []
         for i,v in enumerate(asteroids):
             #print("v: ", v)
@@ -41,3 +41,16 @@ class Solution:
                 stack[j-1]=stack[j]
                 stack.pop()
             j -= 1
+    
+    def test1(self):
+        ast = [[5, 10, -5], [8, -8], [10, 2, -5], [-2, -1, 1, 2]]
+        exp = [[5,10]     , [],      [10]       , [-2, -1, 1, 2]]
+        for a,e in zip(ast,exp):
+            res = self.asteroidCollision(a)
+            print("test: {}\tres: {}".format(a,res), end="\t")
+            if e==res: print("pass") 
+            else: print("fail")
+
+
+sol = Solution()
+sol.test1()
