@@ -24,127 +24,74 @@ class Node:
         self.right = right
 
 class DCP3():
-         
-    '''
-    root is a tree object
-    '''
+    # root is a tree object
     def serialize(self, root):
-        print("serialize: root obj: {},  root val: {}".format(root, root.val))
-        ser_str = self.serialize_helper(root, "")
-        return ser_str[0:-1] # remove last comma
-    
-    def serialize_helper(self, root, ser_str):
-        ser_str += (str(root.val) + ",")
-        print("serialize_helper: root.val: {},  ser_str: {}".format(root.val, ser_str))
-        
-        if root.left is not None:
-            print("    root left: {},  ser_str: {}".format(root.left.val, ser_str))
-            ser_str = self.serialize_helper(root.left, ser_str)
-        if root.right is not None:
-            print("    root right: {},  ser_str: {}".format(root.right.val, ser_str))
-            ser_str = self.serialize_helper(root.right, ser_str)
-            
-        return ser_str
-        
-    '''
-    root is a tree string
-    '''
-    def deserialize(self, root):
-        print("deserialize: root: " + root)
-        node_list = root.split(",")
-        print("deserialize: node_list: {}".format(node_list))
-        if(len(node_list) == 0):
-            return None
-        
-        # first get root
-        node_str = node_list.pop(0)
-        print("deserialize: node_str: {}".format(node_str))
-        root_obj = self.deserialize_node_list(node_list, Node(node_str))
-        return root_obj
-    
-    
-    def deserialize_node_list(self, node_list, node_obj):
-        print("deserialize_node_list: initial node_list: {},  node_obj: {}".format(node_list, node_obj.val));
-        if not node_list:
-            return node_obj
-         
-        node_str = node_list.pop(0)
-        
-        # create children
-        if(node_str == "left"):
-            node_obj.left = Node("left")
-            print("deserialize_node_list: Creating a left node")
-        if(node_str == "right"):
-            node_obj.right = Node("right")
-            print("deserialize_node_list: Creating a right node")
-        
-        # see if there are subnodes    
-        if("." in node_str):
-            print("deserialize_node_list: subnode exists node_str: {}".format(node_str))
-            sub_node_list = node_str.split(".")
-            sub_node_str = sub_node_list.pop(0)
-            if(sub_node_str == "left"):
-                node_obj.left = self.deserialize_sub_node_list(sub_node_list, node_obj.left, "left")
-            if(sub_node_str == "right"):
-                node_obj.right = self.deserialize_sub_node_list(sub_node_list, node_obj.right, "right")
+        serTree = self.serHelper(root)
+        return serTree[:-1]
+        # example:  root,left,left.left,right
 
-        return self.deserialize_node_list(node_list, node_obj)
+    def serHelper(self, root):
+        if root==None:
+            return ""
+
+        serStr = (str(root.val) + ",")
+        left = self.serHelper(root.left)
+        right = self.serHelper(root.right)
+        return serStr + left + right
+
+    # root is a string (serialized tree)
+    def deserialize(self, root):
+        rootSplit = root.split(",")
+        rootObj = None
+        if len(rootSplit) > 0:
+            rootObj = Node(rootSplit[0])
+
+        for i in range(1, len(rootSplit)):
+            pathStr = rootSplit[i]
+            nodesSplit = pathStr.split(".")
+            self.deserHelper(nodesSplit, "", rootObj)
         
+        return rootObj
+    
+    def deserHelper(self, nodesSplit, builtPath, rootObj):
+        if not nodesSplit:
+            return
         
-    def deserialize_sub_node_list(self, sub_node_list, node_obj, node_val):
-        print("--- top of deserialize_sub_node_list ---")
-        print("deserialize_node_list: initial sub_node_list: {},  node_obj: {},  node_val: {}".format(sub_node_list, node_obj.val, node_val));
-        if not sub_node_list:
-            return node_obj
-    
-        sub_node_str = sub_node_list.pop(0)
-        print("deserialize_sub_node_list: item_str: {}".format(sub_node_str))
+        currNodeStr = nodesSplit.pop(0)
+        #print("currNodeStr: ", currNodeStr)
+        #print("nodesSplit: ", nodesSplit)
+        builtPath += currNodeStr + "."
+        currNode = Node(builtPath[:-1])
         
-        # create children
-        node_val += ("." + sub_node_str)
-        if(sub_node_str == "left"):
-            node_obj.left = Node(node_val)
-            print("deserialize_sub_node_list: Creating a left node. node_val: {}".format(node_val))
-        if(sub_node_str == "right"):
-            node_obj.right = Node(node_val)
-            print("deserialize_sub_node_list: Creating a right node. node_val: {}".format(node_val))
+        if currNodeStr == "left":
+            if not rootObj.left:
+                rootObj.left = currNode
+            self.deserHelper(nodesSplit, builtPath, rootObj.left)
+        if currNodeStr == "right":
+            if not rootObj.right:
+                rootObj.right = currNode
+            self.deserHelper(nodesSplit, builtPath, rootObj.right)
     
-        return self.deserialize_sub_node_list(sub_node_list, node_obj, node_val)
-            
-    def test_serialize(self, node):
-        serialized_str = self.serialize(node)
-        print("test_serialize: serialized_str: {}".format(serialized_str))
-        print("test_serialize: output type: {}".format(type(serialized_str)))
+    def testSerialize(self):
+        node = Node('root', Node('left', Node('left.left')), Node('right'))
+        serTree = self.serialize(node)
+        print("serTree: ", serTree)
     
-    def test_deserialize(self):
-        print("test_deserialize")
-        node_list = ['root', 'left', 'left.left', 'right']
-        node_obj = Node(node_list.pop(0))
-        a = self.deserialize_node_list(node_list, node_obj)
-        print("test_deserialize: node_obj after deserialize: {}".format(a))
-        b = self.serialize(a)
-        print("test_deserialize: serialize again: {}".format(b))
+    def testDeserialize(self):
+        node = Node('root', Node('left', Node('left.left')), Node('right'))
+        serTree = self.serialize(node)
+        print("serTree: ", serTree)
+        deserTree = self.deserialize(serTree)
+        print("check deserTree ****")
+        print(" root: ", deserTree.val)
+        print(" root.left:", deserTree.left.val)
+        print(" root.left.left:", deserTree.left.left.val)
+        #print(" root.left.left.left:", deserTree.left.left.left.val) # None, no val
+        print(" root.right:", deserTree.right.val)
+        #print(" root.right.right:", deserTree.right.right.val) # None, no val
+        reserTree = self.serialize(deserTree)
+        print("reserialized: ", reserTree)
     
-    def test_serialize_then_deserialize(self, node):
-        serialized_str = self.serialize(node)
-        print("** test_serialize_then_deserialize: serialized_str: {}".format(serialized_str))
-        deserialized = self.deserialize(serialized_str)
-        print("** test_serialize_then_deserialize: deserialized: {}".format(deserialized))
-        reserialized = self.serialize(deserialized)
-        print("** test_serialize_then_deserialize: reserialized: {}".format(reserialized))
-    
-    def test_assert(self, node):
-        res = self.deserialize(self.serialize(node)).left.left.val == 'left.left'
-        print("res: ", res)
-    
-def main():
-    node = Node('root', Node('left', Node('left.left')), Node('right'))
-    
-    p3 = DCP3()
-    #p3.test_serialize(node)
-    #p3.test_deserialize()
-    #p3.test_serialize_then_deserialize(node)
-    p3.test_assert(node)
-    
-if __name__ == "__main__":
-    main()
+d = DCP3()
+#d.testSerialize()
+d.testDeserialize()
