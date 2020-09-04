@@ -16,63 +16,49 @@ Explanation: The palindromes are ["battab","tabbat"]
 '''
 
 class Solution:
-    # Brute force solution: Time limit exceeded
-    def palindromePairs(self, words):
-        out = []
-        for i in range(len(words)):
+    # accepted but slow
+    def palindromePairs(self, words: [str]) -> [[int]]:
+        palSet = set()
+        indices = []
+        for i,v1 in enumerate(words[:-1]):
             for j in range(i+1, len(words)):
-                ccs1 = words[i] + words[j]
-                if self.isPal(ccs1):
-                    out.append([i,j])
-                ccs2 = words[j] + words[i]
-                if self.isPal(ccs2):
-                    out.append([j,i])
-                 
-        return out
-
-    def isPal(self, word):
-        for i in range(int(len(word)/2)):
-            if word[i] != word[len(word)-1-i]:
-                return False
-        return True
+                v2 = words[j]
+                a = v1+v2
+                if a==a[::-1]:
+                    indices.append([i,j])
+                b = v2+v1
+                if b==b[::-1]:
+                    indices.append([j,i])
+        return indices
 
     # using prefix / suffix checking.
-    def palindromePairs2(self, words):
-        wordMap = {} # store reverse of words -> index in input words list
-        #populate map
-        for i, word in enumerate(words):
-            wordMap[word] = i
-        print("wordMap: ", wordMap)
-
-        out = []
-        for i in range(len(words)):
-            word = words[i]
-            print("i={}, word: {}".format(i, word))
-            for j in range(len(word)+1):
-                prefix = word[:j]
-                suffix = word[j:]
-                print("prefix: {}, suffix: {}".format(prefix, suffix))
-                prefixRev = prefix[::-1]
-                suffixRev = suffix[::-1]
-
+    def palindromePairs2(self, words: [str]) -> [[int]]:
+        m = {} # word: index
+        for i,w in enumerate(words):
+            if w not in m.keys(): m[w] = i
+        #print("m: ", m)
+        indices = set()
+        for i,w in enumerate(words):
+            #print("i={}, w:{}".format(i, w))
+            for j in range(len(w)+1):
+                pre = w[:j]
+                preRev = pre[::-1]
+                suf = w[j:]
+                sufRev = suf[::-1]
+                #print("pre: {}, suf: {}".format(pre, suf))
+                
                 # check that reversed suffix is in wordMap given that prefix is a palindrome, 
                 # since this palindrome is the reversed suffix prepended to the word.
-                if suffixRev in wordMap.keys() and self.isPal(prefix):
-                    suffixRevInd = wordMap[suffixRev]
-                    print("     suffixRevInd: ", suffixRevInd)
-                    pair = [suffixRevInd, i]
-                    if suffixRevInd != i and pair not in out:
-                        out.append(pair)
-                
+                if pre==pre[::-1]:
+                    if sufRev in m.keys() and m[sufRev]!=i:
+                        indices.add((m[sufRev], i))
+                        
                 # check that the reversed prefix is in wordMap, given that suffix is a palindrome,
                 # since this palindrome is the reversed prefix appended to the word.
-                if prefixRev in wordMap.keys() and self.isPal(suffix):
-                    prefixRevInd = wordMap[prefixRev]
-                    print("     prefixRevInd: ", prefixRevInd)
-                    pair = [i, prefixRevInd]
-                    if prefixRevInd != i and pair not in out:
-                        out.append(pair)
-        return out
+                if suf==suf[::-1]:
+                    if preRev in m.keys() and m[preRev]!=i:
+                        indices.add((i, m[preRev]))
+        return list(indices)
 
     def test1(self, alg):
         input = ["abcd","dcba","lls","s","sssll"]
@@ -95,7 +81,7 @@ class Solution:
         print("test4 res: ", res)
 
 s = Solution()
-alg = s.palindromePairs2
+alg = s.palindromePairs
 #s.test1(alg)
 #s.test2(alg)
 #s.test3(alg)
