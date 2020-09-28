@@ -10,15 +10,15 @@ class Solution:
         return wellFormedPerms
         
     def permute(self, sList, allPerms, wellFormedPerms):
-        sTup = tuple(sList)
-        if sTup in allPerms:
+        s = "".join(sList)
+        if s in allPerms:
             return
         else:
-            allPerms.add(sTup)
+            allPerms.add(s)
         
             #check if sList is wellFormed
-            if self.isWellFormed(sTup):
-                wellFormedPerms.append("".join(sTup))
+            if self.isWellFormed(s):
+                wellFormedPerms.append(s)
         
         for i in range(len(sList)-1):
             sList[i],sList[i+1] = sList[i+1],sList[i]
