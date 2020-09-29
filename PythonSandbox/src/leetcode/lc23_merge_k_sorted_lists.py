@@ -11,18 +11,52 @@ Input:
 ]
 Output: 1->1->2->3->4->4->5->6
 '''
+import heapq
+
 class ListNode:
     def __init__(self, val, next=None):
         self.val = val
         self.next = next
 
 class Solution:
+    # using priority queue and hashmap for frequency count
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        freqMap = {}
+        heap = []
+        for i,lst in enumerate(lists):
+            n = lst
+            while n != None:
+                if n.val not in freqMap.keys():
+                    freqMap[n.val] = 1
+                    heapq.heappush(heap, n.val)
+                else:
+                    freqMap[n.val] += 1
+                n = n.next
+        
+        if not heap:
+            return None
+        
+        heapRoot = heap[0]
+        mergedHead = ListNode(heapRoot)
+        m = mergedHead
+        while heap:
+            p = heapq.heappop(heap)
+            lim = freqMap[p]
+            if p==heapRoot:
+                lim -= 1
+            for i in range(lim):
+                m.next = ListNode(p)
+                m = m.next
+        
+        return mergedHead
+
+
     '''
     Let n = total number of elements in all k lists.
     Time: O(nlogn), since the worst complexity comes from the sort.
     Space: O(n), since values array stores n elements.
     '''
-    def mergeKLists(self, lists):
+    def mergeKLists3(self, lists):
         # add vals to values array
         values = [] 
         for listHead in lists:
@@ -57,7 +91,7 @@ class Solution:
     #====================================================================
 
     # Results in TLE
-    def mergeKLists2(self, lists):
+    def mergeKLists1(self, lists):
         if not lists:
             return None
         elif len(lists) < 2:
