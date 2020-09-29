@@ -19,8 +19,29 @@ class ListNode:
         self.next = next
 
 class Solution:
+    # using only priority queue
+    def mergeKLists4(self, lists: [ListNode]) -> ListNode:
+        heap = []
+        for i,lst in enumerate(lists):
+            n = lst
+            while n != None:
+                heapq.heappush(heap, n.val)
+                n = n.next
+        
+        if not heap:
+            return None
+        
+        mergedHead = ListNode(heapq.heappop(heap))
+        m = mergedHead
+        while heap:
+            p = heapq.heappop(heap)
+            m.next = ListNode(p)
+            m = m.next
+        
+        return mergedHead
+    
     # using priority queue and hashmap for frequency count
-    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+    def mergeKLists3(self, lists: [ListNode]) -> ListNode:
         freqMap = {}
         heap = []
         for i,lst in enumerate(lists):
@@ -56,7 +77,7 @@ class Solution:
     Time: O(nlogn), since the worst complexity comes from the sort.
     Space: O(n), since values array stores n elements.
     '''
-    def mergeKLists3(self, lists):
+    def mergeKLists2(self, lists):
         # add vals to values array
         values = [] 
         for listHead in lists:
