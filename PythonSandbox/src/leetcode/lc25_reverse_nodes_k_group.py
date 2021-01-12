@@ -74,7 +74,7 @@ class Solution:
         while n != None:
             print("n: ", n.val)
             n = n.next
-            time.sleep(1)
+            #time.sleep(1)
 
 s=Solution()
 s.test1()

@@ -18,12 +18,14 @@ class Solution:
         
         i = 0
         for j in range(1, len(nums)):
+            print("i={}, j={}, nums: {}".format(i,j,nums))
             if nums[i]!=nums[j]:
                 i+=1
                 nums[i]=nums[j]
         
         for _ in range(i+1,len(nums)):
             nums.pop()
+        print("nums final: ", nums)
         return len(nums)
 
 

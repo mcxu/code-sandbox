@@ -106,7 +106,7 @@ class Solution:
             [7,13],
             [2,6,10,23,45,100]]
         listsLL = [self.createLLFromArray(x) for x in lists]
-        res = self.mergeKLists(listsLL)
+        res = self.mergeKLists2(listsLL)
         self.printLL(res)
 
     #====================================================================
@@ -221,7 +221,7 @@ class Solution:
             [7,13],
             [2,6,10,23,45,100]]
         listsLL = [self.createLLFromArray(x) for x in lists]
-        res = self.mergeKLists(listsLL)
+        res = self.mergeKLists1(listsLL)
         self.printLL(res)
 
 sol = Solution()

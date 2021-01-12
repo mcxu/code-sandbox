@@ -12,57 +12,58 @@ A solution set is:
 ]
 '''
 import unittest
+
 class Solution:
-    def threeSum(self, nums):
-        triplets = set([])
-
-        for i in range(len(nums)-1):
-            twoSumTarget = -1*nums[i]
-            twoSumResult = self.twoSum(nums, i+1, twoSumTarget)
-            for result in twoSumResult:
-                t = sorted([nums[i], result[0], result[1]])
-                tTup = tuple(t)
-                if tTup not in triplets:
-                    triplets.add(tTup)
-        return [list(trip) for trip in triplets]
+    def threeSum(self, nums: [int]) -> [[int]]:
+        triplets = set()
+        for i,n in enumerate(nums):
+            neg = -1*n
+            pairsFromi = self.twoSum(nums, i+1, neg)
+            for p in pairsFromi:
+                newtriplet = tuple(sorted([n, p[0], p[1]]))
+                if newtriplet not in triplets:
+                    triplets.add(newtriplet)
+        return triplets
     
-    def twoSum(self, nums, i, target):
-        aux = set([])
-        out = set([])
-        for j in range(i, len(nums)):
-            if target - nums[j] in aux:
-                out.add((nums[j], target-nums[j]))
+    def twoSum(self, num, i, target):
+        visited = set()
+        pairs = set()
+        for j in range(i, len(num)):
+            val = num[j]
+            if target-val in visited:
+                newpair = (target-val, val)
+                if newpair not in pairs:
+                    pairs.add(newpair)
             else:
-                aux.add(nums[j])
-        return out
-
-
-    # def threeSum(self, nums):
-    #     nums = sorted(nums)
-    #     if len(nums) >= 3 and nums[0]==0 and nums[0]==nums[-1]:
-    #         return [[0,0,0]]
+                visited.add(val)
         
-    #     triplets = set([])
+        return pairs
 
-    #     for i in range(len(nums)-2):
-    #         self.tripletHelper(i, i+1, len(nums)-1, nums, triplets)
+# TLE
+class Solution2:
+    def threeSum(self, nums: [int]) -> [[int]]:
+        target = 0
+        nums = sorted(nums)
+        triplets = set()
+        for i in range(len(nums)-2):
+            self.helper(nums, target, i, i+1, len(nums)-1, triplets)
+        return triplets
         
-    #     return [list(triplet) for triplet in triplets]
-    
-    # def tripletHelper(self, i, j, k, nums, triplets):
-    #     if j >= k:
-    #         return
+    def helper(self, nums, target, a, b, c, triplets):
+        if b >= c:
+            return
         
-    #     currTriplet = (nums[i], nums[j], nums[k])
-    #     ctSum = sum(currTriplet)
-
-    #     if ctSum == 0 and currTriplet not in triplets:
-    #         triplets.add(currTriplet)
-
-    #     if ctSum > 0:
-    #         self.tripletHelper(i, j, k-1, nums, triplets)
-    #     else:
-    #         self.tripletHelper(i, j+1, k, nums, triplets)
+        aval=nums[a]; bval=nums[b]; cval=nums[c]
+        currTriplet = (aval, bval, cval)
+        currSum = sum(currTriplet)
+        
+        if currSum==target and currTriplet not in triplets:
+            triplets.add(currTriplet)
+        
+        if currSum < target:
+            self.helper(nums, target, a, b+1, c, triplets)
+        else:
+            self.helper(nums, target, a, b, c-1, triplets)
 
 
 class Test(unittest.TestCase):

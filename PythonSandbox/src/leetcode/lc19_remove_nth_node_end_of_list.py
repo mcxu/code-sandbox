@@ -7,7 +7,7 @@ class ListNode:
         self.next = next
 class Solution:
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
-        nodeMap = {}
+        nodeMap = {} # index : node
         i = 0
         m = head
         while m != None:

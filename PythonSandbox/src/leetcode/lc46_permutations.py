@@ -51,8 +51,6 @@ class Solution:
                 permuteHelper(nums, results)
                 # swap the ith and (i+1)th, to make a new permutation
                 swap(nums, i, i+1)
-                
-            return 
         
         def swap(nums, i, j):
             nums[i],nums[j] = nums[j],nums[i]

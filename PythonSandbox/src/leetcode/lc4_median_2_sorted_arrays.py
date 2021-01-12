@@ -21,52 +21,30 @@ The median is (2 + 3)/2 = 2.5
 
 class LC4_Median2SortedArrays:
     def findMedianSortedArrays(self, nums1, nums2):
-        """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: float
-        """
         merged = []
-        #print("nums1:{}, nums2:{}".format(nums1, nums2))
-        # create merged list
-        if(len(nums1)!=0 and len(nums2)!=0):
-            i = 0; j = 0
-            while(i<len(nums1) or j<len(nums2)):
-                #print("i={}, j={}, nums1 val={}, nums2 val={}".format(i,j,nums1[i],nums2[j]))
-                
-                if(nums1[i] < nums2[j]):
-                    merged.append(nums1[i])
-                    i+=1
-                    if(i == len(nums1)):
-                        merged += nums2[j:]
-                        break
-                elif(nums1[i] >= nums2[j]):
-                    merged.append(nums2[j])
-                    j+=1
-                    if(j == len(nums2)):
-                        merged += nums1[i:]
-                        break
-                #print(" nums1:{}, nums2:{}".format(nums1,nums2))
-                #print(" merged:{}".format(merged))
+        i = 0
+        j = 0
+        while i<len(nums1) and j<len(nums2):
+            if nums1[i] < nums2[j]:
+                merged.append(nums1[i])
+                i+=1
+            else:
+                merged.append(nums2[j])
+                j+=1
         
-        #print("final merged list: {}".format(merged))
+        #print("after while i:{}, j:{}".format(i,j))
+        if i < len(nums1):
+            merged += nums1[i:]
+        else:
+            merged += nums2[j:]
         
-        # if one of lists is empty
-        if(len(nums1)==0):
-            merged = nums2
-        elif(len(nums2)==0):
-            merged = nums1
+        #print("merged: ", merged)
         
-        #print("final merged after empty check: {}".format(merged))
-        
-        # find median
-        lo_ind = int((len(merged)-1)/2)
-        median = float(merged[lo_ind])
-        #print("assuming odd number of nums in merged. median: {}".format(median))
-        if(len(merged) % 2 == 0):
-            median = float(median + merged[lo_ind+1])/2
-            #print("even number of nums in merged. median: {}".format(median))
-    
+        median = 0
+        if len(merged)%2==1: # if odd number of values
+            median = merged[len(merged)//2]
+        else:
+            median = 0.5*(merged[len(merged)//2] + merged[len(merged)//2 - 1])
         return median
 
     

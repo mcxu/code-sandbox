@@ -1,7 +1,7 @@
 # https://leetcode.com/problems/generate-parentheses/
 
 class Solution:
-    def generateParenthesis(self, n: int) -> List[str]:
+    def generateParenthesis(self, n: int) -> [str]:
         sList = list("()"*n)
         #print("sList: ", sList)
         allPerms = set()
