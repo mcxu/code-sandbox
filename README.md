@@ -1,7 +1,7 @@
 code-sandbox <br>
 Code samples and testing grounds. <br>
 
-author: Michael Xu
+author: mcxu
 
 --------------------------------------------------------------------
 Useful commands:
