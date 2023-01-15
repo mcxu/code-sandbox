@@ -93,6 +93,8 @@ class Solution:
             print("val: ", n.val)
             n = n.next
 
+    # ==========================================================
+
     def llToArray(self, head):
         p = head
         result = []
@@ -140,6 +142,8 @@ class Solution:
         res = self.addTwoNumbers_2(l1.getHead(), l2.getHead())
         resArr = self.llToArray(res)
         print("resArr: ", resArr)
+
+    # ==========================================================
 
     """ Using carry number
     """
