@@ -65,12 +65,36 @@ class Prob:
     
     #---------------------------------------------------------------------------------
     '''
-    Brute force, recursive.
+    Brute force, recursive. Only returns the 
+    maximum value of the items.
+    '''
+    @staticmethod
+    def knapsack01BFRecMaxVal(items, capacity):
+        def helper(items, remCap, i):
+            if i >= len(items) or remCap <= 0:
+                return 0
+            
+            currItem = items[i]
+            value = currItem[0]
+            weight = currItem[1]
+
+            if weight > remCap:
+                return helper(items, remCap, i+1)
+
+            acceptItem = helper(items, remCap-weight, i+1) + value
+            rejectItem = helper(items, remCap, i+1)
+            return max(acceptItem, rejectItem)
+        
+        return helper(items, capacity, 0)
+
+    #---------------------------------------------------------------------------------
+    '''
+    Brute force, recursive. Also returns item indices.
     Time complexity: O(2^n), since each call of the helper results in 2x calls of the helper, one for include item, one for exclude item.
     Space complexity: O(n), since there are a max of n calls of the helper on the call stack.
     '''
     @staticmethod
-    def knapsack01BFRec(items, capacity):
+    def knapsack01BFRec2(items, capacity):
         
         # remCap means remaining capacity. This starts out equal to capacity at the root helper call.
         # vii: valid item indices; keep track of which indices were included.
@@ -283,9 +307,10 @@ class Prob:
 
 #alg = Prob.knapsack01BF
 #alg = Prob.knapsack01BFRec
+alg = Prob.knapsack01BFRecMaxVal
 #alg = Prob.knapsack01RecMemo
-alg = Prob.knapsack01IterativeDP
+#alg = Prob.knapsack01IterativeDP
 
-#Prob.test1(alg)
+Prob.test1(alg)
 #Prob.test2(alg)
-Prob.test3(alg)
+#Prob.test3(alg)

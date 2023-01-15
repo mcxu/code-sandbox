@@ -1,11 +1,4 @@
-'''
-https://leetcode.com/problems/string-compression/
-Given an array of characters, compress it in-place.
-The length after compression must always be smaller than or equal to the original array.
-Every element of the array should be a character (not int) of length 1.
-After you are done modifying the input array in-place, return the new length of the array.
-Could you solve it using only O(1) extra space?
-'''
+# https://leetcode.com/problems/string-compression/
 
 class Solution:
     def compress(self, chars) -> int:
@@ -68,6 +61,35 @@ class Solution:
         arr = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
         res=self.compress(arr)
         print("test1 res: ", res)
+
+
+class Solution2:
+    def compress(self, chars: [str]) -> int:
+        count = 0
+        out = []
+        currChar = chars[0]
+        for i,ch in enumerate(chars):
+            #print("i={}, ch={}, currChar:{}".format(i,ch,currChar))
+            if ch == currChar:
+                count += 1
+            else:
+                out += [currChar]
+                if count > 1:
+                    out += [c for c in str(count)]
+                #print("out updated: ", out)
+                currChar = ch
+                count = 1
+                #print("currChar updated: ", currChar)
+        
+        # for last char segment
+        out += [currChar]
+        if count > 1:
+            out += [c for c in str(count)]
+        
+        chars.clear()
+        chars += [c for c in out]
+        return len(chars)
+                
 
 s = Solution()
 s.test1()

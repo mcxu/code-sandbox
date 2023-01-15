@@ -74,5 +74,5 @@ class Prob:
         output = Prob.groupAnagrams2(words)
         print("test2: output: ", output)
     
-Prob.test1()
-#Prob.test2()
+#Prob.test1()
+Prob.test2()

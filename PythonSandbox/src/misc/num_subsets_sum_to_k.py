@@ -35,13 +35,14 @@ class Prob:
             includeCurrValue = helper(arr, remainder-currValue, i-1)
             
             return excludeCurrValue + includeCurrValue
-
+        
         ns = helper(arr, k, len(arr)-1)
         return ns 
     
     @staticmethod
     def test1(alg):
-        arr = [2,4,6,10,12]
+        #arr = [2,4,6,10,12]
+        arr = [2,4,6,12,10]
         k = 16
         res = alg(arr, k)
         print("test1 res: ", res)

@@ -1,9 +1,6 @@
 '''
-206. Reverse Linked List
-
-
+https://leetcode.com/problems/reverse-linked-list/
 '''
-
 class ListNode:
     def __init__(self, x):
         self.val = x

@@ -2,7 +2,7 @@
 https://leetcode.com/problems/number-of-islands/
 '''
 class Solution:
-    def numIslands(self, grid: List[List[str]]) -> int:
+    def numIslands(self, grid: [[str]]) -> int:
         visited = [[False for _ in range(len(grid[0]))] 
                    for _ in range(len(grid))]
         numIslands = 0

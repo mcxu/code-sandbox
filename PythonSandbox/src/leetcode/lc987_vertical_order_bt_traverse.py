@@ -22,75 +22,85 @@ class TreeNode:
         self.right = None
 
 class Solution:
-    def verticalTraversal(self, root: TreeNode):
-        def helper(root, x, y, memo):
-            nonlocal treeDepth
-            if root is None:
-                return 
-            
-            if x not in memo.keys():
-                memo[x] = [[] for _ in range(treeDepth)]
-                memo[x][y].append(root.val)
-            else:
-                memo[x][y].append(root.val)
-
-            helper(root.left, x-1, y+1, memo)
-            helper(root.right, x+1, y+1, memo)
-
-        treeDepth = self.getDepth(root)
-        memo = {}
-        helper(root, 0, 0, memo) # x:0, y:0
-        
-        # print("memo after")
-        # for key in memo.keys():
-        #     print("{} : {}".format(key, memo[key]))
-        
-        out = self.xtnMapToOutFormat(memo)
+    def verticalTraversal(self, root: TreeNode) -> [[int]]:
+        colMap = {}
+        x = 0
+        y = 0
+        self.helper(root, colMap, x, y)
+        out=[]
+        for k in sorted(colMap.keys()):
+            tupList = sorted(colMap[k], key=lambda x: x[1])
+            yMap = {}
+            for _,t in enumerate(tupList):
+                rv = t[0]; yv = t[1]
+                if yv in yMap.keys():
+                    yMap[yv].append(rv)
+                else:
+                    yMap[yv] = [rv]
+            #print("yMap: ",yMap)
+            col = []
+            for k in sorted(yMap.keys()):
+                col += sorted(yMap[k])
+            out.append(col)
         return out
     
-    def xtnMapToOutFormat(self, memo):
-        xmin = min(memo.keys())
-        xmax = max(memo.keys())
-        out = []
-        for i in range(xmin, xmax+1):
-            vertList = []
-            yListsForx = memo[i]
-            for yInd in range(len(yListsForx)):
-                yList = yListsForx[yInd]
-                if yList:
-                    if len(yList) == 1:
-                        vertList.append(yList[0])
-                    else:
-                        yListSorted = sorted(yList)
-                        vertList += yListSorted
-            out.append(vertList)
-        return out
-    
-    def getDepth(self, root):
+    def helper(self, root, colMap, x, y):
         if root == None:
-            return 0
+            return
         
-        ld = self.getDepth(root.left)+1
-        rd = self.getDepth(root.right)+1
-        return max(ld, rd)
+        if x in colMap.keys():
+            colMap[x].append((root.val,y))
+        else:
+            colMap[x] = [(root.val,y)]
+        #print("colMap: ", colMap)
+        self.helper(root.left, colMap, x-1, y+1)
+        self.helper(root.right, colMap, x+1, y+1)
     
-    def test_getDepth(self):
-        root = TreeNode(3)
-        root.left = TreeNode(9)
-        root.right = TreeNode(20)
-        root.right.left = TreeNode(15)
-        root.right.right = TreeNode(7)
+    def buildTree(self, arr):
+        if not arr:
+            return None
+
+        def h(arr, i):
+            if i > len(arr)-1:
+                return None
+            if arr[i]==None:
+                return None
+            
+            root = TreeNode(arr[i])
+            print("node created: ", root.val)
+            root.left = h(arr, 2*i+1)
+            root.right = h(arr, 2*i+2)
+            return root
         
-        d = self.getDepth(root)
-        print("d: ", d)
-    
+        root = h(arr, 0)
+        return root
+
     def test1(self):
-        arr = [0,8,1,None,None,3,2,None,4,5,None,None,7,6]
-        expected = [[8],[0,3,6],[1,4,5],[2,7]]
-        
+        arr = [3,9,20,None,None,15,7]
+        expected = [[9],[3,15],[20],[7]]
+        root = self.buildTree(arr)
+        res = self.verticalTraversal(root)
+        print("res: ", res)
+
+    def test2(self):
+        arr = [1,2,3,4,5,6,7]
+        expected = [[4],[2],[1,5,6],[3],[7]]
+        root = self.buildTree(arr)
+        res = self.verticalTraversal(root)
+        print("res: ", res)
+        if res==expected:
+            print("test2 pass")
+
+    def test3(self):
         arr = [0,2,1,3,None,None,None,4,5,None,7,6,None,10,8,11,9]
-        # [0,2,1,3,null,null,null,4,5,null,7,6,null,10,8,11,9]
+        expected = [[4,10,11],[3,6,7],[2,5,8,9],[0],[1]]
+        root = self.buildTree(arr)
+        res = self.verticalTraversal(root)
+        print("res: ", res)
+        if res==expected:
+            print("test3 pass")
 
 sol = Solution()
-sol.test_getDepth()
 #sol.test1()
+#sol.test2()
+sol.test3()

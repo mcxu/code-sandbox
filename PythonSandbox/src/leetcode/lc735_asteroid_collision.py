@@ -27,7 +27,7 @@ class Solution:
         return stack
     
     # mutates stack to remove collisions 
-    def removeCollisions(self, stack):              
+    def removeCollisions(self, stack):
         j = len(stack)-1
         while stack and stack[j-1]>0 and stack[j]<0:
             #print("stack while: ", stack)

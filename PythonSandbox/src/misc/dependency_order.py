@@ -1,71 +1,45 @@
 '''
-A.py
-import B,C,D
-
-B.py
-import C,D
-
-C.py
-import D
-
-D.py
-no imports
+Given files and their dependencies. Return list of imports so that
+each file has their dependencies imported before the file itself is imported.
+File: A: import B,C,D
+File: B: import C,D
+File: C: import D
+File: D: no imports
 '''
 
-files = ["A", "B", "C", "D"]
-fileToImportMap = {
-    files[0]: ["B", "C", "D"],
-    files[1]: ["C", "D"],
-    files[2]: ["D"],
-    files[3]: []
-}
-ext = ".py"
+class DepOrder:
+    def getDepOrder(self, importsMap):
+        stack = [] # stores the order of files, and gets returned
+        visited = set() # keep track of visited files
+        files = list(importsMap.keys())
+        for i in range(len(importsMap)):
+            initFile = files[i]
+            print("initFile: ", initFile)
+            if initFile not in visited:
+                self.depOrderToposort(importsMap, initFile, visited, stack)
+        return stack
 
-# get dependencies
-def getDepsForFile(fileName):    
-    # if fileName[-len(ext):] != ext:
-    #     fileName += ext
-    deps = fileToImportMap[fileName]
-    return deps
+    def depOrderToposort(self, importsMap, currFile, visited, stack):
+        visited.add(currFile)
+        print("visited:", visited)
+        for i,depFile in enumerate(importsMap[currFile]):
+            if depFile not in visited:
+                self.depOrderToposort(importsMap, depFile, visited, stack)
+        stack.append(currFile)
 
-def orderOfImports(fileList):
-    order = []
-    stack = [fileList[0]]
-    
-    # init this map to keep track of what's already been imported
-    alreadyImported = {}
-    for f in fileList:
-        alreadyImported[f] = False
-    print("alreadyImported: ", alreadyImported)
+    def importsMap1(self):
+        importsMap = {
+            "A": ["B", "C", "D"],
+            "B": ["C", "D"],
+            "C": ["D"],
+            "D": []
+        }
+        return importsMap
 
-    while stack:
-        print("-----")
-        print("stack: ", stack)
-        currFile = stack[-1]
-        print("currFile: ", currFile)
+    def test1(self):
+        im = self.importsMap1()
+        result = self.getDepOrder(im)
+        print("result: ", result)
 
-        
-            
-        print("alreadyImported: ", alreadyImported)
-        print("stack end: ", stack)
-        print("order: ", order)
-
-def testGetDepsForFile():
-    files = ["A.py", "B.py", "C.py", "D.py"]
-    filesNoExt = ["A","B","C","D"]
-    for i in range(len(files)):
-        f = files[i]
-        deps = getDepsForFile(f)
-        print("deps: ", deps)
-    
-    for i in range(len(filesNoExt)):
-        f = filesNoExt[i]
-        deps = getDepsForFile(f)
-        print("deps: ", deps)
-
-def test1():
-    result = orderOfImports(files)
-    print("result: ", result)
-
-#testGetDepsForFile()
-test1()
+do = DepOrder()
+do.test1()

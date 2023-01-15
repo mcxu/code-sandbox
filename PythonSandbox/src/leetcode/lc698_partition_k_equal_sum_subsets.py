@@ -8,6 +8,7 @@ divide this array into k non-empty subsets whose sums are all equal.
 https://medium.com/@null00/leetcode-partition-to-k-equal-sum-subsets-b08841f3e578
 '''
 class Solution:
+    TODO: fix. this is not correct
     def canPartitionKSubsets(self, nums, k):
         numsSum = sum(nums)
         print("numsSum: ", numsSum)

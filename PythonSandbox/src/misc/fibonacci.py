@@ -51,11 +51,36 @@ class Fibonacci:
             a = self.getNthFib_memoized(i)
             print("ind: {}, fib: {}".format(i, a))
 
+    # O(n) time, O(1) space
+    # n is 1 indexed: 1st fib number is 1, 2nd fib number is 1, etc.
+    def getNthFibIterative(self, n):
+        if n < 1:
+            return -1
+        
+        arr = [1,1]
+        if n <= 2:
+            return arr[n-1]
+        
+        for i in range(3, n+1):
+            newnum = arr[-1]+arr[-2]
+            arr[0]=arr[1]
+            arr[1]=newnum
+        
+        return arr[-1]
+    
+    def test_getNthFibIterative(self):
+        #n = 0
+        #n = 1
+        n = 12
+        res = self.getNthFibIterative(n)
+        print("res: ", res)
+
 def main():
     f = Fibonacci()
     #f.test_getNthFib()
     #f.test_getNthFib_memoized()
-    f.test_getNthFib_memoized_multi()
+    #f.test_getNthFib_memoized_multi()
+    f.test_getNthFibIterative()
 
 if __name__ == "__main__":
     main()

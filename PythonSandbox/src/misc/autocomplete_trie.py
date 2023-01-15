@@ -68,6 +68,7 @@ class ACP:
     
     def test1(self):
         self.buildTrie(self.testList2)
+        print("trie: ", self.trieRoot)
         results = self.autocomplete("abs")
         print("test1.1 ", results)
         results = self.autocomplete("adde")

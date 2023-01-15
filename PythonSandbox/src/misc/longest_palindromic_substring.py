@@ -102,14 +102,14 @@ class Prob:
             j += 1
         #print("isPalExpansion: final i={}, j={}".format(i,j))
         # return the start and end indices of the palindrome
-        return (j-1)-(i-1)-1
+        return j-(i+1)
     
     @staticmethod
     def test_palLenExpansion():
         s1 = "abaxyzzyxf"
         s2 = "aaabaaa"
-        pl = Prob.palLenExpansion(s1,1,1)
-        #pl = Prob.palLenExpansion(s1,5,6)
+        #pl = Prob.palLenExpansion(s1,1,1)
+        pl = Prob.palLenExpansion(s1,5,6)
         #pl = Prob.palLenExpansion(s2,3,3)
         print("test_palLenExpansion: pl: ", pl)
         
@@ -131,7 +131,7 @@ class Prob:
     
 #Prob.test_isPal()
 #Prob.test1()
-#Prob.test_palLenExpansion()
-Prob.test2()
+Prob.test_palLenExpansion()
+#Prob.test2()
 
  

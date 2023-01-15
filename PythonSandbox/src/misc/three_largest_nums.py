@@ -4,29 +4,41 @@ of the three largest integers in the input array. Note that the function should 
 if necessary; for example, it should return [10, 10, 12] for an input array of [10, 5, 9, 10, 12].
 """
 
-from utils.sorting_utils import SortingUtils
-from utils.number_utils import NumberUtils
-
 class ThreeLargestNums:
     @staticmethod
-    def threeLargestNums(array):
-        # isolate negatives
-        negs, poss = NumberUtils.isolateNegatives(array)
-        #print("negs: {}\nposs:{}".format(negs, poss))
-        negsSorted = ThreeLargestNums.sortNegatives(negs)
-        #print("negsSorted:", negsSorted)
-        possSorted = SortingUtils.countingSort(poss)
-        array = negsSorted + possSorted
-        return array[-3:]
-        
+    def threeLargestNums(arr):
+        k = 3
+        lo = 0
+        hi = len(arr)-1
+        pidx = ThreeLargestNums.quickselect(arr, lo, hi, k)
+        print("pidx: ", pidx)
+        return arr[pidx:]
+    
     @staticmethod
-    def sortNegatives(array):
-        a = [abs(x) for x in array]
-        sa = SortingUtils.countingSort(a)
-        array = []
-        for x in sa:
-            array.insert(0, -x)
-        return array
+    def quickselect(arr, lo, hi, k):
+        if lo < hi:
+            partitionIdx = ThreeLargestNums.partition(arr, lo, hi)
+            
+            if partitionIdx == len(arr)-k:
+                return partitionIdx
+
+            if partitionIdx > len(arr)-k:
+                return ThreeLargestNums.quickselect(arr, lo, hi-1, k)
+            if partitionIdx < len(arr)-k:
+                return ThreeLargestNums.quickselect(arr, lo+1, hi, k)
+        return lo
+
+    @staticmethod
+    def partition(arr, lo, hi):
+        i = lo
+        j = lo
+        pivotElt = arr[hi]
+        while i <= hi:
+            if arr[i] <= pivotElt:
+                arr[i],arr[j] = arr[j],arr[i]
+                j += 1
+            i += 1
+        return j-1
 
     #all positives
     @staticmethod
@@ -34,18 +46,6 @@ class ThreeLargestNums:
         a = [10, 5, 9, 10, 12]
         result = ThreeLargestNums.threeLargestNums(a)
         print("result: ", result)
-    
-    @staticmethod
-    def test_sortNegatives():
-        a = [-1, -2, -3, -7, -17, -27, -18, -541, -8, -7]
-        result = ThreeLargestNums.sortNegatives(a)
-        print("test_sortNegatives:", result)
-        
-    @staticmethod
-    def test_isolateNegatives():
-        a = [-1, -2, -3, -7, -17, -27, -18, -541, -8, -7, 7]
-        result = NumberUtils.isolateNegatives(a)
-        print("test_isolateNegatives:", result)
     
     # positives and negatives
     @staticmethod
@@ -57,6 +57,9 @@ class ThreeLargestNums:
     @staticmethod
     def test_threeLargestNums3():
         a = [141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]
+        aSorted = sorted(a)
+        print('aSorted: ', aSorted)
+        print("a: ", a)
         result = ThreeLargestNums.threeLargestNums(a)
         print("result: ", result)
 

@@ -1,7 +1,26 @@
 # https://leetcode.com/problems/remove-k-digits/
 
 # better solution 
-
+class Solution2:
+    def removeKdigits(self, num: str, k: int) -> str:
+        stack = []
+        
+        m = k
+        for _,d in enumerate(num):
+            while m>0 and stack and stack[-1]>d:
+                stack.pop()
+                m -= 1
+            stack.append(d)
+        
+        # remove leading 0's
+        while stack and stack[0]=="0":
+            stack.pop(0)
+        # print("stack final: ", stack)
+        # print("m: ", m)
+        if m>0:
+            return "".join(stack[:-m]) if stack[:-m] else "0"
+        
+        return "".join(stack) if stack else "0"
 
 # results in TLE
 class Solution:

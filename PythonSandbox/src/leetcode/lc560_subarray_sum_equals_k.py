@@ -45,10 +45,12 @@ class Solution:
     def subarraySum2(self, nums, k):
         count = 0
         runSum = 0
-        sumMap = {}
-        sumMap[0] = 1 # for the case that runSum-k exists, and is = 0.
+        sumMap = {0: 1} # for the case that runSum-k exists, and is = 0.
         for i in range(len(nums)):
             runSum += nums[i]
+            print("i={}, runSum: {}".format(i, runSum))
+            print("sumMap: ", sumMap)
+            # update count
             if runSum-k in sumMap.keys():
                 count += sumMap[runSum-k]
 
@@ -56,10 +58,6 @@ class Solution:
                 sumMap[runSum] = sumMap[runSum]+1
             else:
                 sumMap[runSum] = 1
-        
-        print("sumMap: ")
-        for key in sumMap.keys():
-            print("    {} : {}".format(key, sumMap[key]))
         return count
     
     def test1(self,alg):
@@ -86,6 +84,6 @@ class Solution:
         print("test3 c: ", c)
         
 sol = Solution()
-sol.test1(sol.subarraySum2)
-#sol.test2(sol.subarraySum2)
+#sol.test1(sol.subarraySum2)
+sol.test2(sol.subarraySum2)
 #sol.test3(sol.subarraySum2)

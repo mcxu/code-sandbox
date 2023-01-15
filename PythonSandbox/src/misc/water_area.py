@@ -75,6 +75,13 @@ class Prob:
                 waterAmts[i] = maxHeightRight - heights[i]
             Prob.waterAreaHelper(heights, maxIndRight+maxInd+1, waterAmts, left=False)
     
+    # ======================================================================================
+
+    @staticmethod
+    def waterArea2(heights):
+        pass
+
+    # ======================================================================================
     '''
     Dynamic programming
     '''

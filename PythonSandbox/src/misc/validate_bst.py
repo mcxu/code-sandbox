@@ -32,11 +32,9 @@ class Prob:
     @staticmethod
     def helper(tree, minVal, maxVal):
         if tree == None:
-            print("gotten to none")
             return True
         
         if tree.value < minVal or tree.value >= maxVal:
-            print("false found")
             return False
         
         # check if left subtree is valid: set maxVal to value of current node

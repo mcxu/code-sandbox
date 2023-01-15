@@ -39,21 +39,21 @@ class Prob:
         print("initial min in mnc: ", min(mnc))
 
         for i in range(n+1): # O(n) time
-            #print("i=", i)
+            print("i=", i)
             for d in range(len(denoms)): # O(d) time
                 denom = denoms[d]
-                #print(" d= {}, denom= {}".format(d,denom))
+                print(" d= {}, denom= {}".format(d,denom))
                 if i >= denom:
                     mnc[i] = min(mnc[i], mnc[i-denom] + 1)
-                    #print("     mnc: ", mnc)
+                    print("   mnc: ", mnc)
                 else:
+                    print("   denom > i. breaking")
                     break
         print("mnc: ", mnc)
         minWaysFinal = mnc[n]
         if minWaysFinal == float("inf"):
             return -1
-        else:
-            return minWaysFinal
+        return minWaysFinal
 
     @staticmethod
     def test1(alg):
@@ -100,10 +100,18 @@ class Prob:
         numCoins = alg(n, denoms)
         print("test6: num coins: ", numCoins)
 
+    @staticmethod
+    def test7(alg):
+        n = 10
+        denoms = [2,3,4]
+        numCoins = alg(n, denoms)
+        print("test6: num coins: ", numCoins)
+
 alg = Prob.minNumOfCoinsForChangeDP
 #Prob.test1(alg)
 #Prob.test2(alg)
 #Prob.test3(alg)
 #Prob.test4(alg)
 #Prob.test5(alg)
-Prob.test6(alg)
+#Prob.test6(alg)
+Prob.test7(alg)

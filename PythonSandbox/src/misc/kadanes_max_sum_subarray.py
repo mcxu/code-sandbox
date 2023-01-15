@@ -16,20 +16,14 @@ class KD:
     """
     @staticmethod
     def kadanesAlgorithm(array):
-        print("array: ", array)
         maxEndingHere = array[0]
         maxSoFar = maxEndingHere
         for i in range(1, len(array)):
             val = array[i]
-            print("val: ", val)
-            print("maxEndingHere: ", maxEndingHere)
-            print("maxSoFar: ", maxSoFar)
             maxEndingHere = max(val, maxEndingHere+val)
-            print("maxEndingHere after: ", maxEndingHere)
+            print("maxEndingHere: ", maxEndingHere)
             if maxEndingHere > maxSoFar:
                 maxSoFar = maxEndingHere
-                print("maxSoFar set to: ", maxSoFar)
-        print("maxSoFar: ", maxSoFar)
         return maxSoFar
             
     '''
@@ -89,7 +83,7 @@ class KD:
     
     @staticmethod
     def test1(alg):
-        array = [3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4] 
+        array = [3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]
         #ans: 19 ([1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1])
         ans = alg(array)
         print("test1 ans: ", ans)
@@ -107,8 +101,8 @@ class KD:
         print("test3 ans: ", ans)
    
 
-#alg  = KD.kadanesAlgorithm
-alg = KD.kadanesWithSubarray 
+alg  = KD.kadanesAlgorithm
+#alg = KD.kadanesWithSubarray 
 KD.test1(alg)
 #KD.test2() 
 #KD.test3()      

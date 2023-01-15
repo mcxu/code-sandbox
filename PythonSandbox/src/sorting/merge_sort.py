@@ -1,7 +1,5 @@
 '''
 Merge Sort
-
-
 '''
 
 from utils.number_utils import NumberUtils

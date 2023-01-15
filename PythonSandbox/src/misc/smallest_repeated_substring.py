@@ -19,6 +19,8 @@ class SRS:
     
     def test1(self):
         strings = [
+            "aaaaaaaa",
+            "aaaaaaab",
             "abcabcabc",
             "abcabb",
             "lrbblrbb",

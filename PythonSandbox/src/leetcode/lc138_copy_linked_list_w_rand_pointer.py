@@ -29,10 +29,9 @@ class Solution:
         # create new nodes with corresponding values, O(n) time
         n = head
         while n != None:
-            newNode = Node(n.val)
-            nnMap[n] = newNode
+            nnMap[n] = Node(n.val)
             n = n.next
-    
+        print("nnNap: ", nnMap)
         # create connections in new tree, O(n) time
         n = head
         while n != None:
@@ -125,5 +124,5 @@ class Solution:
             copied = copied.next
 
 sol = Solution()
-#sol.test1(sol.copyRandomList)
-sol.test1(sol.copyRandomListWOMap)
+sol.test1(sol.copyRandomList)
+#sol.test1(sol.copyRandomListWOMap)

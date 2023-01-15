@@ -20,9 +20,7 @@ class Solution:
         """  
         s = set()
         self.helper1(root1, s)
-        print("twoSumBSTs: s: ", s)
         result = self.helper2(root2, target, s)
-        print("twoSumBSTs: result: ", result)
         return result
     
     # do in-order traversal on 1st BST so that the elements in the tree
@@ -41,16 +39,12 @@ class Solution:
         if root == None:
             return False
         
+        if target - root.value in s:
+            return True
+        
         if self.helper2(root.left, target, s) == True:
             return True
-        
-        # evaluation logic
-        print("helper2: val: {}, target: {}".format(root.value, target))
-        d = target - root.value # difference that needs to be found in l1
-        if d > 0 and d in s:
-            print("    d={}, s={}".format(d, s))
-            return True
-        
+
         return self.helper2(root.right, target, s)
         
     # -----------------------------------------------------------------------------

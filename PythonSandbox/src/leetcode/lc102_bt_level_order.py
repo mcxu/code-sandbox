@@ -23,7 +23,7 @@ class TreeNode:
         self.right = None
 
 class Solution:
-    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+    def levelOrder(self, root: TreeNode) -> [[int]]:
         levelMap = {} # levels: [values]
         self.helper(root,0,levelMap)
         
@@ -46,7 +46,33 @@ class Solution:
         
         self.helper(root.left, currLevel+1, levelMap)
         self.helper(root.right, currLevel+1, levelMap)
-        
+    
+    def makeTree(self, nodes):
+
+        def helper(nodes, i):
+            if i > len(nodes)-1:
+                return None
+            
+            val = nodes[i]
+            if val == None:
+                return None
+            root=TreeNode(val)
+            root.left = helper(nodes, i*2+1)
+            root.right = helper(nodes, i*2+2)
+            return root
+
+        return helper(nodes, 0)
+
+    def tree1(self):
+        nodes = [3,9,20,None,None,15,7]
+        root = self.makeTree(nodes)
+        return root
+    
+    def test1(self):
+        root = self.tree1()
+        res = self.levelOrder(root)
+        print('res: ', res)
+
 # ========================== using BFS ====================
 
     def levelOrderIterative(self, root):
@@ -57,7 +83,7 @@ class Solution:
     
     def bfs(self, root):
         q = [(root, 0)] # (node, level)
-        visited = [] # nodes
+        visited = set() # nodes
         output = [] # lists of values by level
         
         while q:
@@ -66,7 +92,7 @@ class Solution:
             currLevel = curr[1]
             
             if currNode not in visited and currNode != None:
-                visited.append(currNode)
+                visited.add(currNode)
                 
                 if currLevel >= len(output):
                     output.append([currNode.val])
@@ -77,3 +103,6 @@ class Solution:
                 q.append((currNode.right, currLevel+1))
         
         return output
+
+s = Solution()
+s.test1()

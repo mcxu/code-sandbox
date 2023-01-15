@@ -7,3 +7,4 @@ A string is K-Palindrome if it can be transformed into a palindrome by removing 
 class Solution:
     def isKPalindrome(self, s, k):
         pass
+        #TODO

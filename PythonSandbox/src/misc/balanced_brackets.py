@@ -84,8 +84,8 @@ class Prob:
     
     @staticmethod
     def test2():
-        #s = '><<><'
-        s = '>>><>>'
+        s = '><<><'
+        #s = '>>><>>'
         balStr = Prob.balanceString(s)
         print("test2 balStr: ", balStr)
         

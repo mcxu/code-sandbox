@@ -1,6 +1,7 @@
 '''
 https://leetcode.com/problems/first-bad-version/
 '''
+# TODO
 class Solution:
     def firstBadVersion(self, n):
         """

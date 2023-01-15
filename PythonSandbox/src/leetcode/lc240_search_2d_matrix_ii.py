@@ -29,7 +29,7 @@ class Solution:
         
             if num < target:
                 i = med+1
-            elif num > target:
+            else:
                 j = med-1
             
         return False

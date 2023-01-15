@@ -35,8 +35,8 @@ class Prob:
         maxVal = input**2 # maximum value to count up to
         yindMin = 0
         xindMin = 0
-        yindMax = len(matrix)-1;
-        xindMax = len(matrix[0])-1;
+        yindMax = len(matrix)-1
+        xindMax = len(matrix[0])-1
         print("maxVal: %s, yindMax: %s, xindMax: %s" % (maxVal, yindMax, xindMax))
         
         # starting numbers

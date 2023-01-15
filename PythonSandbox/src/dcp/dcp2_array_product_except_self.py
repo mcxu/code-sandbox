@@ -88,13 +88,46 @@ class DCP2():
             
         return prods
 
+    def listProduct(self, arr):
+        cumulativeProd = 1
+        for i in range(len(arr)):
+            if arr[i] != 0:
+                cumulativeProd *= arr[i]
+        
+        zeroSet = set()
+        for i in range(len(arr)):
+            if arr[i] == 0:
+                zeroSet.add(i)
+
+        out = []
+        for i in range(len(arr)):
+            if i in zeroSet:
+                if len(zeroSet) == 1:
+                    out.append(cumulativeProd)
+                else:
+                    out.append(0)
+            else:
+                if not zeroSet:
+                    out.append(cumulativeProd/arr[i])
+                else:
+                    out.append(0)
+        return out
+
+    def test_listProduct(self):
+        #arr = [1,2,3,0,5,0]
+        arr = [3,2,0,4,5]
+        res = self.listProduct(arr)
+        print("res: ", res)
+
 if __name__ == "__main__":
-    p2 = DCP2()
-    a = [1,2,3,4,5]
-    #out1 = p2.eval4(a)
-    out1 = p2.eval3(a)
-    print("out1: {}".format(out1))
+    # p2 = DCP2()
+    # a = [1,2,3,4,5]
+    # #out1 = p2.eval4(a)
+    # out1 = p2.eval3(a)
+    # print("out1: {}".format(out1))
     
 #     b = [3,2,1]
 #     out2 = p2.eval3(b)
 #     print("out2: {}".format(out2))
+    p = DCP2()
+    p.test_listProduct()
