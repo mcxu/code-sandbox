@@ -1,50 +1,34 @@
 """
-4. Median of Two Sorted Arrays [Hard]
-
-There are two sorted arrays nums1 and nums2 of size m and n respectively.
-Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
-You may assume nums1 and nums2 cannot be both empty.
-
-Example 1:
-
-nums1 = [1, 3]
-nums2 = [2]
-
-The median is 2.0
-Example 2:
-
-nums1 = [1, 2]
-nums2 = [3, 4]
-
-The median is (2 + 3)/2 = 2.5
+https://leetcode.com/problems/median-of-two-sorted-arrays/
 """
 
 class LC4_Median2SortedArrays:
-    def findMedianSortedArrays(self, nums1, nums2):
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         merged = []
-        i = 0
-        j = 0
-        while i<len(nums1) and j<len(nums2):
+        i, j = 0, 0
+        while i < len(nums1) and j < len(nums2):
             if nums1[i] < nums2[j]:
                 merged.append(nums1[i])
-                i+=1
+                i += 1
             else:
                 merged.append(nums2[j])
-                j+=1
+                j += 1
         
-        #print("after while i:{}, j:{}".format(i,j))
+        #handle remaining numbers
         if i < len(nums1):
             merged += nums1[i:]
         else:
             merged += nums2[j:]
         
-        #print("merged: ", merged)
-        
-        median = 0
-        if len(merged)%2==1: # if odd number of values
-            median = merged[len(merged)//2]
-        else:
-            median = 0.5*(merged[len(merged)//2] + merged[len(merged)//2 - 1])
+        # case for odd number of elements in merged
+        medIdx = len(merged)//2
+        median = merged[medIdx]
+
+        # case for even number of elements in merged
+        if len(merged)%2 == 0:
+            medIdx -= 1
+            median = (median + merged[medIdx])/2
+
         return median
 
     
