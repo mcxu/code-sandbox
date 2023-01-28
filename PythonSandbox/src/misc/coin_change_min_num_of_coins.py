@@ -8,20 +8,6 @@ Sample output: 3 (2x1 + 1x5)
 """
 
 class Prob:
-    
-    # TODO: not finished.
-    @staticmethod
-    def minNumOfCoinsForChangeRec(n, denoms):
-        
-        def helper(n, denoms):
-            
-            if n < 0:
-                return 0
-            if n == 0:
-                return 1
-            
-            
-    
     '''
     Dynamic programming, iterative. Using minWays array to store solns to subproblems.
     Let n=amount, d=len(denoms)

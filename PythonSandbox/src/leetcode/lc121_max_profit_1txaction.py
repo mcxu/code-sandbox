@@ -13,32 +13,29 @@ class Solution:
     '''
 class Solution:
     def maxProfit(self, prices: [int]) -> int:
-        if not prices or len(prices) == 1:
+        if not prices or len(prices)==1:
             return 0
         
-        minBuyInd = 0
-        maxSellInd = 1
-        profitSoFar = 0
+        buyIdx = 0 # minimize value at this index
+        sellIdx = 1 # maximize value at this index
+        maxProfitSoFar = 0
         for i in range(1, len(prices)):
-            #print("i={}".format(i))
-            
-            sellPrice = prices[i]
-            if sellPrice > prices[maxSellInd]:
-                maxSellInd = i
-                #print("maxSellInd now: ", maxSellInd)
-            
-            buyPrice = prices[i-1]
-            if buyPrice < prices[minBuyInd]:
-                minBuyInd = i-1
-                #print("minBuyInd now: ", minBuyInd)
-                
-            if minBuyInd >= maxSellInd:
-                #print("mbi and msi crossed")
-                maxSellInd = i
+            currPrice = prices[i]
 
-            profitSoFar = max(profitSoFar, prices[maxSellInd]-prices[minBuyInd])
+            if currPrice < prices[buyIdx]:
+                buyIdx = i
+            
+            if currPrice > prices[sellIdx]:
+                sellIdx = i
+
+            if buyIdx >= sellIdx:
+                print(f"buyIdx caught up to sellIdx: buyIdx: {buyIdx}, sellIdx: {sellIdx}, currIdx: {i}")
+                sellIdx = i
+
+            profitSoFar = prices[sellIdx] - prices[buyIdx]
+            maxProfitSoFar = max(maxProfitSoFar, profitSoFar)
         
-        return profitSoFar
+        return maxProfitSoFar
     
     def test1(self):
         prices = [7,1,5,3,6,4]

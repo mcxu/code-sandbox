@@ -13,34 +13,51 @@ A solution set is:
 '''
 import unittest
 
-class Solution:
+class Solution2:
     def threeSum(self, nums: [int]) -> [[int]]:
         triplets = set()
         for i,n in enumerate(nums):
-            neg = -1*n
-            pairsFromi = self.twoSum(nums, i+1, neg)
-            for p in pairsFromi:
-                newtriplet = tuple(sorted([n, p[0], p[1]]))
-                if newtriplet not in triplets:
-                    triplets.add(newtriplet)
-        return triplets
-    
-    def twoSum(self, num, i, target):
-        visited = set()
-        pairs = set()
-        for j in range(i, len(num)):
-            val = num[j]
-            if target-val in visited:
-                newpair = (target-val, val)
-                if newpair not in pairs:
-                    pairs.add(newpair)
-            else:
-                visited.add(val)
-        
-        return pairs
+            target = -n # find twoSum that add up to opposite of n
+            pairsFromIdx = self.twoSumFromIdx(i+1, nums, target) # get pairs from i+1 (twoSum)
 
-# TLE
-class Solution2:
+            for tup in pairsFromIdx:
+                newTriplet = tuple(sorted([n, tup[0], tup[1]]))
+                if newTriplet not in triplets:
+                    triplets.add(newTriplet)
+        return triplets
+
+
+    def twoSumFromIdx(self, j, nums, target):
+        validPairs = set()
+        seenNums = set()
+        for k in range(j, len(nums)):
+            if target - nums[k] in seenNums:
+                validPairs.add((nums[k], target-nums[k]))
+            else:
+                seenNums.add(nums[k])
+        return validPairs
+
+    def test(self):
+        cases = [
+            dict(nums=[-1,0,1,2,-1,-4], output=[[-1,-1,2],[-1,0,1]]),
+            dict(nums=[0,1,1], output=[]),
+            dict(nums=[0,0,0], output=[[0,0,0]])
+        ]
+
+        for c in cases:
+            res = self.threeSum(c["nums"])
+            print("case: ", c["nums"])
+            print("res: ", res)
+            assert res == c["output"]
+
+
+
+sol2 = Solution2()
+sol2.test()
+
+
+# TLE ===========================================================
+class Solution:
     def threeSum(self, nums: [int]) -> [[int]]:
         target = 0
         nums = sorted(nums)
@@ -74,7 +91,7 @@ class Test(unittest.TestCase):
             [-1, 0, 1],
             [-1, -1, 2]
         ]
-        sol = Solution()
+        sol = Solution2()
         result = sol.threeSum(nums)
         print("result: ", result)
         for t in expected:
@@ -89,4 +106,4 @@ class Test(unittest.TestCase):
     #     for t in expected:
     #         self.assertIn(t, result)
 
-unittest.main()
+#unittest.main()

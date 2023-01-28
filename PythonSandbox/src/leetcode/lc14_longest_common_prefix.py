@@ -1,6 +1,6 @@
 #https://leetcode.com/problems/longest-common-prefix/
 
-class Solution:
+class Solution2:
     # Using trie.
     def longestCommonPrefix(self, strs: [str]) -> str:
         trieRoot, shortestStrLen = self.buildTrie(strs)
@@ -62,6 +62,7 @@ class Solution:
 
     # ==========================================================
 
+class Solution:
     def longestCommonPrefix_1stAttempt(self, strs: [str]) -> str:
         if not strs:
             return ""
@@ -96,5 +97,5 @@ class Solution:
                 
         return commonPref
 
-sol = Solution()
+sol = Solution2()
 sol.test()

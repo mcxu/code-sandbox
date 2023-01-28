@@ -2,18 +2,20 @@
 https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/submissions/
 '''
 class Solution:
-    def findMin(self, nums: List[int]) -> int:
-        lo = 0
-        hi = len(nums)-1
-        while lo < hi:
-            m = int((lo+hi)/2)
-            #print("lo: {}, hi: {} m:{} ".format(lo,hi,m))
-            if m-1>=0 and nums[m] < nums[m-1]:
-                return nums[m]
+    def findMin(self, nums: [int]) -> int:
+        i = 0
+        j = len(nums)-1
+
+        while i <= j:
+            midIdx = (i+j)//2
+
+            if midIdx-1 >= 0 and nums[midIdx-1] > nums[midIdx]:
+                return nums[midIdx]
             
-            if nums[lo] <= nums[m] and nums[m] > nums[hi]:
-                lo = m+1
+            if nums[i] <= nums[midIdx] and nums[midIdx] > nums[j]:
+                i = midIdx + 1
             else:
-                hi = m-1
+                j = midIdx - 1
         
-        return nums[lo]
+        return nums[i]
+    

@@ -9,33 +9,33 @@ Sample input: "ZXVVYZW", "XKYKZPW"
 Sample output: ["X", "Y", "Z", "W"]
 
 Brute force complexity:
-http://www.mathcs.emory.edu/~cheung/Courses/323/Syllabus/DynProg/LCS-brute-force.html
+https://www.enjoyalgorithms.com/blog/longest-common-subsequence 
+https://www.ics.uci.edu/~eppstein/161/960229.html 
 '''
 
 class Prob:
     '''
     Let l1=len(str1), l2=len(str2)
-    Time complexity: O(l1*l2*min(l1,l2)), since nested for loops iterate through all l1*l2 char combinations.
-        Additionally, for each cell, there can only be up to min(l1,l2) appends.
-    Space complexity: O(l1*l2*min(l1,l2)). In addition to the matrix to store subsequence, the list in EACH cell
-        adds min(l1,l2) characters to store. 
+    Time complexity: O(l1*l2), since nested for loops iterate through all l1*l2 char combinations.
+    Space complexity: O(l1*l2). From the subseqMatrix.
     '''
     @staticmethod
     def longestCommonSubsequence(str1, str2):
         # have a matrix to store LCS up to a coordinate
-        subseqMatrix = [[[] for x in range(len(str1)+1)] for y in range(len(str2)+1)]
-#         print("subseqMatrix")
-#         for row in subseqMatrix: print(row)
+        subseqMatrix = [["" for x in range(len(str1)+1)] for y in range(len(str2)+1)]
         
-        for y in range(1, len(str2)+1):
-            for x in range(1, len(str1)+1):
+        print("subseqMatrix")
+        for row in subseqMatrix: print(row)
+        
+        for y in range(1, len(str2)+1): # row
+            for x in range(1, len(str1)+1): # col
                 #print("---------------")
                 #print("current corrdinates y={}, x={}".format(y,x))
                 if str1[x-1] == str2[y-1]:
                     # case1: find matching chars in lists
                     # action: set cell [y,x] to the upper left diagonal cell [y-1,x-1] joined with matching char, forming a subsequence
                     #print("found match at str2[{}]={}, str1[{}]={}".format(y-1, str2[y-1], x-1, str1[x-1]))
-                    subseqMatrix[y][x] = subseqMatrix[y-1][x-1] + [str1[x-1]]
+                    subseqMatrix[y][x] = subseqMatrix[y-1][x-1] + str1[x-1]
                     
                 elif len(subseqMatrix[y][x-1]) >= len(subseqMatrix[y-1][x]):
                     # case2: for coord [y,x], the subsequence in the cell to the left longer than the cell above
@@ -48,8 +48,8 @@ class Prob:
                     subseqMatrix[y][x] = subseqMatrix[y-1][x]
                 
                 #The above 2 elifs can be condensed into this else logic:
-#                 else:
-#                     subseqMatrix[y][x] = max(subseqMatrix[y][x-1], subseqMatrix[y-1][x])
+                #else:
+                #    subseqMatrix[y][x] = max(subseqMatrix[y][x-1], subseqMatrix[y-1][x])
                 
                 print("subseqMatrix (debug):")
                 for row in subseqMatrix: print(row)
@@ -124,7 +124,8 @@ class Prob:
     @staticmethod
     def test1(alg):
         str1 = "ZXVVYZW"
-        str2 = "XKYKZPW"
+        str2 = "XKYKZPW" 
+        #expected: XYZW
         lcs = alg(str1, str2)
         print("test1: lcs: ", lcs)
         
@@ -159,13 +160,13 @@ class Prob:
         
 def main():
     alg1 = Prob.longestCommonSubsequence
-    alg2 = Prob.longestCommonSubsequenceUsingPointer
+    #alg2 = Prob.longestCommonSubsequenceUsingPointer
     
-    #Prob.test1(alg2)
+    Prob.test1(alg1)
     #Prob.test2(alg2)
     #Prob.test3(alg2)
     #Prob.test4(alg2)
-    Prob.test5(alg2)
+    # Prob.test5(alg2)
 
 main()
 
