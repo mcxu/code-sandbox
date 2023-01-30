@@ -1,31 +1,32 @@
 '''
 39. Combination Sum
 https://leetcode.com/problems/combination-sum/
+
+Time complexity: O(n^t), where n~len(candidates), t~target
+Space complexity: O(t), t~target
 '''
 class Solution:
-    '''
-
-    '''
     def combinationSum(self, candidates, target):
         solutions = []
-        self.helper(candidates, target, [], solutions)
-        #print("solutions: ", solutions)
+        currSolution = []
+        self.buildSolution(candidates, target, currSolution, solutions)
         return solutions
-    
-    def helper(self, candidates, target, sol, solutions):
-        #print("sol: ", sol)
+
+    # helper function
+    def buildSolution(self, candidates, target, currSolution, solutions):
+        # print(f"target: {target}, currSolution: {currSolution}")
         if target < 0:
-            return
-        
+            return 
+
         if target == 0:
-            sortedSol = sorted(sol)
-            if sortedSol not in solutions:
-                solutions.append(sortedSol)
+            currSolution.sort()
+            if currSolution not in solutions:
+                solutions.append(currSolution)
+                # print("solutions updated: ", solutions)
             return
         
-        for i in range(len(candidates)):
-            c = candidates[i]
-            self.helper(candidates, target-c, sol+[c], solutions)
+        for i,c in enumerate(candidates):
+            self.buildSolution(candidates, target - c, currSolution + [c], solutions)
 
     def test1(self):
         candidates = [2,3,6,7]
