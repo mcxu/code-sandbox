@@ -13,8 +13,8 @@ class Prob:
         left = array[:median]
         right = array[median:]
         #print("mergeSort: median:{}, l:{}, r:{}".format(median,left,right))
-        sl = Prob.mergeSort(left)
-        sr = Prob.mergeSort(right)
+        sl = mergeSort(left)
+        sr = mergeSort(right)
         return Prob.mergeArrays(sl,sr)
     
     # merge pre-sorted arrays

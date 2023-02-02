@@ -38,6 +38,25 @@ class BinaryTreeUtils:
         rd = BinaryTreeUtils.treeHeight(tree.right) 
         return max(ld+1, rd+1)
 
+    @staticmethod
+    def buildTree(arr): # arr is a tree in array format
+        if not arr:
+            return None
+
+        def h(arr, i):
+            if i > len(arr)-1:
+                return None
+            if arr[i]==None:
+                return None
+            
+            root = TreeNode(arr[i])
+            #print("node created: ", root.val)
+            root.left = h(arr, 2*i+1)
+            root.right = h(arr, 2*i+2)
+            return root
+        
+        root = h(arr, 0)
+        return root
 
     def test1(self):
         tree = TreeNode(2)

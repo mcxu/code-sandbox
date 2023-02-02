@@ -12,23 +12,21 @@ determine the maximum amount of money you can rob tonight without alerting the p
 
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        startFrom0 = self.helper(nums, 0, {}) # start from 0th index
-        return startFrom0
-    
-    
-    def helper(self, nums, i, memo):
-        #print("i = ", i)
-        if len(nums) == 2:
-            return max(nums)
-        
-        if i > len(nums)-1:
+        i = 0 # start from 0th index
+        memo = {}
+        maxReward = self.jump(nums, i, memo)
+        return maxReward
+
+    def jump(self, nums, i, memo):
+        if i >= len(nums):
             return 0
         
         if i in memo.keys():
             return memo[i]
-        
-        jump1FromCurr = self.helper(nums, i+1, memo)
-        jump2FromCurr = self.helper(nums, i+2, memo) + nums[i]
-        memo[i] = max(jump1FromCurr, jump2FromCurr)
-        return memo[i]
-        #return max(jump1FromCurr, jump2FromCurr)
+
+        dontRobCurrent = self.jump(nums, i+1, memo) # don't include reward of the current house
+        robCurrent = self.jump(nums, i+2, memo) + nums[i] # include the reward of the current house
+        maxReward = max(dontRobCurrent, robCurrent) # which one leads to the max reward?
+
+        memo[i] = maxReward
+        return maxReward
