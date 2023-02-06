@@ -10,3 +10,21 @@ class Solution:
                 return False
         
         return True
+
+    def test(self):
+        cases = [
+            dict(intervals=[(0,30),(5,10),(15,20)], expected=False),
+            dict(intervals=[(5,8),(9,15)], expected=True)
+        ]
+
+        for case in cases:
+            intervals = case["intervals"]
+            expected = case["expected"]
+
+            print(f"Case: intervals:{intervals}")
+            res = self.canAttendMeetings(intervals)
+            print("result: ", res)
+            assert res == expected
+
+sol = Solution()
+sol.test()
