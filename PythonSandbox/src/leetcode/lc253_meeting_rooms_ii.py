@@ -12,21 +12,21 @@ class Solution:
             return 0
             
         intervals = sorted(intervals, key=lambda x: x[0])
-        print("intervals: ", intervals)
+        # print("intervals: ", intervals)
         endingTimeHeap = [intervals.pop(0)[1]]
-        print("init heap: ", endingTimeHeap)
+        # print("init heap: ", endingTimeHeap)
 
         for interval in intervals:
-            print(f"--- curr interval: {interval}")
+            # print(f"--- curr interval: {interval}")
             currStart, currEnd = interval[0], interval[1]
-            print("curr heap: ", endingTimeHeap)
+            # print("curr heap: ", endingTimeHeap)
 
             if currStart >= endingTimeHeap[0]:
                 heapq.heappop(endingTimeHeap)
-                print("heap popped: ", endingTimeHeap)
+                # print("heap popped: ", endingTimeHeap)
             
             heapq.heappush(endingTimeHeap, currEnd)
-            print("heap pushed: ", endingTimeHeap)
+            # print("heap pushed: ", endingTimeHeap)
         
         return len(endingTimeHeap)
 

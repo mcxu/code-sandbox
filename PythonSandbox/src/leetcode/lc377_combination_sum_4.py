@@ -3,6 +3,7 @@ https://leetcode.com/problems/combination-sum-iv/description/
 """
 
 class Solution:
+    # memoized
     def combinationSum4(self, nums: [int], target: int) -> int:
         memo = {}
         return self.buildSolution(nums, target, memo)
@@ -20,11 +21,30 @@ class Solution:
 
         numCombos = 0
         for i in range(len(nums)):
-            n = nums[i]
-            numCombos += self.buildSolution(nums, target-n, memo)
+            numCombos += self.buildSolution(nums, target-nums[i], memo)
         
         memo[target] = numCombos
         return numCombos
+
+    # ======= Not memoized
+
+    def combinationSum4_noMemo(self, nums: [int], target: int) -> int:
+        return self.buildSolution(nums, target)
+    
+    def buildSolution(self, nums, target):
+
+        if target < 0:
+            return 0
+
+        if target == 0:
+            return 1
+
+        numCombos = 0
+        for i in range(len(nums)):
+            numCombos += self.buildSolution(nums, target-nums[i])
+        
+        return numCombos
+
 
     def test(self):
         cases = [

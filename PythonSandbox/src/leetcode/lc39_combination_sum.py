@@ -25,8 +25,10 @@ class Solution:
                 # print("solutions updated: ", solutions)
             return
         
-        for i,c in enumerate(candidates):
-            self.buildSolution(candidates, target - c, currSolution + [c], solutions)
+        for i in range(startIdx, len(candidates)):
+            c = candidates[i]
+            if i == startIdx or candidates[i-1] != c:
+                self.buildSolution(candidates, target-c, currSolution+[c], solutions, i+1)
 
     def test1(self):
         candidates = [2,3,6,7]
