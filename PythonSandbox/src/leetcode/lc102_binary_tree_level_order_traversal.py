@@ -23,29 +23,30 @@ class TreeNode:
         self.right = None
 
 class Solution:
+    # ======================= recursive ==========================
     def levelOrder(self, root: TreeNode) -> [[int]]:
-        levelMap = {} # levels: [values]
-        self.helper(root,0,levelMap)
-        
-        travOut = []
-        i = 0
-        while i in levelMap.keys():
-            levelVals = levelMap[i]
-            travOut.append(levelVals)
-            i += 1
-        return travOut
-        
-    def helper(self, root, currLevel, levelMap):
+        levelMap = {} # mapping levels -> [values in the nodes]
+        self.dfs(root, 0, levelMap)
+
+        output = []
+        for i in range(len(levelMap)):
+            output.append(levelMap[i])
+        return output
+
+
+    def dfs(self, root, currLevel, levelMap):
         if root == None:
-            return 
-        if currLevel in levelMap.keys():
-            levelMap[currLevel].append(root.val)
-        else:
-            levelMap[currLevel] = [root.val]
-        #print("levelMap: ", levelMap)
+            return
         
-        self.helper(root.left, currLevel+1, levelMap)
-        self.helper(root.right, currLevel+1, levelMap)
+        if currLevel not in levelMap.keys():
+            levelMap[currLevel] = [root.val]
+        else:
+            levelMap[currLevel].append(root.val)
+        
+        self.dfs(root.left, currLevel+1, levelMap)
+        self.dfs(root.right, currLevel+1, levelMap)
+    
+    # ======================= recursive ==========================
     
     def makeTree(self, nodes):
 
@@ -73,7 +74,7 @@ class Solution:
         res = self.levelOrder(root)
         print('res: ', res)
 
-# ========================== using BFS ====================
+# ================ using iterative BFS ==================
 
     def levelOrderIterative(self, root):
         if root == None:

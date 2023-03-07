@@ -2,7 +2,7 @@
 https://leetcode.com/problems/longest-palindromic-substring/description/
 """
 
-class LC5_LongestPalindromicSubstring:
+class Solution:
     def longestPalindrome(self, s: str) -> str:
         lps = ""
         for i,c in enumerate(s):
@@ -10,15 +10,18 @@ class LC5_LongestPalindromicSubstring:
             [startIdxOdd, endIdxOdd] = self.expand(i, i, s)
             # exapand for i+1 (even)
             [startIdxEven, endIdxEven] = self.expand(i, i+1, s)
-
-            substrOdd = s[startIdxOdd: endIdxOdd]
-            substrEven = s[startIdxEven: endIdxEven]
+            
             if endIdxEven-startIdxEven > len(lps):
-                lps = substrEven
+                lps = s[startIdxEven: endIdxEven]
             elif endIdxOdd-startIdxOdd > len(lps):
-                lps = substrOdd
+                lps = s[startIdxOdd: endIdxOdd]
 
         return lps
+
+    def expand(self, i, j, s):
+        while i >= 0 and j < len(s) and s[i]==s[j]:
+            i -= 1
+            j += 1
 
     def expand(self, i, j, s):
         while i >= 0 and j < len(s) and s[i]==s[j]:
@@ -33,6 +36,6 @@ class LC5_LongestPalindromicSubstring:
         res = self.longestPalindrome(s)
         print("res: ", res)
     
-c = LC5_LongestPalindromicSubstring()
+c = Solution()
 c.test1()
     

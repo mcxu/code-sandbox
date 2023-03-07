@@ -4,20 +4,20 @@ https://leetcode.com/problems/valid-parentheses/
 
 class Solution:
     def isValid(self, s: str) -> bool:
-        stack = []
-        for i,ch in enumerate(s):   
-            if stack:
-                if stack[-1] == "(" and ch == ")":
-                    stack.pop()
-                elif stack[-1] == "{" and ch == "}":
-                    stack.pop()
-                elif stack[-1] == "[" and ch == "]":
-                    stack.pop()
-                else:
-                    stack.append(ch)
-            else:
-                stack.append(ch)
+        stack = [] 
+
+        for _,c in enumerate(s):
+            if not stack:
+                stack.append(c)
+                continue
                 
-        if stack:
-            return False
-        return True
+            if stack[-1]=="(" and c==")":
+                stack.pop()
+            elif stack[-1]=="{" and c=="}":
+                stack.pop()
+            elif stack[-1]=="[" and c=="]":
+                stack.pop()
+            else:
+                stack.append(c)
+
+        return len(stack) == 0

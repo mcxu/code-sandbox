@@ -1,27 +1,33 @@
 # https://leetcode.com/problems/insert-interval/
 
 class Solution:
-    def insert(self, intervals: [[int]], newInterval: [int]) -> [[int]]:
+    ''' 
+    Time complexity: O(n) where n ~ len(intervals)
+    Space complexity: O(1) since the only piece of new information being added is the new interval itself.
+    '''
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        # check if intervals is already empty, if it is, then just add the new interval and return the intervals
         if not intervals:
             intervals.append(newInterval)
             return intervals
-        
+
         newStart, newEnd = newInterval[0], newInterval[1]
 
-        # Step 1: Find where to insert new interval
+        if intervals[-1][1] < newStart:
+            intervals.append(newInterval)
+            return intervals
+
+        # Step 1: Find where to insert new interval based on starting points
         i = 0
         while i < len(intervals):
             currInterval = intervals[i]
             currStart, currEnd = currInterval[0], currInterval[1]
 
-            if currStart <= newStart <= currEnd:
+            if currStart <= newStart and newStart <= currEnd:
                 intervals.insert(i+1, newInterval)
                 break
-            elif newStart <= currStart and newStart <= currEnd:
+            elif newStart <= currStart:
                 intervals.insert(i, newInterval)
-                break
-            elif intervals[-1][1] < newStart:
-                intervals.append(newInterval)
                 break
             i += 1
         
@@ -31,9 +37,11 @@ class Solution:
             nextInterval = intervals[i+1]
 
             if currInterval[1] >= nextInterval[0] and currInterval[1] >= nextInterval[1]:
+                # if the current interval is completely above the next interval
                 intervals.pop(i+1)
                 i -= 1
             elif currInterval[1] >= nextInterval[0]:
+                # if the current interval intersects into the next interval
                 currInterval[1] = nextInterval[1]
                 i -= 1
             i += 1

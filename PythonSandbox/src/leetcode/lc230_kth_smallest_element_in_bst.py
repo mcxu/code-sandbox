@@ -13,7 +13,7 @@ class TreeNode:
 
 class Solution:
     def kthSmallest(self, root: TreeNode, k: int) -> int: 
-        #using inorder traversal, can get sorted array of values
+        #using inorder traversal on a BST can get sorted array of values
         def helper(root, values):
             if root == None:
                 return
@@ -46,6 +46,46 @@ class Solution:
         res = self.kthSmallest(root, k)
         print("test2 res: ", res)
 
-sol = Solution()
+# sol = Solution()
 #sol.test1()
-sol.test2()
+# sol.test2()
+
+# Solution 2: Using heap
+class Solution2:
+    def kthSmallest(self, root: [], k: int) -> int:
+        heapArr = []
+        self.putOnHeap(root, heapArr)
+
+        kthSmallest = -float('inf')
+        for i in range(k):
+            kthSmallest = heapq.heappop(heapArr)
+        
+        return kthSmallest
+
+    def putOnHeap(self, root, heapArr):
+        if root == None:
+            return
+        
+        heapq.heappush(heapArr, root.val)
+
+        self.putOnHeap(root.left, heapArr)
+        self.putOnHeap(root.right, heapArr)
+
+
+# Solution 3: Using inorder traversal, but stops at kth recursion
+class Solution3:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        nodeValues = []
+        self.inorderTraverse(root, nodeValues, k)
+        return nodeValues[-1]
+
+    def inorderTraverse(self, root, nodeValues, k):
+        if root == None:
+            return 
+        
+        self.inorderTraverse(root.left, nodeValues, k)
+        if len(nodeValues) >= k:
+            return
+        else:
+            nodeValues.append(root.val)
+        self.inorderTraverse(root.right, nodeValues, k)
