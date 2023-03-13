@@ -12,40 +12,34 @@ Therefore its length is 4.
 '''
 
 class Solution:
-    # Accepted: Using DFS
-    def longestConsecutive2(self, nums):
+    def longestConsecutive(self, nums: List[int]) -> int:
         numSet = set(nums)
         visited = set()
-        maxCount = 0
-        for i in range(len(nums)):
-            count = self.dfs(i, nums, numSet, visited)
-            if count > maxCount:
-                maxCount = count
-            #print("visited after: ", visited)
-        return maxCount
-    
-    def dfs(self, i, nums, numSet, visited):
-        stack = [nums[i]]
+        longestLen = 0
+        for n in nums:
+            count = self.dfs(n,numSet,visited)
+            longestLen = max(longestLen, count)
+        return longestLen
+
+    def dfs(self, n, numSet, visited):
+        stack = [n]
         count = 0
         while stack:
-            currNum = stack.pop()
-            #print("currNum: ", currNum)
+            currNum = stack.pop(-1)
+
             if currNum not in visited:
                 visited.add(currNum)
+
                 count += 1
-                nMinus = currNum-1
-                nPlus = currNum+1
-                if nMinus in numSet:
-                    stack.append(nMinus)
 
-                if nPlus in numSet:
-                    stack.append(nPlus)
-
-        #print("count: ", count)
+                if currNum-1 in numSet:
+                    stack.append(currNum-1)
+                if currNum+1 in numSet:
+                    stack.append(currNum+1)
         return count
 
     # initial attempt: time limit exceeded
-    def longestConsecutive(self, nums) -> int:
+    def longestConsecutive_old(self, nums) -> int:
         if not nums:
             return 0
 
