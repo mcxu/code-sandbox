@@ -23,10 +23,10 @@ class Solution:
                 intersection.append(bInt[1])
             else:
                 intersection.append(aInt[1])
-            
+            # check if intersection is valid
             if intersection[0] <= intersection[1]:
                 out.append(intersection)
-            
+            # increment pointer of which ending is lower
             if aInt[1] < bInt[1]:
                 i += 1
             else:

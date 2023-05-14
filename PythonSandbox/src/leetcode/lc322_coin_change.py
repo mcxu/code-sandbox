@@ -1,82 +1,48 @@
 """ https://leetcode.com/problems/coin-change/
 Find minimum number of coins to make this change amount
-
-Dyanamic Programming
 """
 class Solution:
-    def coinChange(self, coins: [int], amount: int) -> int:
+    """
+    Dyanamic Programming
+    Time complexity: O(amount * coins)
+    Space complexity: O(amount)
+    """
+    def coinChange(self, coins: [int], amount: int) -> int: 
         coins.sort()
-        
-        # keep track of min number of coins up to an amount, which is the index of this array
-        mncUpToAmt = [float('inf')] * (amount+1)
-        mncUpToAmt[0] = 0
-        
-        for i in range(1, amount+1):
-            for _,denom in enumerate(coins):
-                if i-denom >= 0:
-                    mncUpToAmt[i] = min(mncUpToAmt[i], mncUpToAmt[i-denom]+1)
-                    #print("mncUpToAmt: ", mncUpToAmt)
+        mncForAmt = [float('inf')] * (amount+1)
+        mncForAmt[0] = 0
+
+        for amt in range(amount+1):
+            for denom in coins:
+                if amt - denom >= 0:
+                    mncForAmt[amt] = min(mncForAmt[amt], mncForAmt[amt-denom]+1)
                 else:
                     break
-                    
-        if mncUpToAmt[amount] == float('inf'): return -1
-        return mncUpToAmt[amount]
-    
 
-    # version of algorithm to keep track of coins
-    # http://www.cs.uni.edu/~fienup/cs270s04/lectures/lec6_1-29-04_coin_change_web.htm
-    def coinChangeGetCoins(self, coins, amount):
-        coins.sort()
+        if mncForAmt[amount] == float('inf'):
+            return -1
 
-        # min num of coins for an amount (index)
-        mncUpToAmt = [float('inf')] * (amount+1)
-        mncUpToAmt[0] = 0
-        
-        # keep track of which coins is needed
-        coinArr = [0] * (amount+1)
-
-        for i in range(1, amount+1):
-            print("--- i: ", i)
-            possibleSolnsFori = []
-            denomForMncFori = float('inf')
-            for j in range(len(coins)):
-                denom = coins[j]
-                if i-denom>=0:
-                    possibleSolnsFori.append(mncUpToAmt[i-denom])
-                    print("possibleSolnsFori: ", possibleSolnsFori)
-                    print(" denom: ", denom)
-                    if mncUpToAmt[i-denom] < denomForMncFori and denom > 1:
-                        denomForMncFori = denom
-                        print("denomForMncFori: ", denomForMncFori)
-            
-            if possibleSolnsFori:
-                mncUpToAmt[i] = min(possibleSolnsFori)+1
-                coinArr[i] = denomForMncFori
-
-        print("mncUpToAmt: ", mncUpToAmt)
-        print("coinArr:    ", coinArr)
-
-        if mncUpToAmt[amount]==float('inf'): return [-1, -1]
-        soln = [mncUpToAmt[amount], -1]
-        return soln
+        return mncForAmt[amount]
 
     def test1(self):
         amount = 29
         coins = [1,5,10,12,25,50]
-        res = self.coinChangeGetCoins(coins, amount)
+        res = self.coinChange(coins, amount)
         print("res: ", res)
 
-# s = Solution()
-# s.test1()
+s = Solution()
+s.test1()
 
 #=======================================================================================
 
 """ Recursive with memoization
-Time complexity (w/o memo): 
+Time complexity: O(len(coins)^amount)
+Space complexity: O(amount)
+    Recursive callstack: O(amount)
+    memo: O(amount)
 """
 class Solution2:
-    def coinChange(self, coins: [int], amount: int) -> int: 
-        coins.sort()
+    def coinChange(self, coins: [int], amount: int) -> int:
         memo = {}
         numCoins = self.getMinCoins(coins, amount, memo)
 
@@ -122,5 +88,5 @@ class Solution2:
             print("res: ", res)
             assert res == c["expected"]
 
-sol = Solution2()
-sol.test()
+# sol = Solution2()
+# sol.test()

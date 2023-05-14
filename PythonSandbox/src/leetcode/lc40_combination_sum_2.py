@@ -17,6 +17,7 @@ target = 27
 """
 import collections
 import time
+from typing import List
 
 """ Passes
 Time complexity: O(2^n), where n ~ len(candidates). 2^n comes from the fact that you either 
@@ -24,7 +25,7 @@ Time complexity: O(2^n), where n ~ len(candidates). 2^n comes from the fact that
 Space complexity: O(n): recursion stack is at most O(n)
 """
 class Solution2():
-    def combinationSum2(self, candidates: [int], target: [int]) -> [[int]]:
+    def combinationSum2(self, candidates: List[int], target: List[int]) -> List[List[int]]:
         candidates.sort() # need this so that same nums are next to each other
         solutions = []
         currSolution = []

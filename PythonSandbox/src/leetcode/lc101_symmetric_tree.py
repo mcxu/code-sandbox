@@ -1,5 +1,11 @@
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
 class Solution:
-    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+    def isSymmetric(self, root: TreeNode) -> bool:
 
         if root.left and root.right and (root.left.val != root.right.val):
             return False

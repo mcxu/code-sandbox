@@ -1,17 +1,22 @@
 # https://leetcode.com/problems/powx-n/
 
 class Solution:
+    # using exponentiation
+    # Time complexity: O(log n) bc while loop is using nn <= 0 as stopping criteria and nn is being //2
+    # Space complexity: O(1) bc we are storing just nn and result, 2 variables.
     def myPow(self, x: float, n: int) -> float:
-        if n == 1:
-            return x**1
-        elif n == 0:
-            return 1
-        elif n < 0 or x <= 1:
-            return x**n
+        result = 1
+        nn = abs(n)
+
+        while nn > 0:
+            if nn % 2 == 1:
+                result = result * x
+                nn = nn - 1
+            else:
+                x = x * x
+                nn = nn // 2
         
-        nhalf = int(n/2)
-        result = self.myPow(x, nhalf)
-        result *= result
-        if int(n%2) > 0:
-            result *= x
+        if n < 0:
+            return 1/result
+
         return result

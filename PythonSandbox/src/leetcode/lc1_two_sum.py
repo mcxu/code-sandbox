@@ -21,7 +21,6 @@ class Solution:
                 diffMap[nums[i]] = i
         
         return None
-        
     
     def test1(self, alg):
         nums = [2, 7, 11, 15]

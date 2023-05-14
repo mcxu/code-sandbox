@@ -22,35 +22,35 @@ class Solution:
     '''
     def romanToInt(self, s: str) -> int:
         rti = {
-            'I' : 1,
-            'V' : 5,
-            'X' : 10,
-            'L' : 50,
-            'C' : 100,
-            'D' : 500,
-            'M' : 1000}
-        
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+
         tot = 0
+
         i = len(s)-1
         while i >= 0:
-            #print("--- i={}, rnum:{}".format(i, s[i]))
-            
-            if i == 0:
-                tot += rti[s[i]]
+            currChar = s[i]
+            charToLeft = s[i-1]
+
+            if i-1 < 0:
+                tot += rti[currChar]
                 break
             
-            if rti[s[i]] > rti[s[i-1]]:
-                # subtract
-                diff = rti[s[i]] - rti[s[i-1]]
-                tot += diff
-                i = i-1
+            if rti[charToLeft] >= rti[currChar]:
+                tot += rti[currChar]
             else:
-                # add
-                tot += rti[s[i]]
-            print("tot is: ", tot)
-            i = i-1
+                diff = rti[currChar] - rti[charToLeft]
+                tot += diff
+                i -= 1
                 
-        print("tot: ", tot)
+            i -= 1
+        
         return tot
         
     def test1(self):

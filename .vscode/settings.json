@@ -1,12 +1,16 @@
 {
     "editor.fontSize" : 13,
     "python.pythonPath": "C:\\Python\\Python37\\python.exe",
+    "python.analysis.extraPaths": [
+        ".\\PythonSandbox\\src"
+    ],
+    "python.autoComplete.extraPaths": [".\\PythonSandbox\\src"],
+    "python.linting.pylintEnabled": false,
+    
     "java.project.referencedLibraries": [
         "C:\\SWTools\\junit\\*.jar"
     ],
-
-    "python.linting.pylintEnabled": true,
-    "python.autoComplete.extraPaths": [".\\PythonSandbox\\src"],
+    "java.dependency.packagePresentation": "hierarchical",
 
     // Controls if quick suggestions should show up while typing
     "editor.quickSuggestions": {
@@ -41,9 +45,6 @@
 
     // Enable parameter hints
     "editor.parameterHints.enabled": false,
-    "java.dependency.packagePresentation": "hierarchical",
-    "python.linting.enabled": false,
-    "python.analysis.extraPaths": [
-        ".\\PythonSandbox\\src"
-    ]
+
+    "editor.semanticHighlighting.enabled": false
 }

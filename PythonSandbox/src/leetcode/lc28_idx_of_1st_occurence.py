@@ -1,3 +1,6 @@
+"""
+https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/
+"""
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
         for i,c in enumerate(haystack):
@@ -12,8 +15,10 @@ class Solution:
         while i<len(haystack) and j<len(needle) and haystack[i] == needle[j]:
             i += 1
             j += 1
+        
         if j >= len(needle) and haystack[i-1] == needle[j-1]:
             return True
 
         return False
-        
+    
+    

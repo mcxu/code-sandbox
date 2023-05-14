@@ -4,7 +4,6 @@ https://leetcode.com/problems/intersection-of-three-sorted-arrays/
 1213. Intersection of 3 sorted arrays
 """
 
-
 class LC1213_Intersection3SortedArrays:
 
     def arraysIntersection(self, arr1, arr2, arr3):
@@ -47,27 +46,25 @@ class LC1213_Intersection3SortedArrays:
         uniqueVals = []
 
         i, j, k = 0, 0, 0
-        print("i={}, j={}, k={}".format(i, j, k))
 
         while i < len(arr1) and j < len(arr2) and k < len(arr3):
+            print("i={}, j={}, k={}".format(i, j, k))
             if arr1[i] == arr2[j] and arr2[j] == arr3[k]:
                 uniqueVals.append(arr1[i])
                 i += 1
                 j += 1
                 k += 1
+            elif arr1[i] < arr2[j]:
+                i += 1
+            elif arr2[j] < arr3[k]:
+                j += 1
             else:
-                if arr1[i] > arr2[j]:
-                    j += 1
-                elif arr2[j] > arr3[k]:
-                    k += 1
-                else:
-                    i += 1
+                k += 1
 
         return uniqueVals
 
 
 obj = LC1213_Intersection3SortedArrays()
-
 
 def test():
     a = [1, 2, 3, 4, 5]
@@ -84,5 +81,5 @@ def test2():
     output = obj.arraysIntersection3(arr1, arr2, arr3)
     print("output: ", output)
 
-
+#test()
 test2()

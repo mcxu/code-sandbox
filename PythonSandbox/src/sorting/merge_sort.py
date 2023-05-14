@@ -5,21 +5,19 @@ Merge Sort
 from utils.number_utils import NumberUtils
 
 class Prob:
-    @staticmethod
-    def mergeSort(array):
+    def mergeSort(self, array):
         if not array or len(array)==1:
             return array
         median = int(len(array)/2)
         left = array[:median]
         right = array[median:]
         #print("mergeSort: median:{}, l:{}, r:{}".format(median,left,right))
-        sl = mergeSort(left)
-        sr = mergeSort(right)
+        sl = self.mergeSort(left)
+        sr = self.mergeSort(right)
         return Prob.mergeArrays(sl,sr)
     
     # merge pre-sorted arrays
-    @staticmethod
-    def mergeArrays(l,r):
+    def mergeArrays(self, l,r):
         print("merging arrays: l:{}, r:{}".format(l,r))
         
         out = []

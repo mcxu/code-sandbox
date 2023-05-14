@@ -12,23 +12,22 @@ class Prob:
     def nthRoot(n, x):
         lo = 0
         hi = x
-        acc = .000001 # accuracy of calculation
-        med = (lo + hi)/2
-        i = 0
+        acc = 0.000000001 # accuracy of calculation
+        med = hi/2
         while abs(med**n - x) > acc:
-            print("med: ", med)
+            # print(f"med: {med}, med^n: {med**n}")
             if med**n > x:
                 hi = med
             else:
                 lo = med
             med = (lo + hi)/2
-            i += 1
         return med
     
     @staticmethod
     def test1(alg):
         n = 3 # root
-        x = 1001
+        # x = 1000
+        x = 27
         r = alg(n, x)
         print("r: ", r)
 

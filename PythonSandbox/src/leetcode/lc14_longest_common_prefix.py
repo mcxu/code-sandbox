@@ -14,8 +14,8 @@ class Solution2:
             ptr = ptr[currKey]
         
         return builtPrefix
-                    
-                        
+    
+
     def buildTrie(self, strs, shortestStrLen = float('inf')):
         trieRoot = {}
 

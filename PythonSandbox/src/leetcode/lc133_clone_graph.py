@@ -1,25 +1,27 @@
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
         if not node:
             return None
         
-        newNode = Node(node.val)
-        visited = set()
-        self.graphDfs(node, visited, newNode)
-        return newNode
+        # iterative BFS
+        q = [node]
+        copyMap = {node.val: Node(node.val)}
 
+        while q:
+            currNode = q.pop(0)
+            currNodeCopy = copyMap[currNode.val]
 
-    def graphDfs(self, node, visited, newNode):
-        if node == None:
-            return 
-        
-        print("current node: ", node.val)
-        print("visited: ", visited)
-        if node.val not in visited:
-            visited.add(node.val)
-            newNode.neighbors.append(Node(node.val))
-            print("newNode added: ", [n.val for n in newNode.neighbors])
+            for _,neighbor in enumerate(currNode.neighbors):
+                if neighbor.val not in copyMap.keys():
+                    copyMap[neighbor.val] = Node(neighbor.val)
+                    q.append(neighbor)
                 
-        for _,neighbor in enumerate(node.neighbors):
-            if neighbor not in visited:
-                self.graphDfs(neighbor, visited, newNode.neighbors[-1])
+                neighborCopy = copyMap[neighbor.val]
+                currNodeCopy.neighbors.append(neighborCopy)
+
+        return copyMap[node.val]

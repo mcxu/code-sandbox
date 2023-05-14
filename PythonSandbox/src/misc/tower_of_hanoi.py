@@ -3,7 +3,7 @@ class TowerOfHanoi:
     n: num disks
     f: from name
     a: auxilary name
-    f: to name
+    t: to name
     """
     def hanoi(self, n, f, a, t):
         moves = []
@@ -37,8 +37,8 @@ class TowerOfHanoi:
 
 def main():
     toh = TowerOfHanoi()
-    #toh.testHanoi()
-    toh.testHanoiNumberMoves()
+    toh.testHanoi()
+    # toh.testHanoiNumberMoves()
 
 if __name__ == "__main__":
     main()

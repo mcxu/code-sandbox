@@ -11,6 +11,7 @@ class SRS:
                 j = i+1+len(subFrom0)
                 while j < len(s):
                     aux = s[j:j+len(subFrom0)]
+                    print(f"j: {j}, aux: {aux}")
                     if aux != subFrom0:
                         return None
                     j += len(subFrom0)
@@ -19,17 +20,18 @@ class SRS:
     
     def test1(self):
         strings = [
-            "aaaaaaaa",
-            "aaaaaaab",
-            "abcabcabc",
-            "abcabb",
-            "lrbblrbb",
-            "lrbblrbblr",
-            "lrbbbbb",
-            "abddab",
-            "qwertyyyqwertyyyqwertyyyqwertyyy",
-            "qwertyyyyqwertyyyqwertyyyyqwertyyy",
-            "qwertyyyyqwertyyyqwertyyyyqwertyyyqqq"
+            # "aaaaaaaa",
+            # "aaaaaaab",
+            # "abcabcabc",
+            "abcabcabcabc",
+            # "abcabb",
+            # "lrbblrbb",
+            # "lrbblrbblr",
+            # "lrbbbbb",
+            # "abddab",
+            # "qwertyyyqwertyyyqwertyyyqwertyyy",
+            # "qwertyyyyqwertyyyqwertyyyyqwertyyy",
+            # "qwertyyyyqwertyyyqwertyyyyqwertyyyqqq"
         ]
         for i,s in enumerate(strings):
             print("--- TEST NO.: ", i)

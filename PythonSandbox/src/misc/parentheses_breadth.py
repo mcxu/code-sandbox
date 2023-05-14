@@ -31,9 +31,10 @@ def getBreadth(s):
 
 def test1():
     #s = "()()()" # 3
-    #s = "(()()())" # 3
-    #s = "(())"
-    s = "(())(()())"
+    # s = "(()()())" # 3
+    # s = "(())"
+    # s = "(())(()())"
+    s = "(())(())" # return 2
     res = getBreadth(s)
     print("res: ", res)
 test1()    

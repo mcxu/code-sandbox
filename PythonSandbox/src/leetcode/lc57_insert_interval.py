@@ -5,7 +5,7 @@ class Solution:
     Time complexity: O(n) where n ~ len(intervals)
     Space complexity: O(1) since the only piece of new information being added is the new interval itself.
     '''
-    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+    def insert(self, intervals: [int], newInterval: [int]) -> [int]:
         # check if intervals is already empty, if it is, then just add the new interval and return the intervals
         if not intervals:
             intervals.append(newInterval)

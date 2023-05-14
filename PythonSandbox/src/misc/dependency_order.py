@@ -22,7 +22,7 @@ class DepOrder:
     def depOrderToposort(self, importsMap, currFile, visited, stack):
         visited.add(currFile)
         print("visited:", visited)
-        for i,depFile in enumerate(importsMap[currFile]):
+        for _,depFile in enumerate(importsMap[currFile]):
             if depFile not in visited:
                 self.depOrderToposort(importsMap, depFile, visited, stack)
         stack.append(currFile)

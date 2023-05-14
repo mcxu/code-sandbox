@@ -47,31 +47,53 @@ class Solution:
         At most n calls on the recursive call stack. O(n). There are n items memoized. O(n)
         So the total is O(2n), which is O(n).
     '''
-    def canPartitionMemo(self, nums):
+    def canPartitionWithMemo(self, nums):
         numSum = sum(nums)
-        
+
         if numSum % 2 == 0:
-            targetSum = numSum/2
-            memo = {}
-            return self.helperMemo(nums, len(nums)-1, targetSum, memo)
-        
+            targetSum = numSum // 2
+            # print("targetSum: ", targetSum)
+            
+            #memo = {} # memo with map
+            memo = [[None for _ in range(targetSum+1)] for _ in range(len(nums))] # memo with matrix
+            
+            result = self.helperMemo(nums, len(nums)-1, targetSum, memo)
+            return result
+
         return False
     
-    def helperMemo(self, nums, i , targetSum, memo):
+    def helperMemo(self, nums, i, targetSum, memo):
+        # print(f"i: {i}, targetSum: {targetSum}")
+
         if targetSum == 0:
             return True
+        
         if targetSum < 0:
             return False
+
         if i < 0:
             return False
         
-        if targetSum in memo.keys():
-            return memo[targetSum]
+        # check memo before recursion
+        # memo with map
+        # if (i, targetSum) in memo:
+        #     return memo[(i, targetSum)]
+
+        # memo with matrix
+        if memo[i][targetSum] != None:
+            return memo[i][targetSum]
+
+        # recursive results for
+        includeCurrNum = self.helperMemo(nums, i-1, targetSum-nums[i], memo)
+        excludeCurrNum = self.helperMemo(nums, i-1, targetSum, memo)
         
-        excludeVal = self.helperMemo(nums, i-1, targetSum, memo)
-        includeVal = self.helperMemo(nums, i-1, targetSum-nums[i], memo)
-        memo[targetSum] = (excludeVal | includeVal)
-        return memo[targetSum]
+        # memo with map
+        #memo[(i, targetSum)] = includeCurrNum or excludeCurrNum
+        # return memo[(i, targetSum)]
+
+        # memo with matrix
+        memo[i][targetSum] = includeCurrNum or excludeCurrNum
+        return memo[i][targetSum]
     
     def test1(self, alg):
         nums = [1, 5, 11, 5] 
@@ -89,6 +111,6 @@ class Solution:
 
 s = Solution()
 #alg = s.canPartition
-alg = s.canPartitionMemo
+alg = s.canPartitionWithMemo
 s.test1(alg)
 #s.test2(alg)

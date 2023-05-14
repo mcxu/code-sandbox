@@ -10,7 +10,7 @@ def intervalsOverlap(A, B):
 def test():
     # A = [1,3] # B = [2,4]
     # A,B = [5,10], [3,6]
-    A,B = [1,5], [6,10]
+    A,B = [1,9], [6,10]
     result = intervalsOverlap(A,B)
     print("result: ", result)
 

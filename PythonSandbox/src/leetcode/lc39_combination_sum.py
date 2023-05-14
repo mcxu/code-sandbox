@@ -5,30 +5,29 @@ https://leetcode.com/problems/combination-sum/
 Time complexity: O(n^t), where n~len(candidates), t~target
 Space complexity: O(t), t~target
 '''
+from typing import List
+
 class Solution:
-    def combinationSum(self, candidates, target):
-        solutions = []
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         currSolution = []
+        solutions = []
+        # call recursive function
         self.buildSolution(candidates, target, currSolution, solutions)
         return solutions
-
-    # helper function
+    
     def buildSolution(self, candidates, target, currSolution, solutions):
-        # print(f"target: {target}, currSolution: {currSolution}")
         if target < 0:
-            return 
-
+            return
+        
         if target == 0:
             currSolution.sort()
             if currSolution not in solutions:
                 solutions.append(currSolution)
-                # print("solutions updated: ", solutions)
             return
         
-        for i in range(startIdx, len(candidates)):
+        for i in range(0, len(candidates)):
             c = candidates[i]
-            if i == startIdx or candidates[i-1] != c:
-                self.buildSolution(candidates, target-c, currSolution+[c], solutions, i+1)
+            self.buildSolution(candidates, target-c, currSolution+[c], solutions)
 
     def test1(self):
         candidates = [2,3,6,7]

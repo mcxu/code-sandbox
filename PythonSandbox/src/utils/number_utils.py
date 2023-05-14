@@ -107,13 +107,33 @@ class NumberUtils:
             p = NumberUtils.isPrime(n)
             print("n: {}, p: {}".format(n,p))
         
-         
+
+    @staticmethod
+    def getPowerset(nums):
+        powerset = set([()])
+        for n in nums:
+            tempset = set()
+            for subset in powerset:
+                newSubset = subset + tuple([n])
+                tempset.add(newSubset)
+        
+            powerset |= tempset # set union operator
+            #powerset.update(tempset) # same as union
+        return powerset
+
+    @staticmethod
+    def test_getPowerset():
+        nums = [1,5,3,6]
+        ps = NumberUtils.getPowerset(nums)
+        print("res: ", ps)
+
 def main():
     #nutils.test_generateRandomNumbers1()
     #nutils.test_generateRandomNumbers2()
     #nutils.test_getHighestVal()
     #nutils.test_factorial()
-    NumberUtils.test_isPrime()
+    # NumberUtils.test_isPrime()
+    NumberUtils.test_getPowerset()
 
 if __name__ == "__main__":
     main()
