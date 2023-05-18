@@ -1,6 +1,7 @@
 """
 https://leetcode.com/problems/count-the-number-of-complete-components/description/
 """
+from typing import List
 
 class Solution:
     def countCompleteComponents(self, n: int, edges: List[List[int]]) -> int:

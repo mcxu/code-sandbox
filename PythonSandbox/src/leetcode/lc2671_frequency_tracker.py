@@ -7,9 +7,8 @@ class FrequencyTracker:
     def add(self, number: int) -> None:
         if number in self.freqMap.keys():
             f1 = self.freqMap[number]
-            if f1 in self.freqToNum.keys():
-                if number in self.freqToNum[f1]:
-                    self.freqToNum[f1].remove(number)
+            if f1 in self.freqToNum.keys() and number in self.freqToNum[f1]:
+                self.freqToNum[f1].remove(number)
                 
             self.freqMap[number] += 1
         else:
