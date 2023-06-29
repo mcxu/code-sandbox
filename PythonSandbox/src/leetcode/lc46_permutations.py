@@ -62,9 +62,9 @@ class Solution:
             
     def test_permute(self):
         numsList = [
-            #[1,2,3]
+            [1,2,3]
             #[1,2,3,4],
-            [1,2,3,4,5,6]
+            #[1,2,3,4,5,6]
             ]
         
         for nums in numsList:

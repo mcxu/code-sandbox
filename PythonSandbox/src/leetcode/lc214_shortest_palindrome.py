@@ -6,7 +6,7 @@ class Solution:
     def shortestPalindrome(self, s: str) -> str:
         srev = s[::-1]
         for i in range(len(s)):
-            if s[:len(s)-i]==srev[i:]:
+            if srev[i:] == s[:len(s)-i]:
                 return srev[:i] + s
         return ""
 

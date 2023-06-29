@@ -47,7 +47,7 @@ class Solution2:
             maxSeqLen = max(maxSeqLen, currSeq)
         
         return maxSeqLen
-    
+
 
 class Solution:
     """ Using DFS

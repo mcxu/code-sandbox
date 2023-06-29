@@ -31,7 +31,6 @@ class Solution2:
         memo = {}
         numWays = self.helper(0, n, memo)
         return numWays
-
     
     def helper(self, i, n, memo):
         if i > n:

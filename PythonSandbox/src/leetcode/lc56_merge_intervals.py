@@ -1,6 +1,8 @@
 '''
 https://leetcode.com/problems/merge-intervals/
 '''
+from typing import List
+
 class Solution:
     def merge(self, intervals: [[int]]) -> [[int]]:
         intervals = sorted(intervals, key=lambda x: x[0]) # O(nlogn), n= len(intervals)
