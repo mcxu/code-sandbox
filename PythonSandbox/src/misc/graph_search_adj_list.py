@@ -24,6 +24,7 @@ class GraphSearchAdjList:
             else:
                 stack += connections
         return result
+    
     # ============================================================
 
     def dfsAdjListRecursive(self, adjList):
@@ -35,8 +36,9 @@ class GraphSearchAdjList:
     def dfsAdjListHelper(self, adjList, currNode, result, visited):
         if currNode not in visited:
             visited.add(currNode)
-            result.append(currNode)
-
+            
+        result.append(currNode)
+        
         for _,connectedNode in enumerate(adjList[currNode]):
             if connectedNode not in visited:
                 self.dfsAdjListHelper(adjList, connectedNode, result, visited)
@@ -135,7 +137,7 @@ class GraphSearchAdjList:
 gs = GraphSearchAdjList()
 al = gs.adjList1()
 #al = gs.adjList2()
-#gs.test_dfsAdjListIterative(al)
-#gs.test_dfsAdjListRecursive(al)
+# gs.test_dfsAdjListIterative(al)
+gs.test_dfsAdjListRecursive(al)
 #gs.test_bfsAdjListIterative(al)
-gs.test_bfsAdjListRecursive(al)
+# gs.test_bfsAdjListRecursive(al)
