@@ -13,7 +13,6 @@ class DCP14:
         for _ in range(iterations):
             rand_float_x = random.uniform(0, radius)
             rand_float_y = random.uniform(0, radius)
-
             rad_dist_computed = (rand_float_x**2 + rand_float_y**2)**0.5
 
             if rad_dist_computed <= radius:
