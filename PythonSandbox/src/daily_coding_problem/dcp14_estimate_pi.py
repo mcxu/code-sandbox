@@ -22,7 +22,6 @@ class DCP14:
                 total_count += 1
 
         pi_estimate = 4*inside_count/total_count
-        # print("pi_estimate: ", pi_estimate)
         return pi_estimate
     
     def test(self):
