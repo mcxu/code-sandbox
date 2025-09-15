@@ -41,7 +41,7 @@
     "editor.suggestSelection": "recentlyUsed",
 
     // Enable word based suggestions
-    "editor.wordBasedSuggestions": false,
+    "editor.wordBasedSuggestions": "off",
 
     // Enable parameter hints
     "editor.parameterHints.enabled": false,
