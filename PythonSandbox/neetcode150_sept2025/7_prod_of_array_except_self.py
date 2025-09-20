@@ -11,9 +11,6 @@ class ProdOfArrayExceptSelf:
             else:
                 allProd *= n
         
-        # print("allProd: ", allProd)
-        # print("zeroIndices: ", zeroIndices)
-        # zeroIndices [2]
         output = []
         for i,n in enumerate(nums):
             if i in zeroIndices:
