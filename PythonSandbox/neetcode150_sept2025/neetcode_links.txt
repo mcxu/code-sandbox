@@ -1,1 +1,4 @@
 NeetCode 150: https://neetcode.io/practice?tab=neetcode150
+
+On LC site: https://leetcode.com/problem-list/plakya4j/
+Files are numbered by their ID on Leetcode.
