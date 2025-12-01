@@ -46,5 +46,14 @@
     // Enable parameter hints
     "editor.parameterHints.enabled": false,
 
-    "editor.semanticHighlighting.enabled": false
+    "editor.semanticHighlighting.enabled": false,
+
+    "workbench.tree.indent": 16,
+
+    "[json]": {
+        "editor.formatOnSave": false
+    },
+    "[jsonc]": {
+        "editor.formatOnSave": false
+    }
 }
