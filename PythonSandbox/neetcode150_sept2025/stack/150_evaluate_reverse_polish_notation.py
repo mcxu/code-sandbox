@@ -32,7 +32,7 @@ class EvaluateRPN:
         ]
 
         for i, tc in enumerate(tests, start=1):
-            print(f"\n== RUNNING test{i}  CASE:", str(tc)[:100])
+            print(f"\n== RUNNING test{i} \nCASE:", str(tc)[:100])
             output = FN_TO_TEST(tc["tokens"])
             print(f"RESULTS FOR test{i}:\n{output}")
             evaluation = (output == tc["expected"])
