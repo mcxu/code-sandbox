@@ -1,6 +1,10 @@
 from typing import List, Callable
 
 class Search2DMatrix:
+    """
+    Time complexity: O(log(m*n)) = O(log(m)) + O(log(n)) [product rule]
+    Space complexity: O(max(m, n)): Either searchColumn or searchRow, whichever one's larger
+    """
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         searchColumn = [row[-1] for row in matrix]
 
