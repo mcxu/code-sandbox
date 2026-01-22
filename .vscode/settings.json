@@ -1,14 +1,25 @@
 {
     "editor.fontSize" : 13,
-    "python.pythonPath": "C:\\Python\\Python37\\python.exe",
+    "python.envFile": "${workspaceFolder}/.env",
+
+    "terminal.integrated.env.osx": {
+        "PYTHONPATH": "${workspaceFolder}/PythonSandbox"
+    },
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "${workspaceFolder}/PythonSandbox"
+    },
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "${workspaceFolder}/PythonSandbox"
+    },
+
     "python.analysis.extraPaths": [
-        ".\\PythonSandbox\\src"
+        "PythonSandbox"
     ],
-    "python.autoComplete.extraPaths": [".\\PythonSandbox\\src"],
+    "python.autoComplete.extraPaths": ["PythonSandbox"],
     "python.linting.pylintEnabled": false,
     
     "java.project.referencedLibraries": [
-        "C:\\SWTools\\junit\\*.jar"
+        "/usr/bin"
     ],
     "java.dependency.packagePresentation": "hierarchical",
 
