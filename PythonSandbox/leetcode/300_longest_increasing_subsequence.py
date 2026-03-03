@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         if not nums:
@@ -16,3 +18,15 @@ class Solution:
         #print("longestUpToVal: ", longestUpToVal)
 
         return longestSoFar
+    
+    def test1(self):
+        nums = [10,9,2,5,3,7,101,18]
+        result = self.lengthOfLIS(nums)
+        print("result: ", result)
+        actual = 4 # [2,3,7,101]
+        assert result == actual, "Test failed"
+        
+
+if __name__ == "__main__":
+    sol = Solution()
+    sol.test1()
