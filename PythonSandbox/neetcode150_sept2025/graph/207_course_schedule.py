@@ -1,6 +1,14 @@
 from typing import List
 from collections import defaultdict
 
+"""
+https://leetcode.com/problems/course-schedule/description/
+
+Let V be the number of courses and E is the number of prerequisites.
+Time complexity: O(V + E)
+Space complexity: O(V + E)
+"""
+
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         if not numCourses or not prerequisites:
@@ -13,31 +21,32 @@ class Solution:
         for course in range(numCourses):
             print("course: ", course)
             currPath = set()
-            nodeCycleFree = self.dfs(course, adjList, visited, currPath)
-            print("nodeCycleFree: ", nodeCycleFree)
-            if not nodeCycleFree:
+            cycleExists = self.checkCycle(course, adjList, visited, currPath)
+            print("cycleExists: ", cycleExists)
+            if cycleExists:
                 return False # cycle detected in node
 
         return True
 
-    def dfs(self, node, adjList, visited, currPath):
+    # dfs; True if there is a cycle, False otherwise
+    def checkCycle(self, node, adjList, visited, currPath):
         if node in currPath:
-            return False # cycle detected
+            return True # cycle detected
         if node in visited: 
-            return True # already visited
+            return False # already visited
         
         currPath.add(node)
 
         for prereq in adjList[node]:
             print("prereq: ", prereq)
-            neighborsCycleFree = self.dfs(prereq, adjList, visited, currPath)
-            if not neighborsCycleFree:
-                return False # cycle detected in neighbor
+            cycleExists = self.checkCycle(prereq, adjList, visited, currPath)
+            if cycleExists:
+                return True # cycle detected in neighbor
         
         currPath.remove(node)
         visited.add(node) # means node and its prerequisites are fully traversed and no cycle detected
 
-        return True
+        return False
 
     def buildAdjList(self, edges) -> {}: 
         adjList = defaultdict(list)
