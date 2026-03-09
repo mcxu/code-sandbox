@@ -6,17 +6,14 @@ class Topo:
         stack = [] #output
         visited = set()
         searchInits = [i for i in range(len(adjList))]
-        # j = 0
+        print("searchInits: ", searchInits)
+        
         while searchInits:
             # print("searchInits: ", searchInits)
-            currNode = searchInits[0]
+            currNode = searchInits.pop(0)
             print("currNode: ", currNode)
-            # if j==0 and startNode != 0:
-            #     currNode = startNode
-            searchInits.remove(currNode)
             if currNode not in visited:
                 self.topoDFS(adjList, currNode, stack, visited)
-            # j += 1
         return stack
     
     def topoDFS(self, adjList, currNode, stack, visited):
@@ -61,8 +58,9 @@ class Topo:
         res = self.topoSort(adjList, startNode=7)
         print("res: ", res)
 
-t = Topo()
-#al = t.adjList1()
-#al = t.adjList2()
-t.test_topoSort1()
-#t.test_topoSort2()
+if __name__ == "__main__":
+    t = Topo()
+    #al = t.adjList1()
+    # al = t.adjList2()
+    # t.test_topoSort1()
+    t.test_topoSort2()

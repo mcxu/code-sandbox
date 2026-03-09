@@ -66,5 +66,8 @@
     },
     "[jsonc]": {
         "editor.formatOnSave": false
-    }
+    },
+    "cursorpyright.analysis.extraPaths": [
+        "PythonSandbox"
+    ]
 }

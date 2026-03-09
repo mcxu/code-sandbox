@@ -15,7 +15,7 @@ class BinaryTreeUtils:
         h = BinaryTreeUtils.treeHeight(tree)
         for i in range(0,h+1):
             BinaryTreeUtils.printLevel(tree, i)
-            print("")
+            print("N")
 
     # https://www.geeksforgeeks.org/print-level-order-traversal-line-line/
     @staticmethod
@@ -36,7 +36,7 @@ class BinaryTreeUtils:
             return 0
         ld = BinaryTreeUtils.treeHeight(tree.left)
         rd = BinaryTreeUtils.treeHeight(tree.right) 
-        return max(ld+1, rd+1)
+        return 1 + max(ld, rd)
 
     @staticmethod
     def buildTree(arr): # arr is a tree in array format
