@@ -4,11 +4,16 @@ class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         intervals.sort(key = lambda x: x[0])
         merged = []
-        for _,(s,e) in enumerate(intervals):
-            if not merged or merged[-1][1] < s:
-                merged.append([s,e])
-            elif s <= merged[-1][1] < e:
-                merged[-1][1] = e
+        for _,interval in enumerate(intervals):
+            if not merged:
+                merged.append(interval)
+                continue
+            
+            lastInterval = merged[-1]
+            if lastInterval[1] < interval[0]:
+                merged.append(interval)
+            elif interval[0] <= lastInterval[1] < interval[1]:
+                lastInterval[1] = interval[1]
 
         return merged
     
@@ -35,6 +40,6 @@ class Solution:
 
 if __name__ == "__main__":
     s = Solution()
-    # s.test1()
+    s.test1()
     # s.test2()
-    s.test3()
+    # s.test3()
