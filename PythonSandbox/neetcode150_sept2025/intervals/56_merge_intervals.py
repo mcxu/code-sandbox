@@ -14,7 +14,7 @@ class Solution:
                 merged.append(interval)
             elif interval[0] <= lastInterval[1] < interval[1]:
                 lastInterval[1] = interval[1]
-
+        
         return merged
     
     def test1(self):
