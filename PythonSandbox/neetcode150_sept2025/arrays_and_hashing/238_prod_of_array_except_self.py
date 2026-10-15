@@ -27,7 +27,9 @@ class ProdOfArrayExceptSelf:
         return output
     
     """ Without using division
-
+    Let n = len(nums)
+    TC: O(n), 2 for loops, each iterating the length of n
+    SC: O(n), runningProdsFromLeft order O(n)
     """
     def prodExceptSelf2(self, nums):
         runProdsFromLeft = [1]
