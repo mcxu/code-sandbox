@@ -1,20 +1,21 @@
 '''
 https://leetcode.com/problems/product-of-array-except-self/
 '''
+from typing import List 
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        runProdFromRight = [1]
+        runProdsFromLeft = [1]
         for i in range(len(nums)-1):
             n = nums[i]
-            runProdFromRight.append(runProdFromRight[-1] * n)
+            runProdsFromLeft.append(runProdsFromLeft[-1] * n)
         
         output = []
 
-        runProdFromLeft = 1
+        runProdFromRight = 1
         for i in range(len(nums)-1, -1, -1):
-            output.insert(0, runProdFromLeft * runProdFromRight[i])
-            runProdFromLeft *= nums[i]
+            output.insert(0, runProdsFromLeft[i] * runProdFromRight)
+            runProdFromRight *= nums[i]
         
         return output
     

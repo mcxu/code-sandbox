@@ -22,15 +22,30 @@ class ProdOfArrayExceptSelf:
                 if len(zeroIndices) >= 1:
                     output.append(0)
                 else:
-                    output.append(int(allProd/n))
+                    output.append(allProd//n)
 
+        return output
+    
+    """ Without using division
+
+    """
+    def prodExceptSelf2(self, nums):
+        runProdsFromLeft = [1]
+        for n in nums:
+            runProdsFromLeft.append(runProdsFromLeft[-1] * n)
+        
+        output = []
+        runProdFromRight = 1
+        for i in range(len(nums)-1, -1, -1):
+            output.insert(0, runProdsFromLeft[i] * runProdFromRight)
+            runProdFromRight *= nums[i]
         return output
 
     def test_1(self):
         nums = [1,2,3,4]
         expected = [24,12,8,6]
 
-        output = self.prodExceptSelf(nums)
+        output = self.prodExceptSelf2(nums)
         print("output: ", output)
         assert output == expected
 
@@ -38,7 +53,7 @@ class ProdOfArrayExceptSelf:
         nums = [-1,1,0,-3,3]
         expected = [0,0,9,0,0]
 
-        output = self.prodExceptSelf(nums)
+        output = self.prodExceptSelf2(nums)
         print("output: ", output)
         assert output == expected
 
@@ -46,13 +61,13 @@ class ProdOfArrayExceptSelf:
         nums = [-1,1,1,-3,3,1,0,-5,3,1,2]
         expected = [0,0,0,0,0,0,-270,0,0,0,0]
 
-        output = self.prodExceptSelf(nums)
+        output = self.prodExceptSelf2(nums)
         print("output: ", output)
         assert output == expected
 
 if __name__ == "__main__":
     cl = ProdOfArrayExceptSelf()
-    # cl.test_1()
+    cl.test_1()
     # cl.test_2()
-    cl.test_3()
+    # cl.test_3()
     
