@@ -1,27 +1,28 @@
 {
     "editor.fontSize" : 13,
+
+    "python.terminal.useEnvFile": true,
     "python.envFile": "${workspaceFolder}/.env",
 
     "terminal.integrated.env.osx": {
-        "PYTHONPATH": "${workspaceFolder}/PythonSandbox"
+        "PYTHONPATH": "${workspaceFolder}"
     },
     "terminal.integrated.env.linux": {
-        "PYTHONPATH": "${workspaceFolder}/PythonSandbox"
+        "PYTHONPATH": "${workspaceFolder}"
     },
     "terminal.integrated.env.windows": {
-        "PYTHONPATH": "${workspaceFolder}/PythonSandbox"
+        "PYTHONPATH": "${workspaceFolder}"
     },
-
-    "python.analysis.extraPaths": [
+    "python.autoComplete.extraPaths": ["PythonSandbox"],
+    "cursorpyright.analysis.extraPaths": [
         "PythonSandbox"
     ],
-    "python.autoComplete.extraPaths": ["PythonSandbox"],
-    "python.linting.pylintEnabled": false,
-    
-    "java.project.referencedLibraries": [
-        "/usr/bin"
+    "python.testing.pytestArgs": [
+        "PythonSandbox",
+        "-s" // this disables print statement capture, so allows them to show up in the test console
     ],
-    "java.dependency.packagePresentation": "hierarchical",
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
 
     // Controls if quick suggestions should show up while typing
     "editor.quickSuggestions": {
@@ -66,8 +67,5 @@
     },
     "[jsonc]": {
         "editor.formatOnSave": false
-    },
-    "cursorpyright.analysis.extraPaths": [
-        "PythonSandbox"
-    ]
+    }
 }

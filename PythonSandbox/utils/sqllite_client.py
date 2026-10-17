@@ -3,7 +3,6 @@
 import sqlite3
 from typing import Any
 
-
 class SQLiteClient:
     def __init__(self, db_path: str = ":memory:"):
         """Initialize the SQLite client.
@@ -60,26 +59,3 @@ class SQLiteClient:
         """Context manager exit."""
         self.close()
 
-
-# Example usage
-if __name__ == "__main__":
-    with SQLiteClient("example.db") as db:
-        # Create a table
-        db.execute("""
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                email TEXT UNIQUE
-            )
-        """)
-
-        # Insert data
-        db.execute("INSERT INTO users (name, email) VALUES (?, ?)", ("Alice", "alice@example.com"))
-        db.execute("INSERT INTO users (name, email) VALUES (?, ?)", ("Bob", "bob@example.com"))
-
-        # Query data
-        users = db.fetch_all("SELECT * FROM users")
-        print("All users:", users)
-
-        user = db.fetch_one("SELECT * FROM users WHERE name = ?", ("Alice",))
-        print("Found user:", user)
