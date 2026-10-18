@@ -2,3 +2,4 @@
 JavaSandbox/target/
 __pycache__
 .db
+.env

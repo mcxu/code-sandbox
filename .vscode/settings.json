@@ -60,7 +60,7 @@
 
     "editor.semanticHighlighting.enabled": false,
 
-    "workbench.tree.indent": 16,
+    "workbench.tree.indent": 20,
 
     "[json]": {
         "editor.formatOnSave": false

@@ -16,7 +16,7 @@ class EncodeDecodeStr:
         i = 0
         while i < len(s):
             j = i
-            print(f"{i=}, {j=}")
+            # print(f"{i=}, {j=}")
             while s[j] != "#":
                 j += 1
                 # print(f"j updated: {j}")
