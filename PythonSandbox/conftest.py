@@ -4,7 +4,11 @@ File for shared test fixtures
 
 import pytest
 import os
+import pandas as pd
 from PythonSandbox.utils.pg_client import PgClient
+
+pd.set_option("display.max_rows", None)
+pd.set_option("display.max_columns", None)
 
 @pytest.fixture
 def pg_client():

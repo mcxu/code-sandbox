@@ -5,7 +5,7 @@ from typing import Any
 
 import pandas as pd
 import psycopg
-from psycopg.rows import dict_row
+from psycopg.rows import dict_row, tuple_row
 
 
 class PgClient:
@@ -44,15 +44,16 @@ class PgClient:
             self.connection.close()
             self.connection = None
 
-    def execute(self, query: str, params: tuple | None = None) -> psycopg.Cursor:
+    def execute(self, query: str, params: tuple | None = None, row_factory=None) -> psycopg.Cursor:
         """Execute a SQL query.
         Args:
             query: SQL query string. Use %s for placeholders.
             params: Query parameters.
+            row_factory: Row format for this cursor. Defaults to the connection's dict rows.
         Returns:
             Cursor object with query results.
         """
-        cursor = self.connection.cursor()
+        cursor = self.connection.cursor(row_factory=row_factory)
         try:
             cursor.execute(query, params)
             self.connection.commit()
@@ -83,7 +84,8 @@ class PgClient:
 
     def fetch_all_as_pd(self, query: str, params: tuple | None = None) -> pd.DataFrame:
         """Execute a query and fetch all results as a DataFrame."""
-        cursor = self.execute(query, params)
+        # Tuple rows keep every column when a join returns repeated names like two `id`s.
+        cursor = self.execute(query, params, row_factory=tuple_row)
         columns = [col.name for col in cursor.description]
         return pd.DataFrame(cursor.fetchall(), columns=columns)
 
