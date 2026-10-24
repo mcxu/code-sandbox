@@ -27,12 +27,10 @@ class Merge2SortedLists:
         #print("n1 ptr: ", n1.val if n1 else n1)
         #print("n2 ptr: ", n2.val if n2 else n2)
 
-        while n1:
-            n3.next = ListNode(n1.val); n3 = n3.next
-            n1 = n1.next
-        while n2:
-            n3.next = ListNode(n2.val); n3 = n3.next
-            n2 = n2.next
+        if n1:
+            n3.next = n1
+        if n2:
+            n3.next = n2
 
         return mergedList.next
 
@@ -58,8 +56,8 @@ class Merge2SortedLists:
 
 
     def test1(self):
-        list1 = [1,2,4]; list2 = [1,3,4]
-        #list1 = []; list2 = [0]
+        #list1 = [1,2,4]; list2 = [1,3,4]
+        list1 = []; list2 = [0]
 
         list1LL = self.buildLinkedList(list1)
         self.printList("list1: ", list1LL)
