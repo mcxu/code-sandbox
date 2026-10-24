@@ -1,7 +1,44 @@
 from typing import List
 
 class Med2SortedArrays:
-    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+    def findMedianSortedArrays(self, nums1: list[int], nums2: list[int]) -> float:
+        mergedArray = []
+        i = 0
+        j = 0
+        while i < len(nums1) and j < len(nums2):
+            n1 = nums1[i]
+            n2 = nums2[j]
+
+            if n1 == n2:
+                mergedArray.append(n1)
+                mergedArray.append(n2)
+                i += 1
+                j += 1
+            elif n1 < n2:
+                mergedArray.append(n1)
+                i += 1
+            elif n1 > n2:
+                mergedArray.append(n2)
+                j += 1
+        
+        print(f"{mergedArray=}")
+        print("i end: ", i)
+        print("j end: ", j)
+        
+        if i == len(nums1):
+            mergedArray += nums2[j:]
+        elif j == len(nums2):
+            mergedArray += nums1[i:]
+        
+        # print(f"after final append {mergedArray=}")
+        
+        if len(mergedArray)%2 == 0:
+            return (mergedArray[len(mergedArray)//2 - 1] + mergedArray[len(mergedArray)//2])/2
+        
+        return mergedArray[len(mergedArray)//2]
+        
+
+    def findMedianSortedArrays_NoMerge(self, nums1: List[int], nums2: List[int]) -> float:
         len1, len2 = len(nums1), len(nums2)
 
         # 1. Ensure nums1 is the shorter array for O(log(min(m, n))) complexity
@@ -64,3 +101,29 @@ class Med2SortedArrays:
         # Should not be reached if inputs are valid arrays
         return 0.0
     
+
+    def test1(self):
+        nums1 = [1,3]
+        nums2 = [2]
+        median = self.findMedianSortedArrays(nums1, nums2)
+        print(f"{median=}")
+    
+    def test2(self):
+        nums1 = [1,2]
+        nums2 = [3,4]
+        median = self.findMedianSortedArrays(nums1, nums2)
+        print(f"{median=}")
+    
+    def test3(self):
+        # nums1 = [0,0]
+        # nums2 = [0,0]
+        nums1 = []
+        nums2 = [2]
+        median = self.findMedianSortedArrays(nums1, nums2)
+        print(f"{median=}")
+
+if __name__ == "__main__":
+    c = Med2SortedArrays()
+    # c.test1()
+    # c.test2()
+    c.test3()

@@ -24,3 +24,4 @@ class BestTimeToBuyAndSellStock:
             maxProfitSoFar = max(maxProfitSoFar, highestPrice - lowestPrice)
         
         return maxProfitSoFar
+

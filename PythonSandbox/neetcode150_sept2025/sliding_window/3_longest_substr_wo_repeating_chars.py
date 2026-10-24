@@ -1,28 +1,21 @@
 class LongestSubstringWithoutRepeatingCharacters:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        longestSoFar = 0
+        longest = 0
         seenChars = set()
-        
-        i = 0
-        j = 0
+
+        i = 0; j = 0
         while j < len(s):
-            iChar, jChar = s[i], s[j]
-            
-            print(f"===== j={j} ch: ", jChar, "\nseenChars before: ", seenChars)
+            iChar = s[i]
+            jChar = s[j]
             if jChar in seenChars:
                 seenChars.remove(iChar)
-                print("seenChars after remove: ", seenChars)
                 i += 1
-                print("i is now: ", i)
             else:
                 seenChars.add(jChar)
-                print("seenChars after: ", seenChars)
-
-                longestSoFar = max(longestSoFar, j - i + 1)
-                print("longestSoFar: ", longestSoFar)
+                longest = max(longest, j - i + 1)
                 j += 1
-
-        return longestSoFar
+        
+        return longest 
 
     def test_1(self):
         testCases = [

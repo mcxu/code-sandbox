@@ -18,6 +18,27 @@ class ValidPalindrome:
                 i += 1; j -= 1
         
         return True
+
+    def isPalindrome2(self, s: str) -> bool:
+        i = 0 
+        j = len(s)-1
+        
+        while i < j:
+            iChar = s[i].lower()
+            jChar = s[j].lower()
+            
+            if not iChar.isalnum():
+                i += 1; continue
+            if not jChar.isalnum():
+                j -= 1; continue
+            
+            if iChar != jChar:
+                return False
+            else:
+                i += 1
+                j -= 1
+        
+        return True
     
     def test_1(self):
         test_cases = [
@@ -30,7 +51,7 @@ class ValidPalindrome:
         for tc in test_cases:
             s, expected = tc[0], tc[1]
             print(f"===\nTest: {s}, \nExpected: {expected}")
-            output = self.isPalindrome(s)
+            output = self.isPalindrome2(s)
             print("output", output)
             assert output == expected
 
