@@ -35,5 +35,5 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    sol.test1()
-    #sol.test2()
+    # sol.test1()
+    sol.test2()
