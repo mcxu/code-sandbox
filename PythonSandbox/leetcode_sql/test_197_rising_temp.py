@@ -21,6 +21,13 @@ class TestRisingTemp:
     
     def test_query(self, pg_client):
         query = """
+            SELECT *
+            FROM Weather currDates
+            INNER JOIN Weather prevDates
+            ON currDates.recordDate > prevDates.recordDate;
+        """
+        
+        query2 = """
             SELECT currDates.id
             FROM Weather currDates
             INNER JOIN Weather prevDates
